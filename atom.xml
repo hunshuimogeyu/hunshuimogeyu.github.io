@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>uyom</title>
+  
+  
+  <link href="https://hunshuimogeyu.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://hunshuimogeyu.github.io/"/>
+  <updated>2022-01-08T04:27:23.520Z</updated>
+  <id>https://hunshuimogeyu.github.io/</id>
+  
+  <author>
+    <name>uyom</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ARC127 F ±AB</title>
+    <link href="https://hunshuimogeyu.github.io/2022/01/08/ARC127-F%20%C2%B1AB/"/>
+    <id>https://hunshuimogeyu.github.io/2022/01/08/ARC127-F%20%C2%B1AB/</id>
+    <published>2022-01-08T04:24:30.000Z</published>
+    <updated>2022-01-08T04:27:23.520Z</updated>
+    
+    <content type="html"><![CDATA[<p>先把 <span class="math inline">\(V\)</span> 对 <span class="math inline">\(B\)</span> 取模，显然我们只要考虑 <span class="math inline">\([0,B)\)</span> 中哪些数可以搞出来，因为一个不在这个区间内的数 <span class="math inline">\(x\)</span> 可以被搞出来当且仅当 <span class="math inline">\(x \bmod B\)</span> 可以被搞出来。</p><p>显然如果 <span class="math inline">\(A+B\le M+1\)</span>，答案是 <span class="math inline">\(M+1\)</span>。</p><p>稍加思考不难发现之后会进行的操作只有两种</p><ul><li><p>加一次 <span class="math inline">\(A\)</span>，然后一直减 <span class="math inline">\(B\)</span> 直到不能减。</p></li><li><p>一直加 <span class="math inline">\(B\)</span> 直到不能加，然后减一次 <span class="math inline">\(A\)</span>。</p></li></ul><p>当然能够执行一种操作需要 <span class="math inline">\(V\)</span> 满足一些条件，大概就是 <span class="math inline">\(V\)</span> 的值需要在一个区间内。</p><p>前者会使 <span class="math inline">\(V\to (V+(A\bmod B))\bmod B\)</span>，后者会使 <span class="math inline">\(V\to (V+B-(A\bmod B))\bmod B\)</span>。</p><p>于是我们肯定是一直执行操作 <span class="math inline">\(1\)</span> 到不能执行，再一直执行操作 <span class="math inline">\(2\)</span>，期间搞到的数就是所有能搞出来的数。</p><p>可以二分，然后问题转化为判断 <span class="math inline">\(\forall i\in[0,n],(ai+b)\bmod c\in [l,r]\)</span>，这是个经典问题，随便类欧判下就行。</p><p>复杂度是两个 <span class="math inline">\(\log\)</span> 的，常数有一点点大。</p><p>看了眼官方题解，似乎是一个 <span class="math inline">\(\log\)</span> 的，有空再补。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;先把 &lt;span class=&quot;math inline&quot;&gt;\(V\)&lt;/span&gt; 对 &lt;span class=&quot;math inline&quot;&gt;\(B\)&lt;/span&gt; 取模，显然我们只要考虑 &lt;span class=&quot;math inline&quot;&gt;\([0,B)\)&lt;/span&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>

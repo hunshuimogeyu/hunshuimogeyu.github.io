@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>ARC127 F ±AB • uyom</title><meta name="description" content="ARC127 F ±AB - uyom"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="uyom"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="uyom" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="uyom"><img class="logo-image" src="/pictures/avatar.jpeg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">ARC127 F ±AB</h1><div class="post-info"><a></a>2022-01-08</div><div class="post-content"><p>先把 <span class="math inline">\(V\)</span> 对 <span class="math inline">\(B\)</span> 取模，显然我们只要考虑 <span class="math inline">\([0,B)\)</span> 中哪些数可以搞出来，因为一个不在这个区间内的数 <span class="math inline">\(x\)</span> 可以被搞出来当且仅当 <span class="math inline">\(x \bmod B\)</span> 可以被搞出来。</p>
+<p>显然如果 <span class="math inline">\(A+B\le M+1\)</span>，答案是 <span class="math inline">\(M+1\)</span>。</p>
+<p>稍加思考不难发现之后会进行的操作只有两种</p>
+<ul>
+<li><p>加一次 <span class="math inline">\(A\)</span>，然后一直减 <span class="math inline">\(B\)</span> 直到不能减。</p></li>
+<li><p>一直加 <span class="math inline">\(B\)</span> 直到不能加，然后减一次 <span class="math inline">\(A\)</span>。</p></li>
+</ul>
+<p>当然能够执行一种操作需要 <span class="math inline">\(V\)</span> 满足一些条件，大概就是 <span class="math inline">\(V\)</span> 的值需要在一个区间内。</p>
+<p>前者会使 <span class="math inline">\(V\to (V+(A\bmod B))\bmod B\)</span>，后者会使 <span class="math inline">\(V\to (V+B-(A\bmod B))\bmod B\)</span>。</p>
+<p>于是我们肯定是一直执行操作 <span class="math inline">\(1\)</span> 到不能执行，再一直执行操作 <span class="math inline">\(2\)</span>，期间搞到的数就是所有能搞出来的数。</p>
+<p>可以二分，然后问题转化为判断 <span class="math inline">\(\forall i\in[0,n],(ai+b)\bmod c\in [l,r]\)</span>，这是个经典问题，随便类欧判下就行。</p>
+<p>复杂度是两个 <span class="math inline">\(\log\)</span> 的，常数有一点点大。</p>
+<p>看了眼官方题解，似乎是一个 <span class="math inline">\(\log\)</span> 的，有空再补。</p>
+</div></article></div></main><footer><div class="paginator"></div><div class="copyright"><p>&copy; 2022 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/zykykyk-39">Yikai Zhu</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    Barba.Pjax.start()
+})
+</script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script></body></html>
