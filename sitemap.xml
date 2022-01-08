@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hunshuimogeyu.github.io/about/index.html</loc>
+    
+    <lastmod>2022-01-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hunshuimogeyu.github.io/2022/01/08/ARC127-F%20%C2%B1AB/</loc>
     
     <lastmod>2022-01-08</lastmod>
