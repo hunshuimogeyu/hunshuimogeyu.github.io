@@ -1,0 +1,484 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>JOISC 补完计划 • uyom</title><meta name="description" content="JOISC 补完计划 - uyom"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="uyom"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="uyom" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="uyom"><img class="logo-image" src="/pictures/avatar.jpeg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">JOISC 补完计划</h1><div class="post-info"><a></a>2022-01-08</div><div class="post-content"><p>从去年联赛后就感觉自己颓过头了...甚至连 wzp 都在婊我太颓了...</p>
+<p>开个 blog，<del>假装</del>督促一下自己。</p>
+<p>之前写过的题就不写了。</p>
+<p><del>如果没补完，或者进度太慢我可能又会把这篇 blog 删了</del></p>
+<h2 id="section">2.23</h2>
+<h5 id="joisc-2017-day-2门票安排">「JOISC 2017 Day 2」门票安排</h5>
+<p>神仙题。</p>
+<p>首先有一个结论，所有翻转的区间的并不为空。</p>
+<p>然后就有了一个多项式做法。</p>
+<p>枚举一个点 <span class="math inline">\(x\)</span> ，表示所有翻转的区间都覆盖了 <span class="math inline">\(x\)</span>。</p>
+<p>二分答案，枚举需要被翻转的区间 <span class="math inline">\(t\)</span>。</p>
+<p>从左往右考虑每个点 <span class="math inline">\(i\)</span>，假设之前共翻转了 <span class="math inline">\(y\)</span> 个区间，<span class="math inline">\(i\)</span> 被覆盖了 <span class="math inline">\(z\)</span> 次，当前点 <span class="math inline">\(i\)</span> 还需要翻转 <span class="math inline">\(now\)</span> 个区间。</p>
+<p>推下不等式可以得到 <span class="math inline">\(now \ge \lceil \frac{z+t-y-ans}{2} \rceil\)</span>。</p>
+<p>考虑贪心选择所有左端点在 <span class="math inline">\(i\)</span> 的左边，覆盖了 <span class="math inline">\(x\)</span>，且没有被翻转的区间中，右端点最大的 <span class="math inline">\(now\)</span> 个进行翻转，可以用堆维护。</p>
+<p>最后再对所有点 check 一遍。</p>
+<p>复杂度是 <span class="math inline">\(O(n^3\log^2n)\)</span> 的。</p>
+<p>考虑减少 <span class="math inline">\(x,t\)</span> 的枚举量。</p>
+<p>然后是一堆神仙结论，最终得出了：</p>
+<p>令 <span class="math inline">\(a_i\)</span> 表示所有区间都选择不翻转的情况下，<span class="math inline">\(i\)</span> 覆盖了几次。</p>
+<p>设 <span class="math inline">\(a_l,a_r\)</span> 满足 <span class="math inline">\(a_l=a_r=\max\limits_{i=1}^{n} a_i\)</span>，且 <span class="math inline">\(l,r\)</span> 分别是最右端和最左端的两个。</p>
+<p>最优的答案中存在一种使得 <span class="math inline">\(x\)</span> 取到了 <span class="math inline">\(l\)</span> 或者 <span class="math inline">\(r\)</span>，<span class="math inline">\(t\)</span> 取到了 <span class="math inline">\(a_l-mid\)</span> 或者 <span class="math inline">\(a_l-mid+1\)</span>，其中 <span class="math inline">\(mid\)</span> 是当前二分的答案。</p>
+<p>具体证明可以看<a target="_blank" rel="noopener" href="https://www.ioi-jp.org/camp/2017/2017-sp-tasks/2017-sp-d2-arranging_tickets-review.pdf">这里</a>。</p>
+<p>然后再套用上面的做法就行，复杂度 <span class="math inline">\(O(n \log^2 n)\)</span>。</p>
+<hr />
+<p>upd:</p>
+<p>为了方便，转换一下题意的描述，变成每个人会让 <span class="math inline">\([l_i,r_i]\)</span> 加 <span class="math inline">\(1\)</span>，可以选择翻转一些人，变成让 <span class="math inline">\([1,l_i-1]\)</span> 和 <span class="math inline">\([r_i+1,n]\)</span> 加一，要求全局最大值的最小值。</p>
+<p>设一开始每个点被覆盖的次数是 <span class="math inline">\(a_i\)</span> ，反转后每个点被覆盖的次数是 <span class="math inline">\(b_i\)</span>。</p>
+<hr />
+<blockquote>
+<p>性质 1：选择翻转的人的区间两两肯定有交。</p>
+</blockquote>
+<p>证明：因为翻转两个没交的人的并显然完全覆盖这两个人不翻转的并，于是我们不翻转这两个人肯定能得到更优的答案。</p>
+<p>所以必然存在一个位置，使得每个被翻转的区间都经过这个位置。</p>
+<hr />
+<p>考虑二分答案，然后枚举一个位置 <span class="math inline">\(x\)</span>，表示所有翻转的区间都经过了这个位置。</p>
+<p>令 <span class="math inline">\(pre_{i}\)</span> 表示左端点在 <span class="math inline">\(i\)</span> 以及 <span class="math inline">\(i\)</span> 之前的选择要翻转的区间个数。</p>
+<p>对于 <span class="math inline">\(x\)</span> 以及 <span class="math inline">\(x\)</span> 左边的点来说，显然要满足：</p>
+<p><span class="math display">\[a_i-pre_i+pre_x-pre_i\le mid\]</span></p>
+<p>等价于：</p>
+<p><span class="math display">\[pre_i\ge \lceil \frac{a_i+pre_x-mid}{2} \rceil\]</span></p>
+<p>枚举 <span class="math inline">\(pre_x\)</span>，我们就能得到每个 <span class="math inline">\(pre_i\)</span> 的下界。</p>
+<hr />
+<p>从 <span class="math inline">\(1\)</span> 往 <span class="math inline">\(x\)</span> 贪心，贪心到 <span class="math inline">\(i\)</span> 的时候把所有 <span class="math inline">\(l=i\)</span> 且 <span class="math inline">\(r\ge x\)</span> 的区间按 <span class="math inline">\(r\)</span> 加入大根堆中，贪心地在大根堆里面补齐到当前 <span class="math inline">\(pre_i\)</span> 的下界即可。</p>
+<p>最后还要判一下 <span class="math inline">\([x+1,n]\)</span> 是否合法。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^3\log^2 n)\)</span>，应该可以通过前两个 Subtask。</p>
+<hr />
+<p>设被反转的区间的交是 <span class="math inline">\([x,y]\)</span>，<span class="math inline">\(t\)</span> 为 <span class="math inline">\([x,y]\)</span> 中 <span class="math inline">\(b\)</span> 最大的位置。</p>
+<blockquote>
+<p>性质 2：存在最优方案使得 <span class="math inline">\(b_t\ge \max b_i -1\)</span>。</p>
+</blockquote>
+<p>证明：如果 <span class="math inline">\(b_t\le \max b_i-2\)</span>，那么我们同时取消翻转一个 <span class="math inline">\(l=x\)</span> 和一个 <span class="math inline">\(r=y\)</span> 的区间，此时 <span class="math inline">\(\max b_i\)</span> 不会变大，但是 <span class="math inline">\(b_t\)</span> 和 <span class="math inline">\(\max b_i\)</span> 的差会变小，所以这样调整答案不会变劣。</p>
+<hr />
+<blockquote>
+<p>性质 3：存在最优方案使得 <span class="math inline">\(a_t=\max a_i\)</span>。</p>
+</blockquote>
+<p>证明：如果存在 <span class="math inline">\(a_k&gt;a_t\)</span> ，那么显然 <span class="math inline">\(k\notin [x,y]\)</span>（否则 <span class="math inline">\(b_t\)</span> 就不是 <span class="math inline">\([x,y]\)</span> 中最大的，而是 <span class="math inline">\(b_k\)</span> 是最大的），所以至少会有一个区间没有覆盖 <span class="math inline">\(k\)</span>，而 <span class="math inline">\(t\)</span> 被全部覆盖了，又因为性质 2，可以得到：</p>
+<p><span class="math display">\[ a_k-a_t\geq 1,b_t-b_k\geq -1 \Rightarrow a_k-a_t+b_t-b_k\geq 0\Leftrightarrow a_k-b_k\geq a_t-b_t \]</span></p>
+<p>这个式子的意义就是 <span class="math inline">\(k\)</span> 上反转的区间个数大于等于 <span class="math inline">\(t\)</span>，这与上面所述矛盾。</p>
+<hr />
+<p>于是我们可以去掉枚举 <span class="math inline">\(pre_x\)</span> 的一个 <span class="math inline">\(n\)</span>。</p>
+<p>因为我们现在知道了 <span class="math inline">\(mid=b_t=a_t-pre_x\)</span> 或者 <span class="math inline">\(mid=b_t+1=a_t-pre_x+1\)</span>，分别判一下 <span class="math inline">\(pre_x=a_t-mid\)</span> 和 <span class="math inline">\(pre_x=a_t-mid+_1\)</span> 即可。</p>
+<p>复杂度 <span class="math inline">\(O(n^2\log^2 n)\)</span>，应该可以通过前三个包。</p>
+<hr />
+<blockquote>
+<p>性质 4：<span class="math inline">\(x\)</span> 可以选择任意满足 <span class="math inline">\(a_i=\max_j a_j\)</span> 的 <span class="math inline">\(i\)</span>。</p>
+</blockquote>
+<p>证明： 考虑反证，设 <span class="math inline">\(k\)</span> 是区间 <span class="math inline">\([x,y]\)</span> 外一个 <span class="math inline">\(a_i=\max_j a_j\)</span> 的 <span class="math inline">\(i\)</span>。</p>
+<p>显然覆盖 <span class="math inline">\(k\)</span> 的翻转的区间个数小于 <span class="math inline">\(t\)</span>，于是可以得到：</p>
+<p><span class="math display">\[a_k-b_k\le a_t-b_t-2\]</span></p>
+<p>根据性质 3，我们知道 <span class="math inline">\(a_k=a_t\)</span>，所以 <span class="math inline">\(b_k-b_t\ge 2\)</span>，与性质 2 矛盾。</p>
+<p>于是我们可以再去掉枚举 <span class="math inline">\(x\)</span> 的一个 <span class="math inline">\(n\)</span>，时间复杂度 <span class="math inline">\(O(n\log n \log \sum{C_i})\)</span>，可以通过所有测试点。</p>
+<hr />
+<h5 id="joisc-2017-day-2火车旅行">「JOISC 2017 Day 2」火车旅行</h5>
+<p>每个点往左右第一个比它大的点连边，问题转换为多次求两点的最短路。</p>
+<p>预处理 <span class="math inline">\(L_{i,j},R_{i,j}\)</span> 表示从 <span class="math inline">\(i\)</span> 出发走 <span class="math inline">\(j\)</span> 步，最左和最右分别能走到哪里。转移是 easy 的。</p>
+<p>设 <span class="math inline">\(A&lt;B\)</span>，考虑先找到从 <span class="math inline">\(A\)</span> 出发走 <span class="math inline">\(k\)</span> 步使得 <span class="math inline">\(R_{i,k} &lt; B \le R_{i,k+1}\)</span>，然后再从 <span class="math inline">\(B\)</span> 走到 <span class="math inline">\(R_{i,k}\)</span>。</p>
+<p>这样是 <span class="math inline">\(O(n^2)\)</span>，可以倍增加速，复杂度 <span class="math inline">\(O(n \log n)\)</span>。</p>
+<h5 id="joisc-2017-day-3长途巴士">「JOISC 2017 Day 3」长途巴士</h5>
+<p>我自闭了，感觉自己就是个弱智。</p>
+<p>插入斜率递增的直线，如何线性维护下凸包想了一万年。</p>
+<p>有一个非常容易观察到的性质，如果第 <span class="math inline">\(i\)</span> 个人在到 <span class="math inline">\(j\)</span> 个服务站前 GG 了，那么在到达第 <span class="math inline">\(j\)</span> 个服务站前，第 <span class="math inline">\(i\)</span> 个人后面喝水的人都会 GG，也就是 GG 的人是一段区间，且右端点是某个服务站前最后一个喝水的人。</p>
+<p>考虑根据这个东西 DP。</p>
+<p>设 <span class="math inline">\(F_i\)</span> 表示做完前 <span class="math inline">\(i\)</span> 个人的最小费用。</p>
+<p>转移考虑第 <span class="math inline">\(i\)</span> 个人有没有 GG。</p>
+<p>令 <span class="math inline">\(cost(i,j,k)\)</span> 表示区间 <span class="math inline">\([i,j]\)</span> 内的人在从第 <span class="math inline">\(k\)</span> 个服务站往 <span class="math inline">\(k+1\)</span> 个服务站移动的时候 GG 的费用。</p>
+<p><span class="math inline">\(F_i=\min(F_{i-1}+w\times(\left \lfloor \frac{x}{t} \right \rfloor+[D_i \le x \bmod t]),\min\limits_{j,k} F_j+cost(j+1 ,i,k))\)</span></p>
+<p>具体写出式子后发现如果 <span class="math inline">\(j\)</span> 转移到在它后面的 <span class="math inline">\(i\)</span> 时 <span class="math inline">\(j\)</span> 的贡献是一个一次函数。</p>
+<p>考虑 CDQ 分治，每次插入斜率递增的直线，维护一个下凸包。</p>
+<p>然后我tm真就在想插入斜率递增的直线怎么维护，想了半年还是只会李超树，虽然复杂度都是一个 <span class="math inline">\(\log\)</span> 的。</p>
+<p>后来去 UOJ 群问了一下，发现和斜率递减是一样的，这tm只是插入的位置不同，为什么我就觉得不能这样维护了呢？？？</p>
+<p>不愧是我，丢人.jpg</p>
+<h2 id="section-1">2.24</h2>
+<h5 id="joisc-2017-day-3幽深府邸">「JOISC 2017 Day 3」幽深府邸</h5>
+<p><del>之前做 HNOI 的时候做过了</del></p>
+<p>本来想写一个靠谱的做法，还没写完突发奇想，感觉稍微改一点地方就能过了。</p>
+<p>然后发现这个乱搞它过了，就不管了。</p>
+<p>考虑预处理出每个点能到的区间 <span class="math inline">\([l_i,r_i]\)</span>。</p>
+<p>考虑扫描线，开一个单调栈维护能到当前点的点，栈里面的点的 <span class="math inline">\(l_i\)</span> 递增。</p>
+<p>每次先弹出栈头不能到当前点的点。</p>
+<p>然后更新栈里面每个点的 <span class="math inline">\(l_i\)</span>，如果两个点的 <span class="math inline">\(l_i\)</span> 长一样了就合并在一起。</p>
+<p>复杂度是 <span class="math inline">\(O(n^2)\)</span> 的...</p>
+<p>但是过了...</p>
+<p>复杂度靠谱的话就考虑把栈改成 set，每次更新的时候不是每个点更新，而是考虑多了几个钥匙会让哪些位置可能产生更新，这个总的是 <span class="math inline">\(O(n)\)</span> 的，又因为相同的合并了，所以总共只有 <span class="math inline">\(O(n)\)</span> 次更新。复杂度是 <span class="math inline">\(O(n \log n)\)</span> 的。</p>
+<p>HNOI 那个题当时写了个另外的靠谱的 <span class="math inline">\(O(n \log n)\)</span> 的做法。</p>
+<p>每次不断往左走直到不能走，再往右走直到不能走，重复这个过程直到往左往右都不能走。</p>
+<p>但是不知道为什么少了几个限制，我觉得原来的做法复杂度不太对了...</p>
+<p>通过观察 lych 的题解，我发现好像其实还是对的...</p>
+<p>不愧是我，丢人.jpg</p>
+<h5 id="joisc-2017-day-3自然公园">「JOISC 2017 Day 3」自然公园</h5>
+<p><del>补了罗小黑战记</del></p>
+<p>看不懂 lych 的题解...去膜了一发 supy 的代码...</p>
+<p>考虑每次加入一个一个点 <span class="math inline">\(x\)</span>。</p>
+<p>如果直接已经找到的图有点直接连到了 <span class="math inline">\(x\)</span>，就直接加入 <span class="math inline">\(x\)</span>，每次爆出一个连通块的 bfs 序，二分找到最后一个和 <span class="math inline">\(x\)</span> 有连边的点，然后删去这个点，继续在分裂出来的连通块里找直到找不到一个点和 <span class="math inline">\(x\)</span> 有连边，因为有度数限制，询问次数是对的。</p>
+<p>如果没有点直接连到 <span class="math inline">\(x\)</span>，考虑二分出 <span class="math inline">\(x\)</span> 到已经找到的图的链上的编号最大的点 <span class="math inline">\(y\)</span>，先递归加入 <span class="math inline">\(y\)</span>。</p>
+<h2 id="section-2">2.25</h2>
+<p>今天这种天气真的不想动脑子啊。。所以可能就鸽了。。</p>
+<h5 id="joisc-2017-day-4绑架-2">「JOISC 2017 Day 4」绑架 2</h5>
+<p><del>我终究还是做题了</del></p>
+<p>显然有一个非常傻逼的 <span class="math inline">\(O(nm)\)</span> 的求出每个点答案的 DP。</p>
+<p>然后看到 <span class="math inline">\(Q \le 100\)</span> 那不就大力猜想这个 DP 的如果确定起点的话状态是非常少的，直接记忆化一波。</p>
+<p>然后就过了。</p>
+<p>证明可以看 lych 在 ZJOI2018 的讲课。</p>
+<h5 id="joisc-2016-day-1俄罗斯套娃">「JOISC 2016 Day 1」俄罗斯套娃</h5>
+<p><del>先跳计算几何</del></p>
+<p><del>司机模拟赛搬过这个题</del></p>
+<p>根据 wzp 对我的教导，最小链覆盖等于最长反链。</p>
+<p>直接扫描线树状数组维护就完事了。</p>
+<h2 id="section-3">2.26</h2>
+<p>颓了好久。。</p>
+<h5 id="joisc-2016-day-1棋盘游戏">「JOISC 2016 Day 1」棋盘游戏</h5>
+<p>屑题。</p>
+<p>写出状态后直接大力分类讨论就行。</p>
+<p>转移写的仔细一点就行。</p>
+<h5 id="joisc-2016-day-2雇佣计划">「JOISC 2016 Day 2」雇佣计划</h5>
+<p><del>普及题</del></p>
+<p>是在太傻逼了，不想说了。</p>
+<h2 id="section-4">2.27</h2>
+<p><del>从起床颓到一点半</del></p>
+<p>把计算几何那个题填了。</p>
+<h5 id="joisc-2017-day-4dragon-2">「JOISC 2017 Day 4」Dragon 2</h5>
+<p>相信 <span class="math inline">\(O(qn \log n)\)</span> 大家都会。</p>
+<p>然后众所周知如果每次询问的复杂度是 <span class="math inline">\(O(\min(siz(F_i),siz(G_i)) \times \log n)\)</span>（<span class="math inline">\(siz(x)\)</span> 表示种族 <span class="math inline">\(x\)</span> 的龙的个数）的，记忆化一波复杂度是可以随便跑 <span class="math inline">\(n=3 \times 10^4,q=5 \times 10^4\)</span>的。</p>
+<p>所以再讨论一种情况就做完了。</p>
+<p>写的比较浪，代码喜提 LOJ 最长 AC 代码。</p>
+<p><del>震惊，主席树竟比树状数组跑得快</del></p>
+<h2 id="section-5">2.28</h2>
+<h5 id="joisc-2016-day-2三明治">「JOISC 2016 Day 2」三明治</h5>
+<p>好题。</p>
+<p>首先有一个非常菜的做法。</p>
+<p>bfs 从外往里拿，每个点搞两个 bitset 分别表示是拿这个点靠拿这个点上面的三明治还是拿靠下面的三明治 需要拿的三明治。</p>
+<p>时空复杂度都是 <span class="math inline">\(O(\frac{n^4}{w})\)</span>。</p>
+<p>从外往里不行就考虑从里往外，对于每个点考虑如果靠拿这个点上面/下面的三明治而拿这个点，需要拿的三明治是固定的，这个可以直接 dfs 找。</p>
+<p>直接做复杂度是 <span class="math inline">\(O(n^4)\)</span> 的。</p>
+<p>但是我们如果对于每一列从上往下做，每个点可以继承上一个点搜索的结果，因为前一个点肯定要拿。</p>
+<p>复杂度优化为 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h5 id="joisc-2016-day-2女装大佬">「JOISC 2016 Day 2」女装大佬</h5>
+<p><del>这个题让我回忆起了 PKUWC 当时 D2T1 做了 1h 的绝望</del></p>
+<p><del>然后这个题我又做了毛 1h</del></p>
+<p><del>我tm思考了半年其实根本不存在的细节，不愧是我，丢人</del></p>
+<p>显然原问题可以转化为一个匹配问题。</p>
+<p>考虑可以在 <span class="math inline">\(n\)</span> 分钟内领完的条件是 <span class="math inline">\(\left \lfloor \frac{\max(preF_i-preM_i)}{2} \right \rfloor \le \frac{preF_n-preM_m}{2}\)</span></p>
+<p><span class="math inline">\(preF_i\)</span> 表示前 <span class="math inline">\(i\)</span> 个人中 'F' 的个数，<span class="math inline">\(preM_i\)</span> 表示前 <span class="math inline">\(i\)</span> 个人中 'M' 的个数。</p>
+<p>可以把 <span class="math inline">\(\max\)</span> 去掉，考虑对于每个 <span class="math inline">\(i\)</span> 求要满足这个条件最少要把几个后面的 'M' 移到 <span class="math inline">\(i\)</span> 前面。</p>
+<p>推下不等式就做完了。</p>
+<p>不太懂我为什么想了这么久。</p>
+<h2 id="section-6">2.29</h2>
+<p>今天模拟赛...</p>
+<h5 id="joisc-2016-day-3回转寿司">「JOISC 2016 Day 3」回转寿司</h5>
+<p><del>之前在去恰饭的路上似乎听过zyy说过类似的题</del></p>
+<p><del>以为是神仙题，想了一下发现是傻逼题</del></p>
+<p>考虑分块。</p>
+<p>边角直接暴力重构，重构考虑第 <span class="math inline">\(i\)</span> 个点就是之前塞进来的点和 <span class="math inline">\(i\)</span> 前面的点的最小值，这个可以通过分析那个代码得到。</p>
+<p>中间的块随便搞搞就行了。</p>
+<p>复杂度可以做到 <span class="math inline">\(O(q\sqrt{n}\log n)\)</span>。</p>
+<h5 id="joisc-2016-day-3电报">「JOISC 2016 Day 3」电报</h5>
+<p><del>普及题</del></p>
+<p>对于每个点保留连向它的边中边权最大的那条边，如果保留整个环再随便搞搞就行了。</p>
+<h2 id="section-7">3.1</h2>
+<p>三月了呢。</p>
+<h5 id="joisc-2016-day-4危险的滑冰">「JOISC 2016 Day 4」危险的滑冰</h5>
+<p><del>总感觉 JOISC 6102 的题做起来不得劲啊</del></p>
+<p>首先有一个性质，对于两个原本就有的冰块中间的那块区域只会到一次。</p>
+<p>考虑根据这个东西建图，对于每个点 <span class="math inline">\((i,j)\)</span> 向它四个方向两点中间没有冰块的点连边，边权为从 <span class="math inline">\((i,j)\)</span> 出发所需的来回走的步数。</p>
+<p>直接建边数是 <span class="math inline">\(O(n^3)\)</span> 的。</p>
+<p>考虑优化建图，歪比歪比，歪比巴卜（这部分挺 easy 的懒得写了）可以优化到 <span class="math inline">\(O(n^2)\)</span>。</p>
+<p>复杂度 <span class="math inline">\(O(n^2\log n)\)</span>。</p>
+<h5 id="joisc-2016-day-4最差记者-2">「JOISC 2016 Day 4」最差记者 2</h5>
+<p><del>LOJ 上有的 JOISC 6102 的题补完辣</del></p>
+<p>首先有一个贪心，考虑从小到大考虑每个第二轮的成绩，能匹配到第一轮的成绩就匹配掉，并且应该匹配尽量大的。</p>
+<p>但是这显然有一个小小的问题，这样子搞可能会让某个人没东西可以匹配。</p>
+<p>举个栗子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 1</span><br><span class="line">1 2</span><br><span class="line">5 3</span><br><span class="line">5 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br></pre></td></tr></table></figure>
+<p>按照上面的贪心，第二轮的第 <span class="math inline">\(2\)</span> 个和第 <span class="math inline">\(3\)</span> 个和第一轮的第 <span class="math inline">\(1\)</span> 个和第 <span class="math inline">\(2\)</span> 个配，第二轮的第 <span class="math inline">\(2\)</span> 个并不能和第一轮的第 <span class="math inline">\(3\)</span> 个配。</p>
+<p>所以还要判一下如果当前点匹配了某个点会不会使得某个点没得配了。</p>
+<p>线段树维护即可。</p>
+<p>复杂度 <span class="math inline">\(O(n \log n)\)</span>。</p>
+<h5 id="joisc-2018-day-1道路建设">「JOISC 2018 Day 1」道路建设</h5>
+<p>LCT 模板题。</p>
+<h2 id="section-8">3.4</h2>
+<p>跳计算几何。</p>
+<h5 id="joisc-2018-day-1帐篷">「JOISC 2018 Day 1」帐篷</h5>
+<p>考虑 DP。</p>
+<p>设 <span class="math inline">\(dp_{i,j}\)</span> 表示已经有 <span class="math inline">\(i\)</span> 行和 <span class="math inline">\(j\)</span> 列填了的方案数。</p>
+<p>转移考虑最上面一行怎么填，这样就不会算重了。</p>
+<h5 id="joisc-2018-day-2修行">「JOISC 2018 Day 2」修行</h5>
+<p>转载自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/abcyan1235/article/details/101608634/">zsy 的博客</a></p>
+<p>相当于是要求有多少排列 <span class="math inline">\(p\)</span> 满足 <span class="math inline">\(p_i&gt;p_{i+1}\)</span> 的 <span class="math inline">\(i\)</span> 的个数恰好为 <span class="math inline">\(k-1\)</span>。</p>
+<p>转化为求期望。这个期望等价于 <span class="math inline">\(n\)</span> 个 <span class="math inline">\([0,1)\)</span> 随机变量 <span class="math inline">\(a\)</span> 满足 <span class="math inline">\(a_i&gt;a_{i+1}\)</span> 的 <span class="math inline">\(i\)</span> 的个数恰好为 <span class="math inline">\(k\)</span> 的概率，而这样的 <span class="math inline">\(a\)</span> 又可以一一对应为 <span class="math inline">\(n\)</span> 个 <span class="math inline">\([0,1)\)</span> 随机变量 <span class="math inline">\(b\)</span> 的前缀和的小数部分，其中当 <span class="math inline">\(a_i \le a_{i+1}\)</span> 时前缀和整数部分不变，否则整数部分 <span class="math inline">\(+1\)</span>。</p>
+<p>于是变成了求 <span class="math inline">\(k-1 \le \sum b_i &lt; k\)</span> 的概率。</p>
+<p>先把 <span class="math inline">\(b_i \in [0,1)\)</span> 的限制容斥掉，然后就变成了求 <span class="math inline">\(n\)</span> 个 <span class="math inline">\([0,+\infty)\)</span> 随机变量之和 <span class="math inline">\(&lt;k\)</span> 的概率。这个概率实际上等于 <span class="math inline">\(\frac{k^n}{n!}\)</span>。</p>
+<h2 id="section-9">3.5</h2>
+<p>先跳个提答。</p>
+<h5 id="joisc-2018-day-2最差记者-3">「JOISC 2018 Day 2」最差记者 3</h5>
+<p><del>为什么这个题当时现场有 16 个人过啊</del></p>
+<p>设 <span class="math inline">\(b_i\)</span> 表示 <span class="math inline">\(i\)</span> 移动一次会和 <span class="math inline">\(i+1\)</span> 拉开多少距离。</p>
+<p>可以用 <span class="math inline">\(b_{i-1}\)</span> 推出 <span class="math inline">\(b_i\)</span>。</p>
+<p><span class="math inline">\(b_i=\left \lceil \frac{a_i}{b_{i-1}} \right \rceil \times b_{i-1}\)</span></p>
+<p>不难发现 <span class="math inline">\(b_i\)</span> 的值只有 <span class="math inline">\(\log\)</span> 种，<span class="math inline">\(b_i\)</span> 相同的点显然任意时刻都是靠在一起的。</p>
+<p>询问的时候直接算出每段区间的左右端点，和询问的区间取交求和就行。</p>
+<h5 id="joisc-2018-day-3比太郎的聚会">「JOISC 2018 Day 3」比太郎的聚会</h5>
+<p><del>为什么这个题当时现场只有 3 个人过啊</del></p>
+<p><del>经典套路题</del></p>
+<p>直接按询问 <span class="math inline">\(Y_i\)</span> 大小分类就行。</p>
+<h2 id="section-10">3.6</h2>
+<p>摸了。</p>
+<h5 id="joisc-2018-day-4糖">「JOISC 2018 Day 4」糖</h5>
+<p>经典题。</p>
+<h2 id="section-11">3.10</h2>
+<p>摸了几天鱼，补了几部一直鸽着的片子。</p>
+<h5 id="joisc-2014-day1巴士走读">「JOISC 2014 Day1」巴士走读</h5>
+<p>直接按 <span class="math inline">\(Y_i\)</span> 从大到小加入 <span class="math inline">\(1\)</span> 连出去的边，更新到每个点的最早的时间。</p>
+<p>因为每条边最多只会更新一次，所以复杂度是对的。</p>
+<p>询问的时候二分一下就行了。</p>
+<h5 id="joisc-2014-day1有趣的家庭菜园">「JOISC 2014 Day1」有趣的家庭菜园</h5>
+<p>显然 <span class="math inline">\(ans=\sum\limits_{i=1}^{n} \min(\sum\limits_{j=1}^{i-1}[a_j&gt;a_i],\sum\limits_{j=i+1}^{n}[a_j&gt;a_i])\)</span>。</p>
+<p>拿 jio 做一下就行了。</p>
+<h5 id="joisc-2014-day1历史研究">「JOISC 2014 Day1」历史研究</h5>
+<p>分块，然后就做完了。</p>
+<h2 id="section-12">3.11</h2>
+<h5 id="joisc-2014-day1拉面比较">「JOISC 2014 Day1」拉面比较</h5>
+<p>每次取出两个数，小的和 <span class="math inline">\(\min\)</span> 比，大的和 <span class="math inline">\(\max\)</span> 比。</p>
+<h5 id="joisc-2014-day2水壶">「JOISC 2014 Day2」水壶</h5>
+<p>写了一个乱搞。</p>
+<p>问题本质就是求一个网格图两个的最小瓶颈路。</p>
+<p>考虑 Boruvka，每次从一个集合内的点开始 bfs，如果 bfs 到一个另外集合的点就直接结束。</p>
+<p>复杂度不会算，至少是 <span class="math inline">\(O(H \times W \log n)\)</span> ，但是感觉最多再只会乘一个常数。</p>
+<p>然后根据这个东西我又想到了一个<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/378582977">问题</a>。</p>
+<p>zyy 说大概是 <span class="math inline">\(O(20n^2)\)</span> 的。</p>
+<p>欢迎神仙来回答。</p>
+<h5 id="joisc-2014-day2交朋友">「JOISC 2014 Day2」交朋友</h5>
+<p>如果一个点的出度为 <span class="math inline">\(2\)</span>，显然这个点能到达的点相互之间都会有连边。</p>
+<p>dfs一遍，并查集维护就行。</p>
+<h2 id="section-13">3.12</h2>
+<h5 id="joisc-2014-day2邮戳拉力赛">「JOISC 2014 Day2」邮戳拉力赛</h5>
+<p>考虑如果对于每个打卡点经过的方式确定的话，就是一个下行到上行和上行到下行匹配的过程。</p>
+<p>考虑根据这个东西 DP。</p>
+<p>设 <span class="math inline">\(dp_{i,j}\)</span> 表示做到 <span class="math inline">\(i\)</span>，之前两者差为 <span class="math inline">\(j\)</span> 的最优解。</p>
+<p>转移的时候注意下一个点可以匹配多次就行了。</p>
+<p>没想到一个点匹配多次可以直接记到第二维状态，而是需要再加一维记录前面最佳匹配，最后看别人代码都只有两维才发现的我是个傻逼。</p>
+<h5 id="joisc-2014-day3joioji">「JOISC 2014 Day3」JOIOJI</h5>
+<p>随便推推式子，开个 map，然后扫一遍就行。</p>
+<h5 id="joisc-2014-day3稻草人">「JOISC 2014 Day3」稻草人</h5>
+<p>一往分治方向想就直接会了...</p>
+<p>考虑分治。</p>
+<p>从大到小加入当前分治的区间的点，维护两个单调栈，单调栈里记录的是下标，然后询问的时候在一个单调栈里二分下就行了。</p>
+<p>想了半年才往分治方向想的我是个傻逼。</p>
+<h5 id="joisc-2014-day3电压">「JOISC 2014 Day3」电压</h5>
+<p>先搞出原图的一个生成森林。</p>
+<p>非树边合法的条件是只有一个奇环，并且那个奇环经过这条边。</p>
+<p>树边合法的条件是所有奇环都经过这条边，且没有偶环经过这条边。</p>
+<p>树上差分一下就行了。</p>
+<h2 id="section-14">3.13</h2>
+<h5 id="joisc-2014-day4两个人的星座">「JOISC 2014 Day4」两个人的星座</h5>
+<p>首先有一个性质：两个不交的三角形存在两条公切线使得两个三角形分别在公切线的两侧。</p>
+<p>考虑根据这个性质统计，后面这部分其实是很 easy 的。</p>
+<p>枚举一个点，对另外点极角排序后，two pointers 就行了。</p>
+<p>具体实现的时候可以用前缀和，这样巨好调。</p>
+<p>这个题让我找到了我计算几何板子的一个大锅...</p>
+<h5 id="joisc-2014-day4挂饰">「JOISC 2014 Day4」挂饰</h5>
+<p>直接 DP 就行。</p>
+<h5 id="joisc-2015-day1复制粘贴-2">「JOISC 2015 Day1」复制粘贴 2</h5>
+<p>从后往前做就行。</p>
+<h5 id="joisc-2015-day1愉快的标志设计">「JOISC 2015 Day1」愉快的标志设计</h5>
+<p>可以发现一个合法的字符串，unique 后长度只有 <span class="math inline">\(\log\)</span>，暴力算一算就行了。</p>
+<h5 id="joisc-2015-day1有趣的家庭菜园-2">「JOISC 2015 Day1」有趣的家庭菜园 2</h5>
+<p>首先有一个 <span class="math inline">\(O(n^2)\)</span> 的 DP。</p>
+<p>数据结构随便维护一下就行了。</p>
+<h2 id="section-15">3.16</h2>
+<h5 id="joisc-2015-day-1卡片占卜">「JOISC 2015 Day 1」卡片占卜</h5>
+<p>区间修改感觉有点难处理，差分一下序列改成两个单点改。</p>
+<p>现在就是每次可以改两个点，最终要使四个点的值改变。</p>
+<p>对于每个操作两个点之间连边，那么答案四个点两两匹配的最短路之和。</p>
+<h5 id="joisc-2015-day2building-3">「JOISC 2015 Day2」Building 3</h5>
+<p>考虑怎么 check 一个序列 <span class="math inline">\(A\)</span> 是否合法。</p>
+<p>可以证明如果对于每个 <span class="math inline">\(i\)</span> 都满足存在一个 <span class="math inline">\(j\ (j&lt;i)\)</span> 使得 <span class="math inline">\(A_j=A_j+1\)</span>，则这个序列是合法的。</p>
+<p>统计答案是 easy 的，注意判一下 <span class="math inline">\(0\)</span> 和只能插一个位置的情况就行。</p>
+<h5 id="joisc-2015-day2keys">「JOISC 2015 Day2」Keys</h5>
+<p>考虑对于每个间隔分类讨论两端点具体是什么情况这个间隔才会对答案有贡献。</p>
+<p>可以发现只有一种情况是和两端的点都有关，按这种情况给 <span class="math inline">\(n\)</span> 个人重新排列 DP 就行。</p>
+<h5 id="joisc-2015-day2road-development">「JOISC 2015 Day2」Road Development</h5>
+<p>树剖模板题。</p>
+<h2 id="section-16">3.18</h2>
+<h5 id="joisc-2015-day-3aaqqz">「JOISC 2015 Day 3」AAQQZ</h5>
+<p>屑题。</p>
+<p>写了个 <span class="math inline">\(O(n^3)\)</span> 过了就懒得改成 <span class="math inline">\(O(n^2\log n)\)</span> 了。</p>
+<p>具体的话就是考虑分回文串的中点是否在选择要 sort 的区间内。</p>
+<p>在 sort 区间内的话考虑枚举修改的区间，中点肯定在最小的数中间或这最大的数中间。</p>
+<p>不在的话考虑，枚举中点，然后找到左边和右边第一个不匹配的点，然后从这个点开始拓展就行了。</p>
+<h5 id="joisc-2015-day-3card-game-is-great-fun">「JOISC 2015 Day 3」Card Game Is Great Fun</h5>
+<p>直接 DP 就行。</p>
+<h5 id="joisc-2015-day-4inheritance">「JOISC 2015 Day 4」Inheritance</h5>
+<p>考虑按边权对边 sort 后对每条边算答案，开 <span class="math inline">\(k\)</span> 个并查集维护第 <span class="math inline">\(k\)</span> 人的连通的情况，显然这条边会在第一个出现这条边的两个点还没连通的人那边被删，二分一下就行了。</p>
+<h5 id="joisc-2015-day-4limited-memory">「JOISC 2015 Day 4」Limited Memory</h5>
+<p>先判掉 <span class="math inline">\(n\)</span> 是奇数，左括号的数量不为 <span class="math inline">\(\frac{n}{2}\)</span> 的情况。</p>
+<p>考虑对于每个右括号找与之匹配的左括号，因为是从前往后匹配的，所以之前的肯定合法，从后往前扫的时候只要记左括号与右括号的差就行。</p>
+<p>算一下会发现刚好 22 位够用。</p>
+<h2 id="section-17">3.19</h2>
+<h5 id="joisc-2015-day-4防壁">「JOISC 2015 Day 4」防壁</h5>
+<p>以前和小猪讨论过一道 csa 的和这题长的差不多的一个题，当时就觉得有点细节就没去写，终于还是要写的。</p>
+<p>考虑把同方向移动缩起来，每次移动就是右边贴着一个点往左移或者左边贴着一个点往右移，当一次移动的间隙没有当前块长，那么这次移动是不存在的，可以把这次移动缩起来，所以按长度从小到大算每个块，每次缩掉长度小于当前块的移动。</p>
+<p>关于维护可以用 set 和 链表。</p>
+<p>具体的细节其实主要在第一次的移动。</p>
+<p>我一开始觉得第一次移动不太能缩起来，但是通过观察过的人的代码，好像都没管这个东西，经过一波分析后，发现好像是不用管的，然后第一次的移动再单独拿出来算一下就行了，具体可以看我 LOJ 上的代码。</p>
+<h5 id="joisc-2019-day1考试">「JOISC 2019 Day1」考试</h5>
+<p>三维偏序板题。</p>
+<h2 id="section-18">3.20</h2>
+<h5 id="joisc-2019-day1馕">「JOISC 2019 Day1」馕</h5>
+<p>对于每个人求出把一块馕平均分成 <span class="math inline">\(n\)</span> 段的切割点。</p>
+<p>对于第 <span class="math inline">\(i\)</span> 段给第 <span class="math inline">\(i\)</span> 个切割点最靠前的人。</p>
+<p>可以证明这样构造一定是存在且合法的。</p>
+<p>需要比较精细的实现，写的比较浪分数可能会炸 ll。</p>
+<h5 id="joisc-2019-day2两个天线">「JOISC 2019 Day2」两个天线</h5>
+<p>憨批数据结构题。</p>
+<p>4k代码一发过编译然后直接过了还蛮爽的。</p>
+<h5 id="joisc-2019-day2两道料理">「JOISC 2019 Day2」两道料理</h5>
+<p>考虑扫描线，维护第二维。</p>
+<p>每次移动第一维，第二维转移形如 <span class="math inline">\(f_i=\max(f_{i-1}+b,f_i+a)\)</span> 这样的形式。</p>
+<p>直接维护不太容易维护，考虑维护这个 DP 数组的差分数组。</p>
+<p>后面那个东西，相当于一个前缀都加上一个数，可以看做是两个单点插入。</p>
+<p>前面那个东西，相当与是一个单点插入。</p>
+<p>同一个位置插入多次注意要先插入正的再插入负的。</p>
+<p>另外如果一个位置不管怎么走都要算，不要插入直接记到答案里（我tm被这个东西续了半年，后来看到 mayaohua 一开始和我错的一样，然后他后面判了这个东西才注意到）。</p>
+<h5 id="joisc-2019-day3指定城市">「JOISC 2019 Day3」指定城市</h5>
+<p>在模拟赛里做到两次类似的题了。</p>
+<p>大力猜想每次选最长的链就是对的。</p>
+<p>随便 set 或者堆维护一下就行了。</p>
+<h2 id="section-19">3.21</h2>
+<h5 id="joisc-2019-day3开关游戏">「JOISC 2019 Day3」开关游戏</h5>
+<p>有一个非常重要的性质：一个点最多只会被覆盖两次。</p>
+<p>根据这个性质 DP 就行。</p>
+<p>令 <span class="math inline">\(F_{i,j,k}\)</span> 表示做到第 <span class="math inline">\(i\)</span> 个点，两次操作是 <span class="math inline">\(j,k\)</span> 的最少操作数。</p>
+<p>直接转移就行。</p>
+<h5 id="joisc-2019-day4矿物">「JOISC 2019 Day4」矿物</h5>
+<p>卡常卡的我心力交瘁，从 200w，到 140w，到 120w，到 102w 再到 99w。</p>
+<p>考虑先对所有点做一次，分成两个集合，使得每一对点的两个点分别在不同的集合内。</p>
+<p>然后考虑分治，每次把一个集合的一半的点塞进去，询问另外一个集合中和塞进去的点匹配的点。</p>
+<p>递归下去做。</p>
+<p>实现精细一点，卡卡常就过了。</p>
+<h2 id="section-20">3.23</h2>
+<h5 id="joisc-2019-day3穿越时空-bitaro">「JOISC 2019 Day3」穿越时空 Bitaro</h5>
+<p>xsj 模拟赛题。</p>
+<p>当时只会 <span class="math inline">\(q\sqrt{n \log n}\)</span> /kk。</p>
+<p>首先把每次要 +1 这个东西转化掉。</p>
+<p>考虑线段树维护这个东西。</p>
+<p>有一个性质，如果这段区间的 <span class="math inline">\(\max{l_i}\)</span> 比 <span class="math inline">\(\min{r_i}\)</span> 大，那么这个区间的行走路线可以唯一确定。</p>
+<p>那么考虑可以用一个三元组 <span class="math inline">\((l,r,c)\)</span> 来表示一段区间的答案，即一定要从 <span class="math inline">\(l\)</span> 高度的位置进，从 <span class="math inline">\(r\)</span> 高度的位置的地方出，需要的费用为 <span class="math inline">\(c\)</span>。</p>
+<p>另外如果路劲不唯一的时候就记一下 <span class="math inline">\(\max{l_i}\)</span> 和 <span class="math inline">\(\min{r_i}\)</span>。</p>
+<p>合并讨论下就行。</p>
+<h5 id="joisc-2019-day4蛋糕拼接-3">「JOISC 2019 Day4」蛋糕拼接 3</h5>
+<p>一眼以为是凸优化，写完过不去第一个样例才发现是假的。</p>
+<p>首先显然最优排列方案的美观度是 <span class="math inline">\(\sum V_i-2 \times (\max {C_i}-\min{C_i})\)</span>。</p>
+<p>那么首先可以先把蛋糕按 <span class="math inline">\(C_i\)</span> 排序。</p>
+<p>枚举选的右端点，可以证明选取的最优的左端点单调不减。</p>
+<p>直接分治+主席树做就行了。</p>
+<h5 id="joisc-2019-day4合并">「JOISC 2019 Day4」合并</h5>
+<p>zyy 模拟赛题..我当时现场过了来着..</p>
+<p>因为太傻逼，鸽了。</p>
+<h5 id="joisc-2018-day-1栅栏">「JOISC 2018 Day 1」栅栏</h5>
+<p>考虑对于每两个栅栏和正方形的四个顶点连边，问题转化为求一个最小环且包含这个正方形。</p>
+<p>判包含可以考虑从原点引出一条射线，包含的条件可以转化为这条射线经过了环上的奇数条边。</p>
+<p>建边的话判一下两条线段的四个顶点分别与另一条线段的距离就行。</p>
+<h2 id="section-21">3.24</h2>
+<h5 id="joisc-2018-day-2路网服务">「JOISC 2018 Day 2」路网服务</h5>
+<p>注意到把附加的边全都连到同一个点上比较优。</p>
+<p>爬山爬了半年还是只有80+，自闭了。</p>
+<p>去问了一波 xpp，他说他退火挂着跑了一会就跑出来了，于是我也把爬山改成了退火挂着跑了一会，然后就跑出来了。</p>
+<h5 id="joisc-2018-day-3安全门">「JOISC 2018 Day 3」安全门</h5>
+<p>可以看 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38609262/article/details/86750729">myh 的博客</a>。</p>
+<h2 id="section-22">3.25</h2>
+<h5 id="joisc-2018-day-4野猪">「JOISC 2018 Day 4」野猪</h5>
+<p>LOJ 上 2019 及以前的 JOISC 题终于补完了...</p>
+<p>然而最近 LOJ 又上传了 JOISC 2020 的题.../kel</p>
+<p>第一反应不走最短肯定走次短，但是显然是假的。</p>
+<p>然后冷静了好久，发现再记一条不经过最短出发的边和次短抵达的边的最短 和一条不经过次短出发的边和最短抵达的边的最短好像就可以了。</p>
+<p>这个东西可以把边当点跑 Dij 在 <span class="math inline">\(O(m^2\log m)\)</span> 的时间内处理出来。</p>
+<p>资瓷单点修大家都会，线段树维护矩阵就行。</p>
+<p>因为时限开的比较宽，窝写的时候偷了点懒，矩阵合并的复杂度是四次，不知道为什么总的时间比 xsj 合并是两次的少。</p>
+<h2 id="section-23">3.26</h2>
+<h5 id="joisc-2020-day1建筑装饰-4">「JOISC 2020 Day1」建筑装饰 4</h5>
+<p>先考虑朴素的DP。</p>
+<p><span class="math inline">\(dp_{i,j,0/1}\)</span> 表示第 <span class="math inline">\(i\)</span> 个数选 A/B，选的 A 的个数为 <span class="math inline">\(j\)</span> 是否可行。</p>
+<p>可以证明对于 <span class="math inline">\(dp_{i,?,j}\)</span> 为 1 的值的地方是一个区间。</p>
+<p>DP 这个区间就行。</p>
+<h5 id="joisc-2020-day1汉堡肉">「JOISC 2020 Day1」汉堡肉</h5>
+<p>写了个乱搞，没想到过了。</p>
+<p>考虑 random_shuffle，每次矩形放到某个集合能使这个集合减小的面积最小的那个集合。</p>
+<p>直到找到合法的解。</p>
+<p>正经做法可以看 <a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouyuyang233/article/details/105010508">zyy 的博客</a>。</p>
+<h5 id="joisc-2020-day2变色龙之恋">「JOISC 2020 Day2」变色龙之恋</h5>
+<p>首先有一个 <span class="math inline">\(O(n^2)\)</span> 的做法。</p>
+<p>先对于每个变色龙 <span class="math inline">\(i\)</span> 求出有多少个 <span class="math inline">\(j\)</span> 在询问 <span class="math inline">\(\{i,j\}\)</span> 时返回的答案是 <span class="math inline">\(1\)</span>。</p>
+<p>可以发现对于每个变色龙合法的 <span class="math inline">\(j\)</span> 要么只有 1 个要么只有 3 个，一个说明和它一样的就是那个，三个的话可以先通过两个询问得到这个变色龙喜欢的变色龙编号，在做一遍。</p>
+<p>复杂度瓶颈在对于每个 <span class="math inline">\(i\)</span> 找合法的 <span class="math inline">\(j\)</span>。</p>
+<p>考虑一个一个变色龙扫过去，因为与一个变色龙有关的变色龙最多只有 3 个，可以把之前的变色龙分为 4 个集合使得一个集合内的任意两个变色龙没有任何关系，然后一个一个集合二分过去就行。</p>
+<p>需要比较精细的实现和比较优秀的常数。</p>
+<h2 id="section-24">3.27</h2>
+<h5 id="joisc-2020-day2有趣的-joitter-交友">「JOISC 2020 Day2」有趣的 Joitter 交友</h5>
+<p>考虑给出一个有向图怎么算最后的边数。</p>
+<p>如果两个点 <span class="math inline">\(u,v\)</span> 之间如果既存在 <span class="math inline">\((u,v)\)</span> 也存在 <span class="math inline">\((v,u)\)</span>，这两个点可以缩起来。</p>
+<p>最终答案就是缩完点后的图每个点的 <span class="math inline">\(siz\times (siz-1)+siz\times \text{入度}\)</span>。</p>
+<p>考虑对于每个点分别维护四个 set，启发式合并就行。</p>
+<h5 id="joisc-2020-day2遗迹">「JOISC 2020 Day2」遗迹</h5>
+<p>可以看 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39972971/article/details/105074251">xyx 的博客</a>。</p>
+<h5 id="joisc-2020-day3星座-3">「JOISC 2020 Day3」星座 3</h5>
+<p>考虑按最大值分治，维护一个 DP，启发式合并或者线段树合并就行。</p>
+<h2 id="section-25">4.1</h2>
+<p>草，我居然鸽了这么久了。</p>
+<p>看起来这个寒假又被续了半个月，所以一些颓废相关的东西被我提上日程了，所以最近大概都会这么鸽。</p>
+<p>不过本来 LOJ 上有的题就快补完了。</p>
+<h5 id="joisc-2020-day4首都城市">「JOISC 2020 Day4」首都城市</h5>
+<p>考虑点分治，从当前根的颜色开始拓展，如果有颜色满足所有是当前颜色的点并没有全在当前子树中，那么这个答案肯定是不优的，可以直接舍去。</p>
+<h5 id="joisc-2020-day3迷路的猫">「JOISC 2020 Day3」迷路的猫</h5>
+<p>首先 <span class="math inline">\(A=3,B=0\)</span> 的 sub。</p>
+<p>可以考虑搞出一棵 bfs 树，按层给边染色即可。</p>
+<p><span class="math inline">\(A=2,B=6\)</span> 的 sub。</p>
+<p>如果一个点的度数大于 2，与父亲的连边和与儿子的连边颜色不同就能分辨哪个是父亲。</p>
+<p>问题在于链上怎么在 6 步之内区分上下。</p>
+<p>考虑到要往返，所以其实就只有 3 步。</p>
+<p>3 步一共可以得知 5 条边的信息，那么可以构造一个 01 字符串 <span class="math inline">\(S\)</span>，使得可以通过一个长度为 5 的字符串是否在 <span class="math inline">\(S\)</span> 的循环中存在得到方向。</p>
+<p>随便手玩构造一下就行。</p>
+<h5 id="joisc-2020-day3收获">「JOISC 2020 Day3」收获</h5>
+<p>垃圾数据结构题。</p>
+<p>每个点往前一个和它距离至少为 <span class="math inline">\(C\)</span> 的点连边，可以得到一个基环树森林，考虑树上的询问和环上的询问分开做。</p>
+<p>树上直接线段树合并一波就行。</p>
+<p>环上考虑破环为链，则可以用两个前缀和的差 <span class="math inline">\(pre_i-pre_j\)</span> 表示 <span class="math inline">\(j\)</span> 到 <span class="math inline">\(i\)</span> 需要的时间，设一棵树 <span class="math inline">\(i\)</span> 要跑到环上要 <span class="math inline">\(dep_i\)</span> 的时间，则一个询问的答案为 <span class="math inline">\(\sum_{pre_j-pre_i+dep_k \le T,j \in [i,i+n)} \lfloor \frac{T-(pre_j-pre_i+dep_k)}{len} \rfloor +1\)</span>，其中 <span class="math inline">\(len\)</span> 表示环长，<span class="math inline">\(n\)</span> 表示环的节点个数。</p>
+<p>因为有个下取整还要拆开，所以这是一个三维偏序的问题。</p>
+<p>考虑转化为两个二维偏序问题的和，<span class="math inline">\((\sum_{pre_j-pre_i+dep_k \le T,j \in [n+1,2 \times n]} \lfloor \frac{T-(pre_j-pre_i+dep_k)}{len} \rfloor +1) +(\sum_{j \in [i,n]} [pre_j-pre_i+dep_k \le T])\)</span>。</p>
+<h2 id="section-26">4.8</h2>
+<h5 id="joisc-2020-day1扫除">「JOISC 2020 Day1」扫除</h5>
+<p>还没写过，先胡着。</p>
+<p>先考虑第三个包的做法，显然每次修改肯定是一个区间，线段树维护就行。</p>
+<p>第四包考虑被修改操作动过的点肯定是满足第三个包的性质的，于是只要一颗线段树维护没动过的点和一颗平衡树维护动过的点就行。</p>
+<p>动态插点的话在在外面套一层分治就行了。</p>
+<p>4.9 upd: 已经写好了，大概团子那个题就鸽了，懒得改成退火或者加上点贪心再去跑了，假装自己在寒假结束之前补完了。</p>
+<h5 id="joisc-2020-day4传奇团子师傅">「JOISC 2020 Day4」传奇团子师傅</h5>
+<p>wzp 说每次随 <span class="math inline">\(3 \times 3\)</span> 的矩阵，清空原先的匹配然后在随意配就行了。</p>
+<p>但是我就是这样写的，只爬了 70pts，wzp 说他就这样爬出来了，可能这就是神仙吧。</p>
+<h5 id="joisc-2020-day4治疗计划">「JOISC 2020 Day4」治疗计划</h5>
+<p>考虑 DP，令 <span class="math inline">\(f_i\)</span> 表示 <span class="math inline">\(T_i\)</span> 时刻 <span class="math inline">\([1,R_i]\)</span> 的人都好了的最小花费。</p>
+<p>转移顺序考虑每次取出没转移过的最小的 <span class="math inline">\(f_i\)</span> 转移就行。</p>
+<p>一个点 <span class="math inline">\(j\)</span> 如果能被转移到，且之前没被转移过，这个点的值就是 <span class="math inline">\(f_i+C_j\)</span>，因为每次取出的是最小的且 <span class="math inline">\(i\)</span> 转移到 <span class="math inline">\(j\)</span> 再加上的值都之和 <span class="math inline">\(j\)</span> 有关。</p>
+<p>所以考虑线段树维护还没被转移的点，每次暴力找出能转移到且还转移到的点更新就行。</p>
+<p>具体怎样才能从 <span class="math inline">\(i\)</span> 转移到 <span class="math inline">\(j\)</span> 直接分类讨论推不等式就行。</p>
+<hr />
+<p>LOJ 上有的就填完辣！</p>
+<h2 id="后记">后记</h2>
+<p>说实话感觉 JOISC 大部分题都只有联赛难度。</p>
+<p>大部分题还是做得动的，整体质量蛮高的，如果不想做 cf 和 at 了可以来做做。</p>
+<p>另外关于这些题解的整理，鸽了。</p>
+<p>嘛...至少寒假里还是做了一点题的...尽管真的做的不多...</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/k4fd6h0v.png" /></p>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2022/01/08/Atcoder-%E6%B3%9B%E5%81%9A/">next</a></div><div class="copyright"><p>&copy; 2022 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/zykykyk-39">Yikai Zhu</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    Barba.Pjax.start()
+})
+</script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script></body></html>
