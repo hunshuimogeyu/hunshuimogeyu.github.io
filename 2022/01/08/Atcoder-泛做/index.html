@@ -1,811 +1,989 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>Atcoder 泛做 • uyom</title><meta name="description" content="Atcoder 泛做 - uyom"><link rel="icon" href="/xun.png"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="uyom"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="uyom" type="application/atom+xml">
-</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="uyom"><img class="logo-image" src="/pictures/avatar.jpeg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Atcoder 泛做</h1><div class="post-info"><a></a>2022-01-08</div><div class="post-content"><h2 id="9-2"><a href="#9-2" class="headerlink" title="9.2"></a>9.2</h2><h3 id="AGC-047"><a href="#AGC-047" class="headerlink" title="AGC 047"></a>AGC 047</h3><hr>
-<h4 id="A-Integer-Product"><a href="#A-Integer-Product" class="headerlink" title="A - Integer Product"></a>A - Integer Product</h4><p>先把每个数乘上 $10^9$，如果两个数的积是整数满足末尾至少有 $18$ 个 $0$ 就行了，即质因子 $2$ 的次数和 $5$ 的次数都要大于等于 $18$，暴力枚举两个数的 $2$ 和 $5$ 的幂次然后算就行了。 </p>
-<h4 id="B-First-Second"><a href="#B-First-Second" class="headerlink" title="B - First Second"></a>B - First Second</h4><p>可以发现 $S$ 能转换到的字符串是 $S$ 的一个后缀再在前面加一个 $S$ 前面的字母，对所有串建 Trie，然后枚举每串能转换到的串就行了。</p>
-<h4 id="C-Product-Modulo"><a href="#C-Product-Modulo" class="headerlink" title="C - Product Modulo"></a>C - Product Modulo</h4><p>求出 $200003$ 的原根 $g$，每个 $a_i$ 用 $g$ 的幂次表示，则 $a_i\times a_j$ 可以转化为对应 $g$ 的幂次的加法，一遍 FFT 就行了。</p>
-<h4 id="D-Twin-Binary-Trees"><a href="#D-Twin-Binary-Trees" class="headerlink" title="D - Twin Binary Trees"></a>D - Twin Binary Trees</h4><p>枚举上面的树选的两个叶子的 LCA 和其中一个叶子，考虑计算 LCA 另一子树对当前枚举的叶子的贡献，枚举下面的树选的两个叶子的 LCA，算下上面的树一个子树的叶子连到下面的树的一个子树的贡献就行。</p>
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="uyom"><img class="logo-image" src="/pictures/avatar.jpeg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Atcoder 泛做</h1><div class="post-info"><a></a>2022-01-08</div><div class="post-content"><h2 id="section">9.2</h2>
+<h3 id="agc-047">AGC 047</h3>
+<hr />
+<h4 id="a---integer-product">A - Integer Product</h4>
+<p>先把每个数乘上 <span class="math inline">\(10^9\)</span>，如果两个数的积是整数满足末尾至少有 <span class="math inline">\(18\)</span> 个 <span class="math inline">\(0\)</span> 就行了，即质因子 <span class="math inline">\(2\)</span> 的次数和 <span class="math inline">\(5\)</span> 的次数都要大于等于 <span class="math inline">\(18\)</span>，暴力枚举两个数的 <span class="math inline">\(2\)</span> 和 <span class="math inline">\(5\)</span> 的幂次然后算就行了。</p>
+<h4 id="b---first-second">B - First Second</h4>
+<p>可以发现 <span class="math inline">\(S\)</span> 能转换到的字符串是 <span class="math inline">\(S\)</span> 的一个后缀再在前面加一个 <span class="math inline">\(S\)</span> 前面的字母，对所有串建 Trie，然后枚举每串能转换到的串就行了。</p>
+<h4 id="c---product-modulo">C - Product Modulo</h4>
+<p>求出 <span class="math inline">\(200003\)</span> 的原根 <span class="math inline">\(g\)</span>，每个 <span class="math inline">\(a_i\)</span> 用 <span class="math inline">\(g\)</span> 的幂次表示，则 <span class="math inline">\(a_i\times a_j\)</span> 可以转化为对应 <span class="math inline">\(g\)</span> 的幂次的加法，一遍 FFT 就行了。</p>
+<h4 id="d---twin-binary-trees">D - Twin Binary Trees</h4>
+<p>枚举上面的树选的两个叶子的 LCA 和其中一个叶子，考虑计算 LCA 另一子树对当前枚举的叶子的贡献，枚举下面的树选的两个叶子的 LCA，算下上面的树一个子树的叶子连到下面的树的一个子树的贡献就行。</p>
 <p>具体可以先把要算的另一个子树的叶子对应到下面的树的叶子标记一遍其到根的路径。</p>
-<h4 id="E-Product-Simulation"><a href="#E-Product-Simulation" class="headerlink" title="E - Product Simulation"></a>E - Product Simulation</h4><p>先考虑两个 $01$ 的乘法怎么搞。</p>
-<p>设这两个数是 $x,y$，可以用 $[ [ x+[ x&lt;y ] ]&lt;x+y  ]$ 计算。</p>
-<p>考虑可以用快速乘的方法做，先预处理出 $2^k$ 和 $2^k \times A$。</p>
-<p>问题在于计算 $A\times B \ (B\in {0,1})$。</p>
-<p>可以爆出 $A$ 的每一个二进制位上的值然后用两个 $01$ 之间的乘法求出这个位真正的值，最后再还原。</p>
-<p>爆出 $A$ 的每个二进制位上的值的问题在于计算 $2^k \times B \ (B \in {0,1})$。</p>
-<p>这个等价于 $B$ 左移 $k$ 位。</p>
-<p>操作次数是 $O(\log^3)$ 的。</p>
-<h4 id="F-Rooks"><a href="#F-Rooks" class="headerlink" title="F - Rooks"></a>F - Rooks</h4><p>先按 $x$ 坐标排序，这样每个点能干掉的点是一个区间。</p>
-<p>考虑一个 $O(n^2)$ 的做法。</p>
-<p>设 $f_{i,j,0/1}$ 表示 $[i,j]$ 内都被干掉了，现在在 $i$ 或者 $j$ ，接下来干掉能干掉的要跑多远。</p>
+<h4 id="e---product-simulation">E - Product Simulation</h4>
+<p>先考虑两个 <span class="math inline">\(01\)</span> 的乘法怎么搞。</p>
+<p>设这两个数是 <span class="math inline">\(x,y\)</span>，可以用 <span class="math inline">\([ [ x+[ x&lt;y ] ]&lt;x+y ]\)</span> 计算。</p>
+<p>考虑可以用快速乘的方法做，先预处理出 <span class="math inline">\(2^k\)</span> 和 <span class="math inline">\(2^k \times A\)</span>。</p>
+<p>问题在于计算 <span class="math inline">\(A\times B \ (B\in \{0,1\})\)</span>。</p>
+<p>可以爆出 <span class="math inline">\(A\)</span> 的每一个二进制位上的值然后用两个 <span class="math inline">\(01\)</span> 之间的乘法求出这个位真正的值，最后再还原。</p>
+<p>爆出 <span class="math inline">\(A\)</span> 的每个二进制位上的值的问题在于计算 <span class="math inline">\(2^k \times B \ (B \in \{0,1\})\)</span>。</p>
+<p>这个等价于 <span class="math inline">\(B\)</span> 左移 <span class="math inline">\(k\)</span> 位。</p>
+<p>操作次数是 <span class="math inline">\(O(\log^3)\)</span> 的。</p>
+<h4 id="f---rooks">F - Rooks</h4>
+<p>先按 <span class="math inline">\(x\)</span> 坐标排序，这样每个点能干掉的点是一个区间。</p>
+<p>考虑一个 <span class="math inline">\(O(n^2)\)</span> 的做法。</p>
+<p>设 <span class="math inline">\(f_{i,j,0/1}\)</span> 表示 <span class="math inline">\([i,j]\)</span> 内都被干掉了，现在在 <span class="math inline">\(i\)</span> 或者 <span class="math inline">\(j\)</span> ，接下来干掉能干掉的要跑多远。</p>
 <p>转移往左右延伸就行。</p>
-<p>把关于 $x$ 坐标和 $y$ 坐标都相邻的点缩起来再记忆化跑这个 dp 就能做到 $O(n\log n)$ 或者实现精细能做到 $O(n)$。</p>
+<p>把关于 <span class="math inline">\(x\)</span> 坐标和 <span class="math inline">\(y\)</span> 坐标都相邻的点缩起来再记忆化跑这个 dp 就能做到 <span class="math inline">\(O(n\log n)\)</span> 或者实现精细能做到 <span class="math inline">\(O(n)\)</span>。</p>
 <p>证明不难，读者可尝试自行证明或者点击下面链接。</p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SN0dyP2kJgo&t=22m">需要科学上网</a></p>
-<h2 id="9-3"><a href="#9-3" class="headerlink" title="9.3"></a>9.3</h2><h3 id="AGC-046"><a href="#AGC-046" class="headerlink" title="AGC 046"></a>AGC 046</h3><hr>
-<h4 id="A-Takahashikun-The-Strider"><a href="#A-Takahashikun-The-Strider" class="headerlink" title="A - Takahashikun, The Strider"></a>A - Takahashikun, The Strider</h4><p>显然答案是 $\frac{360}{\gcd(360,X)}$。</p>
-<h4 id="B-Extension"><a href="#B-Extension" class="headerlink" title="B - Extension"></a>B - Extension</h4><p>令 $dp_{i,j}$ 表示扩充成 $i\times j$ 有多少种方案。</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SN0dyP2kJgo&amp;t=22m">需要科学上网</a></p>
+<h2 id="section-1">9.3</h2>
+<h3 id="agc-046">AGC 046</h3>
+<hr />
+<h4 id="a---takahashikun-the-strider">A - Takahashikun, The Strider</h4>
+<p>显然答案是 <span class="math inline">\(\frac{360}{\gcd(360,X)}\)</span>。</p>
+<h4 id="b---extension">B - Extension</h4>
+<p>令 <span class="math inline">\(dp_{i,j}\)</span> 表示扩充成 <span class="math inline">\(i\times j\)</span> 有多少种方案。</p>
 <p>转移考虑减去重复的部分就行了。</p>
-<p>$dp_{i,j}=dp_{i-1,j}\times {j}+dp_{i,j-1}\times i - dp_{i-1,j-1}\times (i-1) \times (j-1)$</p>
-<h4 id="C-Shift"><a href="#C-Shift" class="headerlink" title="C - Shift"></a>C - Shift</h4><p>移动 <code>1</code> 相当于用 <code>0</code> 分割 <code>1</code>，考虑根据这个 dp。</p>
-<p>令 $dp_{i,j,k}$ 表示前 $i$ 个 <code>0</code> 前还需要移动 $j$ 个 <code>1</code> 过去，前面用了 $k$ 次操作。</p>
+<p><span class="math inline">\(dp_{i,j}=dp_{i-1,j}\times {j}+dp_{i,j-1}\times i - dp_{i-1,j-1}\times (i-1) \times (j-1)\)</span></p>
+<h4 id="c---shift">C - Shift</h4>
+<p>移动 <code>1</code> 相当于用 <code>0</code> 分割 <code>1</code>，考虑根据这个 dp。</p>
+<p>令 <span class="math inline">\(dp_{i,j,k}\)</span> 表示前 <span class="math inline">\(i\)</span> 个 <code>0</code> 前还需要移动 <span class="math inline">\(j\)</span> 个 <code>1</code> 过去，前面用了 <span class="math inline">\(k\)</span> 次操作。</p>
 <p>转移枚举当前的 <code>0</code> 前面有几个 <code>1</code> 就行了，操作数在移动 <code>1</code> 到前面的时候再算上就行了。</p>
-<p>直接 dp 是 $O(n^4)$，已经能过了，可以加上前缀和优化到 $O(n^3)$。</p>
-<h4 id="D-Secret-Passage"><a href="#D-Secret-Passage" class="headerlink" title="D - Secret Passage"></a>D - Secret Passage</h4><p>vp 的时候写了个 $O(n^5)$，然后过了…</p>
+<p>直接 dp 是 <span class="math inline">\(O(n^4)\)</span>，已经能过了，可以加上前缀和优化到 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h4 id="d---secret-passage">D - Secret Passage</h4>
+<p>vp 的时候写了个 <span class="math inline">\(O(n^5)\)</span>，然后过了...</p>
 <p>考虑最终能搞出来的串就是一个后缀再插入若干个从前面搬来的 <code>0</code> 和 <code>1</code>。</p>
-<p>可以先 dp 一遍，求出对于每个后缀插 $i$ 个 <code>0</code> 和 $j$ 个 <code>1</code> 是否可行。</p>
-<p>对于一个后缀 $i$ 可以插 $j$ 个 <code>0</code> 和 $k$ 个 <code>1</code>，如果存在一个后缀 $i’(i’&gt;i)$ 可以插若干个 <code>01</code> 变成后缀 $i$ 再可以插 $j$ 个 <code>0</code> 和 $k$ 个 <code>1</code>，那么显然后缀 $i$ 可以插 $j$ 个 <code>0</code> 和 $k$ 个 <code>1</code> 没贡献。</p>
+<p>可以先 dp 一遍，求出对于每个后缀插 <span class="math inline">\(i\)</span> 个 <code>0</code> 和 <span class="math inline">\(j\)</span> 个 <code>1</code> 是否可行。</p>
+<p>对于一个后缀 <span class="math inline">\(i\)</span> 可以插 <span class="math inline">\(j\)</span> 个 <code>0</code> 和 <span class="math inline">\(k\)</span> 个 <code>1</code>，如果存在一个后缀 <span class="math inline">\(i&#39;(i&#39;&gt;i)\)</span> 可以插若干个 <code>01</code> 变成后缀 <span class="math inline">\(i\)</span> 再可以插 <span class="math inline">\(j\)</span> 个 <code>0</code> 和 <span class="math inline">\(k\)</span> 个 <code>1</code>，那么显然后缀 <span class="math inline">\(i\)</span> 可以插 <span class="math inline">\(j\)</span> 个 <code>0</code> 和 <span class="math inline">\(k\)</span> 个 <code>1</code> 没贡献。</p>
 <p>所以只要对所有有贡献的地方算贡献就行了。</p>
-<p>再考虑 dp，令 $f_{i,j,k}$ 表示后缀 $i$ 插 $j$ 个 <code>0</code> 和 $k$ 个 <code>1</code> 的方案。</p>
+<p>再考虑 dp，令 <span class="math inline">\(f_{i,j,k}\)</span> 表示后缀 <span class="math inline">\(i\)</span> 插 <span class="math inline">\(j\)</span> 个 <code>0</code> 和 <span class="math inline">\(k\)</span> 个 <code>1</code> 的方案。</p>
 <p>转移就考虑能用串的字符就用串的字符，不用自己可以随便插的字符。</p>
 <p>最后算贡献的时候需要单独考虑一下最后一段。</p>
-<h4 id="E-Permutation-Cover"><a href="#E-Permutation-Cover" class="headerlink" title="E - Permutation Cover"></a>E - Permutation Cover</h4><p>先考虑无解的情况，不难发现当 $2\times \min(a_i)+1 \le \max(a_i)$ 的时候无解。</p>
+<h4 id="e---permutation-cover">E - Permutation Cover</h4>
+<p>先考虑无解的情况，不难发现当 <span class="math inline">\(2\times \min(a_i)+1 \le \max(a_i)\)</span> 的时候无解。</p>
 <p>考虑贪心的构造答案，每次加入一个新的排列（由末尾的几个加上新加入的几个组成）。</p>
-<p>设 $b_i$ 表示这轮加入后 $i$ 还要加几个。</p>
-<p>如果 $2 \times \min(b_i) \ge \max(b_i)$，那肯定有解；另外因为前面还有一段，所以 $2 \times \min(b_i) +1 = \max(b_i)$ 也有可能有解，但需要满足所有 $b_j=\min(b_i)$ 的 $j$ 在 所有满足 $b_k=\max(b_i)$ 的后面。</p>
+<p>设 <span class="math inline">\(b_i\)</span> 表示这轮加入后 <span class="math inline">\(i\)</span> 还要加几个。</p>
+<p>如果 <span class="math inline">\(2 \times \min(b_i) \ge \max(b_i)\)</span>，那肯定有解；另外因为前面还有一段，所以 <span class="math inline">\(2 \times \min(b_i) +1 = \max(b_i)\)</span> 也有可能有解，但需要满足所有 <span class="math inline">\(b_j=\min(b_i)\)</span> 的 <span class="math inline">\(j\)</span> 在 所有满足 <span class="math inline">\(b_k=\max(b_i)\)</span> 的后面。</p>
 <p>每次枚举加入的数的个数，贪心构造方案，在所有合法方案中找一个字典序最小的就行。</p>
-<p>复杂度 $O(K^2 \sum{a_i})$。</p>
-<h4 id="F-Forbidden-Tournament"><a href="#F-Forbidden-Tournament" class="headerlink" title="F - Forbidden Tournament"></a>F - Forbidden Tournament</h4><p>合法的图一定是一堆大小为 $1$ 的强连通分量后面跟着一个大小任意的强连通分量。</p>
-<p>枚举前面强连通分量的个数 $i$，问题转化为求一个大小为 $n-i$ 的强连通分量，入度最多为 $k-i$。</p>
-<p>设 $1$ 号节点出边的点的集合为 $T$，入边集合为 $S$。</p>
+<p>复杂度 <span class="math inline">\(O(K^2 \sum{a_i})\)</span>。</p>
+<h4 id="f---forbidden-tournament">F - Forbidden Tournament</h4>
+<p>合法的图一定是一堆大小为 <span class="math inline">\(1\)</span> 的强连通分量后面跟着一个大小任意的强连通分量。</p>
+<p>枚举前面强连通分量的个数 <span class="math inline">\(i\)</span>，问题转化为求一个大小为 <span class="math inline">\(n-i\)</span> 的强连通分量，入度最多为 <span class="math inline">\(k-i\)</span>。</p>
+<p>设 <span class="math inline">\(1\)</span> 号节点出边的点的集合为 <span class="math inline">\(T\)</span>，入边集合为 <span class="math inline">\(S\)</span>。</p>
 <p>有以下几个结论：</p>
 <ul>
-<li><p>$S$ 是 DAG。</p>
-</li>
-<li><p>$T$ 是 DAG。</p>
-</li>
-<li><p>先设 $S$ 中的点按拓扑序是 $s_1,s_2,…,s_n$，$T$ 中的点按拓扑序是 $t1,t2,…,t_m$，如果存在边 $(t_j,s_i)$ 则一定还会存在边 $(t_{j+1},s_i)$ 和 $(t_{j},s_{i-1})$，如果把一个矩阵的 $(i,j)$ 表示 是否存在边 $(t_j,s_i)$，则相当于是如果存在 $(i,j)=1$ 则 $(i-1,j)=1$，$(i,j+1)=1$。</p>
-</li>
+<li><p><span class="math inline">\(S\)</span> 是 DAG。</p></li>
+<li><p><span class="math inline">\(T\)</span> 是 DAG。</p></li>
+<li><p>先设 <span class="math inline">\(S\)</span> 中的点按拓扑序是 <span class="math inline">\(s_1,s_2,...,s_n\)</span>，<span class="math inline">\(T\)</span> 中的点按拓扑序是 <span class="math inline">\(t1,t2,...,t_m\)</span>，如果存在边 <span class="math inline">\((t_j,s_i)\)</span> 则一定还会存在边 <span class="math inline">\((t_{j+1},s_i)\)</span> 和 <span class="math inline">\((t_{j},s_{i-1})\)</span>，如果把一个矩阵的 <span class="math inline">\((i,j)\)</span> 表示 是否存在边 <span class="math inline">\((t_j,s_i)\)</span>，则相当于是如果存在 <span class="math inline">\((i,j)=1\)</span> 则 <span class="math inline">\((i-1,j)=1\)</span>，<span class="math inline">\((i,j+1)=1\)</span>。</p></li>
 </ul>
 <p>证明可以看 <a target="_blank" rel="noopener" href="https://img.atcoder.jp/agc046/editorial.pdf">官方题解</a>。</p>
-<p>考虑枚举 $S$ 的大小，$S$ 到 $T$ 之间的连边的方案可以 $O(n^2)$ dp 对应的矩阵。</p>
-<p>复杂度 $O(n^4)$。</p>
+<p>考虑枚举 <span class="math inline">\(S\)</span> 的大小，<span class="math inline">\(S\)</span> 到 <span class="math inline">\(T\)</span> 之间的连边的方案可以 <span class="math inline">\(O(n^2)\)</span> dp 对应的矩阵。</p>
+<p>复杂度 <span class="math inline">\(O(n^4)\)</span>。</p>
 <p>dp 矩阵的部分还可以用容斥优化。</p>
-<h2 id="9-4"><a href="#9-4" class="headerlink" title="9.4"></a>9.4</h2><h3 id="Tokio-Marine-amp-Nichido-Fire-Insurance-Programming-Contest-2020"><a href="#Tokio-Marine-amp-Nichido-Fire-Insurance-Programming-Contest-2020" class="headerlink" title="Tokio Marine &amp; Nichido Fire Insurance Programming Contest 2020"></a>Tokio Marine &amp; Nichido Fire Insurance Programming Contest 2020</h3><hr>
+<h2 id="section-2">9.4</h2>
+<h3 id="tokio-marine-nichido-fire-insurance-programming-contest-2020">Tokio Marine &amp; Nichido Fire Insurance Programming Contest 2020</h3>
+<hr />
 <p>A-E 大家应该都会，所以就只记 F。</p>
-<h4 id="F-Triangles"><a href="#F-Triangles" class="headerlink" title="F - Triangles"></a>F - Triangles</h4><p>考虑皮克定理，问题可以转化为求:</p>
-<p>$$ \sum_{y=1}^{W-1} \sum_{1\le x \le z \le H-1} [y\times z+x\times (W-y)-\gcd(x,y)-\gcd(W-y,z)-\gcd(W,z-x) \le 2 \times k-2]$$</p>
-<p>考虑枚举 $y,z$，可以毛估估出一个 $x$ 的范围，在这个范围里暴力就行，具体来说大概就是把几个 $\gcd$ 的值都看成最坏情况二分出 $L,R$ 使得当 $x\le L$ 肯定是合法的，$x \ge R $ 的时候肯定是不合法。</p>
+<h4 id="f---triangles">F - Triangles</h4>
+<p>考虑皮克定理，问题可以转化为求:</p>
+<p><span class="math display">\[ \sum_{y=1}^{W-1} \sum_{1\le x \le z \le H-1} [y\times z+x\times (W-y)-\gcd(x,y)-\gcd(W-y,z)-\gcd(W,z-x) \le 2 \times k-2]\]</span></p>
+<p>考虑枚举 <span class="math inline">\(y,z\)</span>，可以毛估估出一个 <span class="math inline">\(x\)</span> 的范围，在这个范围里暴力就行，具体来说大概就是把几个 <span class="math inline">\(\gcd\)</span> 的值都看成最坏情况二分出 <span class="math inline">\(L,R\)</span> 使得当 <span class="math inline">\(x\le L\)</span> 肯定是合法的，$x R $ 的时候肯定是不合法。</p>
 <p>不会算复杂度，但是过了。</p>
-<h3 id="NOMURA-Programming-Competition-2020"><a href="#NOMURA-Programming-Competition-2020" class="headerlink" title="NOMURA Programming Competition 2020"></a>NOMURA Programming Competition 2020</h3><hr>
+<h3 id="nomura-programming-competition-2020">NOMURA Programming Competition 2020</h3>
+<hr />
 <p>A-E 大家应该都会，所以就只记 F。</p>
-<h4 id="F-Sorting-Game"><a href="#F-Sorting-Game" class="headerlink" title="F - Sorting Game"></a>F - Sorting Game</h4><p>考虑一个序列是合法的需要满足对于每一个逆序对 $(a_i,a_j)$，$a_i$ 和 $a_j$ 二进制上只有一位不一样，且 $a_i$ 不一样的位上的值为 $1$，$a_j$ 为 $0$。</p>
-<p>考虑直接 dp，令 $f_{n,m}$ 表示长度为 $m$ 值域为 $[0,2^n)$ 合法的序列数。</p>
-<p>转移考虑 $m$ 个数最高位的情况，有两种情况。</p>
-<ol>
-<li><p>最高位上是 <code>000111</code>，这种情况不存在两个地方先 <code>1</code> 后 <code>0</code>，可以直接从 $f_{n-1,m}$ 转移，中间分隔的地方有 $m+1$ 种方案。</p>
-</li>
-<li><p>最高位上是 <code>0001XXX0111</code>，<code>X</code> 表示是任意值，这种情况下需要保证中间 <code>1XXX0</code> 在低位必须全部相同，相当于把这一部分缩成了一个数，这部分需要枚举最后缩完之后有几个数，设有 $i$ 个数，则有 $i$ 种方案放置中间的 <code>1XXX0</code>，中间的 $X$ 可以随便填，方案是 $2^{m-i-1}$，所以对应方案数是 $\sum_{i=1}^{m-1} i \times 2^{m-i-1} \times f_{n-1,i}$。</p>
-</li>
+<h4 id="f---sorting-game">F - Sorting Game</h4>
+<p>考虑一个序列是合法的需要满足对于每一个逆序对 <span class="math inline">\((a_i,a_j)\)</span>，<span class="math inline">\(a_i\)</span> 和 <span class="math inline">\(a_j\)</span> 二进制上只有一位不一样，且 <span class="math inline">\(a_i\)</span> 不一样的位上的值为 <span class="math inline">\(1\)</span>，<span class="math inline">\(a_j\)</span> 为 <span class="math inline">\(0\)</span>。</p>
+<p>考虑直接 dp，令 <span class="math inline">\(f_{n,m}\)</span> 表示长度为 <span class="math inline">\(m\)</span> 值域为 <span class="math inline">\([0,2^n)\)</span> 合法的序列数。</p>
+<p>转移考虑 <span class="math inline">\(m\)</span> 个数最高位的情况，有两种情况。</p>
+<ol type="1">
+<li><p>最高位上是 <code>000111</code>，这种情况不存在两个地方先 <code>1</code> 后 <code>0</code>，可以直接从 <span class="math inline">\(f_{n-1,m}\)</span> 转移，中间分隔的地方有 <span class="math inline">\(m+1\)</span> 种方案。</p></li>
+<li><p>最高位上是 <code>0001XXX0111</code>，<code>X</code> 表示是任意值，这种情况下需要保证中间 <code>1XXX0</code> 在低位必须全部相同，相当于把这一部分缩成了一个数，这部分需要枚举最后缩完之后有几个数，设有 <span class="math inline">\(i\)</span> 个数，则有 <span class="math inline">\(i\)</span> 种方案放置中间的 <code>1XXX0</code>，中间的 <span class="math inline">\(X\)</span> 可以随便填，方案是 <span class="math inline">\(2^{m-i-1}\)</span>，所以对应方案数是 <span class="math inline">\(\sum_{i=1}^{m-1} i \times 2^{m-i-1} \times f_{n-1,i}\)</span>。</p></li>
 </ol>
-<p>第二部分可以用前缀和优化，时间复杂度是 $O(nm)$ 的。</p>
-<h2 id="9-7"><a href="#9-7" class="headerlink" title="9.7"></a>9.7</h2><h3 id="AGC-045"><a href="#AGC-045" class="headerlink" title="AGC 045"></a>AGC 045</h3><hr>
-<h4 id="A-Xor-Battle"><a href="#A-Xor-Battle" class="headerlink" title="A - Xor Battle"></a>A - Xor Battle</h4><p>考虑从后往前做，一个一个数插入线性基，如果 1 号玩家的数插进去了，答案就是 <code>1</code>，不然就是 <code>0</code>。</p>
+<p>第二部分可以用前缀和优化，时间复杂度是 <span class="math inline">\(O(nm)\)</span> 的。</p>
+<h2 id="section-3">9.7</h2>
+<h3 id="agc-045">AGC 045</h3>
+<hr />
+<h4 id="a---xor-battle">A - Xor Battle</h4>
+<p>考虑从后往前做，一个一个数插入线性基，如果 1 号玩家的数插进去了，答案就是 <code>1</code>，不然就是 <code>0</code>。</p>
 <p>正确性显然。</p>
-<h4 id="B-01-Unbalanced"><a href="#B-01-Unbalanced" class="headerlink" title="B - 01 Unbalanced"></a>B - 01 Unbalanced</h4><p>vp 的时候写了个乱搞，结果过了…</p>
-<p>以下用 $cnt0/cnt1$ 表示一个区间的 <code>0/1</code> 个数。 </p>
-<p>假装 $\max(cnt0-cnt1)\le x$，目标就是最小化 $\max(cnt1-cnt0)$。</p>
-<p>考虑从前往后一个一个问号填，能填 <code>0</code> 就填 <code>0</code>，具体来说就是如果当前位置填 <code>0</code> 剩下的位置全填 <code>1</code>，$\max(cnt0-cnt1)$ 都肯定大于 $x$ 了， 就填 <code>1</code>。</p>
-<p>显然随着 $x$ 增大，$\max(cnt1-cnt0)$ 单调不增。</p>
-<p>考虑二分 $x$，使得两者的值尽可能接近。</p>
+<h4 id="b---01-unbalanced">B - 01 Unbalanced</h4>
+<p>vp 的时候写了个乱搞，结果过了...</p>
+<p>以下用 <span class="math inline">\(cnt0/cnt1\)</span> 表示一个区间的 <code>0/1</code> 个数。</p>
+<p>假装 <span class="math inline">\(\max(cnt0-cnt1)\le x\)</span>，目标就是最小化 <span class="math inline">\(\max(cnt1-cnt0)\)</span>。</p>
+<p>考虑从前往后一个一个问号填，能填 <code>0</code> 就填 <code>0</code>，具体来说就是如果当前位置填 <code>0</code> 剩下的位置全填 <code>1</code>，<span class="math inline">\(\max(cnt0-cnt1)\)</span> 都肯定大于 <span class="math inline">\(x\)</span> 了， 就填 <code>1</code>。</p>
+<p>显然随着 <span class="math inline">\(x\)</span> 增大，<span class="math inline">\(\max(cnt1-cnt0)\)</span> 单调不增。</p>
+<p>考虑二分 <span class="math inline">\(x\)</span>，使得两者的值尽可能接近。</p>
 <p>然而这样 WA 了一个点，每次再从后往前填在做一遍就行了。</p>
-<h4 id="C-Range-Set"><a href="#C-Range-Set" class="headerlink" title="C - Range Set"></a>C - Range Set</h4><p>显然 $A,B$ 可以 swap，所以下面考虑 $A \le B$ 的情况。</p>
+<h4 id="c---range-set">C - Range Set</h4>
+<p>显然 <span class="math inline">\(A,B\)</span> 可以 swap，所以下面考虑 <span class="math inline">\(A \le B\)</span> 的情况。</p>
 <p>不能考虑咋操作去得到序列，而要考虑一个序列能不能通过操作得到。</p>
-<p>首先一个最终的序列如果存在长度大于等于 $B$ 的 <code>1</code> 的连续段，显然是可以操作得到的，先把除了这个连续段以外的 <code>1</code> 填完，最后填这段就行了。</p>
-<p>可以发现所有长度大于等于 $A$ 的 <code>0</code> 连续段可以全部改成 <code>1</code>，因为这些连续段可以通过最后填 <code>0</code> 得到。</p>
-<p>所以一个序列如果不合法就是满足把所有长度大于等于 $A$ 的 <code>0</code> 连续段变成 <code>1</code>，不存在长度大于等于 $B$ 的 <code>1</code> 连续段。</p>
+<p>首先一个最终的序列如果存在长度大于等于 <span class="math inline">\(B\)</span> 的 <code>1</code> 的连续段，显然是可以操作得到的，先把除了这个连续段以外的 <code>1</code> 填完，最后填这段就行了。</p>
+<p>可以发现所有长度大于等于 <span class="math inline">\(A\)</span> 的 <code>0</code> 连续段可以全部改成 <code>1</code>，因为这些连续段可以通过最后填 <code>0</code> 得到。</p>
+<p>所以一个序列如果不合法就是满足把所有长度大于等于 <span class="math inline">\(A\)</span> 的 <code>0</code> 连续段变成 <code>1</code>，不存在长度大于等于 <span class="math inline">\(B\)</span> 的 <code>1</code> 连续段。</p>
 <p>剩下的简单做两遍 dp 就行。</p>
-<h4 id="D-Lamps-and-Buttons"><a href="#D-Lamps-and-Buttons" class="headerlink" title="D - Lamps and Buttons"></a>D - Lamps and Buttons</h4><p>策略是每次找最小的没确定的点，找到环就先把所有环点亮。</p>
-<p>如果 GG 的话就是搞到自环或者有环全在后 $N-A$ 个点。</p>
+<h4 id="d---lamps-and-buttons">D - Lamps and Buttons</h4>
+<p>策略是每次找最小的没确定的点，找到环就先把所有环点亮。</p>
+<p>如果 GG 的话就是搞到自环或者有环全在后 <span class="math inline">\(N-A\)</span> 个点。</p>
 <p>显然一个合法方案最多只能有一个自环。</p>
-<p>枚举自环的位置，问题转化为求有 $x+z+y$ 个点，$x$ 个点不能出现自环，$z$ 个点随便，$y$ 个点在的环至少要有一个前 $x$ 个点的方案。</p>
-<p>容斥掉自环的条件，问题转化为求有 $x+z+y$ 个点，$x+z$ 个点随便，$y$ 个点在的环至少要有一个前 $x$ 个点。</p>
-<p>考虑先插 $x$ 个数，在插 $y$ 个数，最后插 $z$ 个数，可以得到方案是 $\frac{x}{x+y}(x+y+z)!$。</p>
-<h4 id="E-Fragile-Balls"><a href="#E-Fragile-Balls" class="headerlink" title="E - Fragile Balls"></a>E - Fragile Balls</h4><p>可以把一个球从 $A_i$ 运到 $B_i$，看做是 $A_i$ 向 $B_i$ 连一条边。</p>
-<p>先考虑 $C_i=1$ 的情况，可以发现答案不是 <code>-1</code>，就是 $\sum [A_i\ne B_i]$。</p>
-<p>因为每个点都有入度，手玩一下可以发现如果一个弱连通块不是一个大小超过 $1$ 的环，就肯定是合法的。</p>
+<p>枚举自环的位置，问题转化为求有 <span class="math inline">\(x+z+y\)</span> 个点，<span class="math inline">\(x\)</span> 个点不能出现自环，<span class="math inline">\(z\)</span> 个点随便，<span class="math inline">\(y\)</span> 个点在的环至少要有一个前 <span class="math inline">\(x\)</span> 个点的方案。</p>
+<p>容斥掉自环的条件，问题转化为求有 <span class="math inline">\(x+z+y\)</span> 个点，<span class="math inline">\(x+z\)</span> 个点随便，<span class="math inline">\(y\)</span> 个点在的环至少要有一个前 <span class="math inline">\(x\)</span> 个点。</p>
+<p>考虑先插 <span class="math inline">\(x\)</span> 个数，在插 <span class="math inline">\(y\)</span> 个数，最后插 <span class="math inline">\(z\)</span> 个数，可以得到方案是 <span class="math inline">\(\frac{x}{x+y}(x+y+z)!\)</span>。</p>
+<h4 id="e---fragile-balls">E - Fragile Balls</h4>
+<p>可以把一个球从 <span class="math inline">\(A_i\)</span> 运到 <span class="math inline">\(B_i\)</span>，看做是 <span class="math inline">\(A_i\)</span> 向 <span class="math inline">\(B_i\)</span> 连一条边。</p>
+<p>先考虑 <span class="math inline">\(C_i=1\)</span> 的情况，可以发现答案不是 <code>-1</code>，就是 <span class="math inline">\(\sum [A_i\ne B_i]\)</span>。</p>
+<p>因为每个点都有入度，手玩一下可以发现如果一个弱连通块不是一个大小超过 <span class="math inline">\(1\)</span> 的环，就肯定是合法的。</p>
 <p>这提示我们可以把所有弱连通块分成三类。</p>
-<ol>
-<li><p>自环，且只有一条边。</p>
-</li>
-<li><p>大小大于 $1$ 的环。</p>
-</li>
-<li><p>除了上面两种。</p>
-</li>
+<ol type="1">
+<li><p>自环，且只有一条边。</p></li>
+<li><p>大小大于 <span class="math inline">\(1\)</span> 的环。</p></li>
+<li><p>除了上面两种。</p></li>
 </ol>
-<p>答案显然至少是 $\sum [A_i\ne B_i]$ 加上大小大于 $1$ 的环的个数。</p>
-<p>手玩一下可以发现有 $4$ 种操作种类先扔过去处理大小大于 $1$ 的环，最后再扔回 $B_i$。</p>
-<ol>
-<li><p>第三种连通块里的球，且满足 $A_i\ne B_i$，可以处理 $C_i-1$ 个环，并且不需要额外的代价。</p>
-</li>
-<li><p>第三种连通块里的球，且满足 $A_i=B_i$，可以处理 $C_i-1$ 个环，但需要一次额外的操作。</p>
-</li>
-<li><p>第一种连通块里的球，需要先扔进来前两种操作中的一种，然后再去操作，可以处理 $C_i-1$ 个环，因为本身原先是合法的，又需要吞掉前两种操作的中的一次操作，所以实际能处理的应该是 $C_i-2$ 个环，并且需要两次额外的操作。</p>
-</li>
-<li><p>第二种连通块里的球，也需要先扔进来前两种操作中的一种，可以处理 $C_i-1$ 个环，因为本身原先就是不合法的，所以实际能处理的就是 $C_i-1$ 个环，并且不需要额外的操作。</p>
-</li>
+<p>答案显然至少是 <span class="math inline">\(\sum [A_i\ne B_i]\)</span> 加上大小大于 <span class="math inline">\(1\)</span> 的环的个数。</p>
+<p>手玩一下可以发现有 <span class="math inline">\(4\)</span> 种操作种类先扔过去处理大小大于 <span class="math inline">\(1\)</span> 的环，最后再扔回 <span class="math inline">\(B_i\)</span>。</p>
+<ol type="1">
+<li><p>第三种连通块里的球，且满足 <span class="math inline">\(A_i\ne B_i\)</span>，可以处理 <span class="math inline">\(C_i-1\)</span> 个环，并且不需要额外的代价。</p></li>
+<li><p>第三种连通块里的球，且满足 <span class="math inline">\(A_i=B_i\)</span>，可以处理 <span class="math inline">\(C_i-1\)</span> 个环，但需要一次额外的操作。</p></li>
+<li><p>第一种连通块里的球，需要先扔进来前两种操作中的一种，然后再去操作，可以处理 <span class="math inline">\(C_i-1\)</span> 个环，因为本身原先是合法的，又需要吞掉前两种操作的中的一次操作，所以实际能处理的应该是 <span class="math inline">\(C_i-2\)</span> 个环，并且需要两次额外的操作。</p></li>
+<li><p>第二种连通块里的球，也需要先扔进来前两种操作中的一种，可以处理 <span class="math inline">\(C_i-1\)</span> 个环，因为本身原先就是不合法的，所以实际能处理的就是 <span class="math inline">\(C_i-1\)</span> 个环，并且不需要额外的操作。</p></li>
 </ol>
 <p>接下来随便贪心，two pointers 搞搞就行了。</p>
-<h4 id="F-Division-into-Multiples"><a href="#F-Division-into-Multiples" class="headerlink" title="F - Division into Multiples"></a>F - Division into Multiples</h4><p>可以转化为 $A,B,C$ 两两互质的情况，具体怎么搞可以看<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39972971/article/details/106685163">这里</a>。</p>
-<p>我们称一个二元组 $(p,q)$ 是好的，需要满足 $p\times A+q\times B \equiv 0 \ (\bmod \ C)$，且找不到一对满足上一个条件的 $(p’,q’)$ 使得两个数都比 $(p,q)$ 小。</p>
-<p>设 $D=\dfrac AB \mod C$，我们就是相当于要找所有的 $i$ 满足对于任意 $j \ (j&lt;i)$，都有 $Di \mod C &lt; Dj \mod C$。</p>
+<h4 id="f---division-into-multiples">F - Division into Multiples</h4>
+<p>可以转化为 <span class="math inline">\(A,B,C\)</span> 两两互质的情况，具体怎么搞可以看<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39972971/article/details/106685163">这里</a>。</p>
+<p>我们称一个二元组 <span class="math inline">\((p,q)\)</span> 是好的，需要满足 <span class="math inline">\(p\times A+q\times B \equiv 0 \ (\bmod \ C)\)</span>，且找不到一对满足上一个条件的 <span class="math inline">\((p&#39;,q&#39;)\)</span> 使得两个数都比 <span class="math inline">\((p,q)\)</span> 小。</p>
+<p>设 <span class="math inline">\(D=\dfrac AB \mod C\)</span>，我们就是相当于要找所有的 <span class="math inline">\(i\)</span> 满足对于任意 <span class="math inline">\(j \ (j&lt;i)\)</span>，都有 <span class="math inline">\(Di \mod C &lt; Dj \mod C\)</span>。</p>
 <p>具体找的过程可以看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ljzalc1022/p/13218462.html">这里</a>，大概是一个类似欧几里得算法的过程。</p>
-<p>可以观察到所有好的二元组是 $O(\log)$ 个等差数列的形式，并且满足 $x_i-x_{i-1}\le x_{i+1}-x_i,y_{i-1}-y_{i}\ge y_i-y_{i+1}$，由于这个性质，选的二元组的<strong>种类</strong>肯定是同一个或者相邻的，因为如果一对 $(i,j)$ （$i,j$ 表示选的二元组的下标）满足 $j-i\ge 2$，显然选择 $(i+1,j-1)$ 更优秀。</p>
+<p>可以观察到所有好的二元组是 <span class="math inline">\(O(\log)\)</span> 个等差数列的形式，并且满足 <span class="math inline">\(x_i-x_{i-1}\le x_{i+1}-x_i,y_{i-1}-y_{i}\ge y_i-y_{i+1}\)</span>，由于这个性质，选的二元组的<strong>种类</strong>肯定是同一个或者相邻的，因为如果一对 <span class="math inline">\((i,j)\)</span> （<span class="math inline">\(i,j\)</span> 表示选的二元组的下标）满足 <span class="math inline">\(j-i\ge 2\)</span>，显然选择 <span class="math inline">\((i+1,j-1)\)</span> 更优秀。</p>
 <p>于是只要考虑计算每一个等差数列就行了。</p>
-<p>对于一个等差数列，设这条线段的左上角是 $(xl,yl)$ 右下角是 $(xr,yr)$，二分答案，考虑怎么 check，显然每个选的二元组 $(p,q)$ 满足 $p\ge xl,q\ge yr$，可以先减去。这条线段上的一个二元组 $(p,q)$ 可以表示为 $(xl+dx\times k,yr+dy \times (cnt-1-k))$ 的形式，其中 $dx,dy$ 分别是 $x$ 和 $y$ 坐标的等差，$cnt$ 是线段上的二元组的个数。那么如果 $\lfloor \frac{X-mid\times xl}{dx} \rfloor + \lfloor \frac{Y-mid\times yr}{dy} \rfloor \ge mid \times (cnt-1)$ 显然是可以凑出 $mid$ 对二元组的。</p>
-<h2 id="9-8"><a href="#9-8" class="headerlink" title="9.8"></a>9.8</h2><h3 id="AGC-044"><a href="#AGC-044" class="headerlink" title="AGC 044"></a>AGC 044</h3><hr>
-<h4 id="A-Pay-to-Win"><a href="#A-Pay-to-Win" class="headerlink" title="A - Pay to Win"></a>A - Pay to Win</h4><p>xjb 记忆化一下就能过了。</p>
-<p>可以发现状态都是形如 $\lceil \frac{n}{2^x 3^y 5^z} \rceil$ 或者 $\lfloor \frac{n}{2^x 3^y 5^z} \rfloor$ 形式，所以复杂度是对的。</p>
-<h4 id="B-Joker"><a href="#B-Joker" class="headerlink" title="B - Joker"></a>B - Joker</h4><p>每次暴力更新最短路就行，冷静分析一下可以发现复杂度是三次的。</p>
-<h4 id="C-Strange-Dance"><a href="#C-Strange-Dance" class="headerlink" title="C - Strange Dance"></a>C - Strange Dance</h4><p>倒着建 Trie 就行了。</p>
-<h4 id="D-Guess-the-Password"><a href="#D-Guess-the-Password" class="headerlink" title="D - Guess the Password"></a>D - Guess the Password</h4><p>可以发现询问形如 <code>AAAABBBB</code> 形式的串会返回前半部分不是 <code>A</code> 的字符个数加上后半部分不是 <code>B</code> 的字符个数，相当于知道前半部分 <code>A</code> 的个数和后半部分 <code>B</code> 的个数的和。</p>
-<p>考虑分治，对于区间 $[l,r]$，对于每种存在的字符 $B$，询问前半部分全是某种存在的字符 $A$ 和后半部分全是当前的字符，可以得到 $[l,mid]$ 中 $A$ 的个数加上 $[mid+1,r]$ 中 $B$ 的个数，我们把所有这些询问得到的值加起来，其实这个值就等于 $[l,r]$ 存在的种类数倍的 $[l,mid]$ 中 $A$ 的个数加上 $r-mid$，于是我们可以得到 $[l,mid]$ 和 $[mid+1,r]$ 中所有字符的个数。</p>
+<p>对于一个等差数列，设这条线段的左上角是 <span class="math inline">\((xl,yl)\)</span> 右下角是 <span class="math inline">\((xr,yr)\)</span>，二分答案，考虑怎么 check，显然每个选的二元组 <span class="math inline">\((p,q)\)</span> 满足 <span class="math inline">\(p\ge xl,q\ge yr\)</span>，可以先减去。这条线段上的一个二元组 <span class="math inline">\((p,q)\)</span> 可以表示为 <span class="math inline">\((xl+dx\times k,yr+dy \times (cnt-1-k))\)</span> 的形式，其中 <span class="math inline">\(dx,dy\)</span> 分别是 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 坐标的等差，<span class="math inline">\(cnt\)</span> 是线段上的二元组的个数。那么如果 <span class="math inline">\(\lfloor \frac{X-mid\times xl}{dx} \rfloor + \lfloor \frac{Y-mid\times yr}{dy} \rfloor \ge mid \times (cnt-1)\)</span> 显然是可以凑出 <span class="math inline">\(mid\)</span> 对二元组的。</p>
+<h2 id="section-4">9.8</h2>
+<h3 id="agc-044">AGC 044</h3>
+<hr />
+<h4 id="a---pay-to-win">A - Pay to Win</h4>
+<p>xjb 记忆化一下就能过了。</p>
+<p>可以发现状态都是形如 <span class="math inline">\(\lceil \frac{n}{2^x 3^y 5^z} \rceil\)</span> 或者 <span class="math inline">\(\lfloor \frac{n}{2^x 3^y 5^z} \rfloor\)</span> 形式，所以复杂度是对的。</p>
+<h4 id="b---joker">B - Joker</h4>
+<p>每次暴力更新最短路就行，冷静分析一下可以发现复杂度是三次的。</p>
+<h4 id="c---strange-dance">C - Strange Dance</h4>
+<p>倒着建 Trie 就行了。</p>
+<h4 id="d---guess-the-password">D - Guess the Password</h4>
+<p>可以发现询问形如 <code>AAAABBBB</code> 形式的串会返回前半部分不是 <code>A</code> 的字符个数加上后半部分不是 <code>B</code> 的字符个数，相当于知道前半部分 <code>A</code> 的个数和后半部分 <code>B</code> 的个数的和。</p>
+<p>考虑分治，对于区间 <span class="math inline">\([l,r]\)</span>，对于每种存在的字符 <span class="math inline">\(B\)</span>，询问前半部分全是某种存在的字符 <span class="math inline">\(A\)</span> 和后半部分全是当前的字符，可以得到 <span class="math inline">\([l,mid]\)</span> 中 <span class="math inline">\(A\)</span> 的个数加上 <span class="math inline">\([mid+1,r]\)</span> 中 <span class="math inline">\(B\)</span> 的个数，我们把所有这些询问得到的值加起来，其实这个值就等于 <span class="math inline">\([l,r]\)</span> 存在的种类数倍的 <span class="math inline">\([l,mid]\)</span> 中 <span class="math inline">\(A\)</span> 的个数加上 <span class="math inline">\(r-mid\)</span>，于是我们可以得到 <span class="math inline">\([l,mid]\)</span> 和 <span class="math inline">\([mid+1,r]\)</span> 中所有字符的个数。</p>
 <p>注意分治的过程中还要随便维护下字符个数的在前缀的出现个数和在后缀的出现个数。</p>
-<h4 id="E-Random-Pawn"><a href="#E-Random-Pawn" class="headerlink" title="E - Random Pawn"></a>E - Random Pawn</h4><p>先考虑一个<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5155">弱化版</a>。</p>
-<p>大概是去掉了环和 $B$ 的限制。</p>
+<h4 id="e---random-pawn">E - Random Pawn</h4>
+<p>先考虑一个<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5155">弱化版</a>。</p>
+<p>大概是去掉了环和 <span class="math inline">\(B\)</span> 的限制。</p>
 <p>考虑棋子的决策，肯定是一直走，直到走到一个点使得走不如留下更优。</p>
 <p>于是我们只需要找到哪些点是终止点。</p>
-<p>首先有一个结论：在长度为 $L$ 的数轴上的位置 $x$ 处，每次进行左右移动（左右概率都为 $\frac{1}{2}$），若到达 $0$ 或 $L$ 即停止，则到达 $0$ 停止的概率为 $\frac{L-x}{L}$，到达 $L$ 停止的概率为 $\frac{x}{L}$。</p>
-<p>关于这个结论的证明，考虑设在 $i$ 开始，到 $L$ 停止的概率为 $F_i$，则 $F_i=\frac{F_{i-1}+F_{i+1}}{2}$，所以不难发现 $F$ 是个等差数列，又因为 $F_{0}=0,F_{L}=1$，所以上面的结论得证。</p>
-<p>加入从 $i$ 出发，左边第一个终止点是 $a$，右边是 $b$，则当前点走的收益是 $E=v_a\times \frac{b-i}{b-a}+v_b\times \frac{i-a}{b-a}$，这个式子化一下，可以发现其实就是直线 $x=i$ 和两端分别是 $(a,v_a),(b,v_b)$ 的线段的交点的纵坐标。</p>
+<p>首先有一个结论：在长度为 <span class="math inline">\(L\)</span> 的数轴上的位置 <span class="math inline">\(x\)</span> 处，每次进行左右移动（左右概率都为 <span class="math inline">\(\frac{1}{2}\)</span>），若到达 <span class="math inline">\(0\)</span> 或 <span class="math inline">\(L\)</span> 即停止，则到达 <span class="math inline">\(0\)</span> 停止的概率为 <span class="math inline">\(\frac{L-x}{L}\)</span>，到达 <span class="math inline">\(L\)</span> 停止的概率为 <span class="math inline">\(\frac{x}{L}\)</span>。</p>
+<p>关于这个结论的证明，考虑设在 <span class="math inline">\(i\)</span> 开始，到 <span class="math inline">\(L\)</span> 停止的概率为 <span class="math inline">\(F_i\)</span>，则 <span class="math inline">\(F_i=\frac{F_{i-1}+F_{i+1}}{2}\)</span>，所以不难发现 <span class="math inline">\(F\)</span> 是个等差数列，又因为 <span class="math inline">\(F_{0}=0,F_{L}=1\)</span>，所以上面的结论得证。</p>
+<p>加入从 <span class="math inline">\(i\)</span> 出发，左边第一个终止点是 <span class="math inline">\(a\)</span>，右边是 <span class="math inline">\(b\)</span>，则当前点走的收益是 <span class="math inline">\(E=v_a\times \frac{b-i}{b-a}+v_b\times \frac{i-a}{b-a}\)</span>，这个式子化一下，可以发现其实就是直线 <span class="math inline">\(x=i\)</span> 和两端分别是 <span class="math inline">\((a,v_a),(b,v_b)\)</span> 的线段的交点的纵坐标。</p>
 <p>冷静分析一下，不难发现终止点都位于上凸包上面。</p>
-<p>现在考虑加上环和 $B$ 的限制咋做。</p>
-<p>环可以先把 $\max$ 移到开头，把环转化成链，因为 $\max$ 肯定是个终止点。</p>
-<p>对于 $B$ 的限制，考虑把 $B$ 消掉。</p>
+<p>现在考虑加上环和 <span class="math inline">\(B\)</span> 的限制咋做。</p>
+<p>环可以先把 <span class="math inline">\(\max\)</span> 移到开头，把环转化成链，因为 <span class="math inline">\(\max\)</span> 肯定是个终止点。</p>
+<p>对于 <span class="math inline">\(B\)</span> 的限制，考虑把 <span class="math inline">\(B\)</span> 消掉。</p>
 <p>首先转移长这样：</p>
-<p>$$E_i = \max(A_i,\frac{E_{i-1}+E_{i+1}}{2}+B_i)$$</p>
-<p>考虑消掉 $B_i$，我们可以构造一个 $C$ 来干掉 $B$。</p>
-<p>$$E_i-C_i = \max(A_i-C_i,\frac{E_{i-1}+E_{i+1}-C_{i-1}-C_{i+1}}{2}+\frac{C_{i-1}+C_{i+1}}{2}+B_i-C_i)$$</p>
-<p>$C_i$ 需要满足 $B_i=\frac{C_{i-1}+C_{i+1}}{2}-C_i$。</p>
-<p>可以令 $C_1=C_2=0,C_{i+1}=2(B_i+C_i)-C_{i-1}$。</p>
-<p>令 $F_i = E_i-C_i,G_i = A_i - C_i$。</p>
+<p><span class="math display">\[E_i = \max(A_i,\frac{E_{i-1}+E_{i+1}}{2}+B_i)\]</span></p>
+<p>考虑消掉 <span class="math inline">\(B_i\)</span>，我们可以构造一个 <span class="math inline">\(C\)</span> 来干掉 <span class="math inline">\(B\)</span>。</p>
+<p><span class="math display">\[E_i-C_i = \max(A_i-C_i,\frac{E_{i-1}+E_{i+1}-C_{i-1}-C_{i+1}}{2}+\frac{C_{i-1}+C_{i+1}}{2}+B_i-C_i)\]</span></p>
+<p><span class="math inline">\(C_i\)</span> 需要满足 <span class="math inline">\(B_i=\frac{C_{i-1}+C_{i+1}}{2}-C_i\)</span>。</p>
+<p>可以令 <span class="math inline">\(C_1=C_2=0,C_{i+1}=2(B_i+C_i)-C_{i-1}\)</span>。</p>
+<p>令 <span class="math inline">\(F_i = E_i-C_i,G_i = A_i - C_i\)</span>。</p>
 <p>转移就变成了：</p>
-<p>$$F_i = \max(G_i,\frac{F_{i-1}+F_{i+1}}{2})$$</p>
+<p><span class="math display">\[F_i = \max(G_i,\frac{F_{i-1}+F_{i+1}}{2})\]</span></p>
 <p>可以发现这就转化成了弱化版。</p>
-<h4 id="F-Name-Preserving-Clubs"><a href="#F-Name-Preserving-Clubs" class="headerlink" title="F - Name-Preserving Clubs"></a>F - Name-Preserving Clubs</h4><p>可以看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yyf0309/p/agc044.html#autoname5">这里</a>或者<a target="_blank" rel="noopener" href="https://img.atcoder.jp/agc044/editorial.pdf">官方题解</a>。</p>
-<h2 id="9-9"><a href="#9-9" class="headerlink" title="9.9"></a>9.9</h2><h3 id="Hitachi-2020"><a href="#Hitachi-2020" class="headerlink" title="Hitachi 2020"></a>Hitachi 2020</h3><hr>
-<h4 id="C-ThREE"><a href="#C-ThREE" class="headerlink" title="C - ThREE"></a>C - ThREE</h4><p>按深度奇偶性分组，每对距离为 $3$ 的两个点不会出现在同一个组。</p>
-<p>如果个数少的那个组比 $\bmod \ 3=2$ 的数多，就分别先放 $\bmod \ 3\ =2$ 和 $\bmod \ 3=1$ 的数，然后把多出来的数改成 $3$ 的倍数，不然 $3$ 的倍数个数肯定比少的那个组的个数多，可以先把少的那个组填满 $3$ 的倍数，剩下的数全扔到另外一个组就行了。</p>
-<h4 id="D-Manga-Market"><a href="#D-Manga-Market" class="headerlink" title="D - Manga Market"></a>D - Manga Market</h4><p>显然 $a\ne 0$ 的店只会逛 $O(\log)$ 个。</p>
-<p>可以先贪心给这些 $a\ne 0$ 的店排序（大概类似国王游戏那个题），然后 dp 一下。</p>
-<p>枚举下 $a=0$ 取几个，答案随便算算就行。</p>
-<h4 id="E-Odd-Sum-Rectangles"><a href="#E-Odd-Sum-Rectangles" class="headerlink" title="E - Odd Sum Rectangles"></a>E - Odd Sum Rectangles</h4><p>随便打打表找找规律就行。</p>
-<p>先把整个矩阵全设成 $1$。</p>
-<p>每次把正中间的点设成 $0$，然后分治左上角右上角左下角右下角就行。</p>
+<h4 id="f---name-preserving-clubs">F - Name-Preserving Clubs</h4>
+<p>可以看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yyf0309/p/agc044.html#autoname5">这里</a>或者<a target="_blank" rel="noopener" href="https://img.atcoder.jp/agc044/editorial.pdf">官方题解</a>。</p>
+<h2 id="section-5">9.9</h2>
+<h3 id="hitachi-2020">Hitachi 2020</h3>
+<hr />
+<h4 id="c---three">C - ThREE</h4>
+<p>按深度奇偶性分组，每对距离为 <span class="math inline">\(3\)</span> 的两个点不会出现在同一个组。</p>
+<p>如果个数少的那个组比 <span class="math inline">\(\bmod \ 3=2\)</span> 的数多，就分别先放 <span class="math inline">\(\bmod \ 3\ =2\)</span> 和 <span class="math inline">\(\bmod \ 3=1\)</span> 的数，然后把多出来的数改成 <span class="math inline">\(3\)</span> 的倍数，不然 <span class="math inline">\(3\)</span> 的倍数个数肯定比少的那个组的个数多，可以先把少的那个组填满 <span class="math inline">\(3\)</span> 的倍数，剩下的数全扔到另外一个组就行了。</p>
+<h4 id="d---manga-market">D - Manga Market</h4>
+<p>显然 <span class="math inline">\(a\ne 0\)</span> 的店只会逛 <span class="math inline">\(O(\log)\)</span> 个。</p>
+<p>可以先贪心给这些 <span class="math inline">\(a\ne 0\)</span> 的店排序（大概类似国王游戏那个题），然后 dp 一下。</p>
+<p>枚举下 <span class="math inline">\(a=0\)</span> 取几个，答案随便算算就行。</p>
+<h4 id="e---odd-sum-rectangles">E - Odd Sum Rectangles</h4>
+<p>随便打打表找找规律就行。</p>
+<p>先把整个矩阵全设成 <span class="math inline">\(1\)</span>。</p>
+<p>每次把正中间的点设成 <span class="math inline">\(0\)</span>，然后分治左上角右上角左下角右下角就行。</p>
 <p>具体证明可以看<a target="_blank" rel="noopener" href="https://img.atcoder.jp/hitachi2020/editorial.pdf">官方题解</a>。</p>
-<h4 id="F-Preserve-Diameter"><a href="#F-Preserve-Diameter" class="headerlink" title="F - Preserve Diameter"></a>F - Preserve Diameter</h4><p>首先可以发现 $H$ 的直径是唯一的，否则显然可以继续加边。</p>
-<p>设这条直径两个端点为 $s,t$，考虑建出任意一棵以 $s$ 为根的 BFS 树，令 $dep_i$ 表示 $i$ 在 BFS 树上的深度，那么两个点 $u,v$ 在 $H$ 中有边必须满足 $|dep_u-dep_v|\le 1$。</p>
-<p>注意到所有直径的中点为同一个点，先考虑中点唯一的情况，设这个中点是 $mid$。</p>
-<p>考虑以 $mid$ 为根再建出一棵 BFS 树，给每个点重新求一个 $dep_i$，满足：</p>
+<h4 id="f---preserve-diameter">F - Preserve Diameter</h4>
+<p>首先可以发现 <span class="math inline">\(H\)</span> 的直径是唯一的，否则显然可以继续加边。</p>
+<p>设这条直径两个端点为 <span class="math inline">\(s,t\)</span>，考虑建出任意一棵以 <span class="math inline">\(s\)</span> 为根的 BFS 树，令 <span class="math inline">\(dep_i\)</span> 表示 <span class="math inline">\(i\)</span> 在 BFS 树上的深度，那么两个点 <span class="math inline">\(u,v\)</span> 在 <span class="math inline">\(H\)</span> 中有边必须满足 <span class="math inline">\(|dep_u-dep_v|\le 1\)</span>。</p>
+<p>注意到所有直径的中点为同一个点，先考虑中点唯一的情况，设这个中点是 <span class="math inline">\(mid\)</span>。</p>
+<p>考虑以 <span class="math inline">\(mid\)</span> 为根再建出一棵 BFS 树，给每个点重新求一个 <span class="math inline">\(dep_i\)</span>，满足：</p>
 <ul>
-<li>$dep_{mid}=0$。</li>
-<li>恰好存在一个点 $x$ 满足 $dep_x=-\frac{L}{2}$。</li>
-<li>恰好存在一个点 $y$ 满足 $dep_y=\frac{L}{2}$。</li>
-<li>对于在 $G$ 中有边的点对 $(u,v)$，满足 $|dep_u-dep_v|\le 1$。</li>
+<li><span class="math inline">\(dep_{mid}=0\)</span>。</li>
+<li>恰好存在一个点 <span class="math inline">\(x\)</span> 满足 <span class="math inline">\(dep_x=-\frac{L}{2}\)</span>。</li>
+<li>恰好存在一个点 <span class="math inline">\(y\)</span> 满足 <span class="math inline">\(dep_y=\frac{L}{2}\)</span>。</li>
+<li>对于在 <span class="math inline">\(G\)</span> 中有边的点对 <span class="math inline">\((u,v)\)</span>，满足 <span class="math inline">\(|dep_u-dep_v|\le 1\)</span>。</li>
 </ul>
-<p>其中 $L$ 表示直径长度。</p>
-<p>可以发现一个合法的 $H$ 一定恰好对应两种满足以上条件的标号方案。</p>
-<p>于是我们可以 DP，状态需要记当前子树目前满足第二个条件的点的个数（和 $2$ 取 $\min$）和满足第三个条件的点的个数（和 $2$ 取 $\min$），转移枚举当前的边的取值（${-1,0,1}$）就行。</p>
-<p>$L$ 为奇数时类似，只需要将直径中间的边断开后对两边分别 DP 后合并即可。</p>
-<h3 id="Keyence-Programming-Contest-2020"><a href="#Keyence-Programming-Contest-2020" class="headerlink" title="Keyence Programming Contest 2020"></a>Keyence Programming Contest 2020</h3><hr>
-<h4 id="D-Swap-and-Flip"><a href="#D-Swap-and-Flip" class="headerlink" title="D - Swap and Flip"></a>D - Swap and Flip</h4><p>可以发现一张牌最后最终哪面朝上和它移动的距离奇偶性有关。</p>
-<p>考虑从前往后 dp，令 $dp_{i,j,k}$ 表示位置 $i$ 放了 $j$ 号牌，前 $i$ 个位置放了哪些牌。</p>
+<p>其中 <span class="math inline">\(L\)</span> 表示直径长度。</p>
+<p>可以发现一个合法的 <span class="math inline">\(H\)</span> 一定恰好对应两种满足以上条件的标号方案。</p>
+<p>于是我们可以 DP，状态需要记当前子树目前满足第二个条件的点的个数（和 <span class="math inline">\(2\)</span> 取 <span class="math inline">\(\min\)</span>）和满足第三个条件的点的个数（和 <span class="math inline">\(2\)</span> 取 <span class="math inline">\(\min\)</span>），转移枚举当前的边的取值（<span class="math inline">\(\{-1,0,1\}\)</span>）就行。</p>
+<p><span class="math inline">\(L\)</span> 为奇数时类似，只需要将直径中间的边断开后对两边分别 DP 后合并即可。</p>
+<h3 id="keyence-programming-contest-2020">Keyence Programming Contest 2020</h3>
+<hr />
+<h4 id="d---swap-and-flip">D - Swap and Flip</h4>
+<p>可以发现一张牌最后最终哪面朝上和它移动的距离奇偶性有关。</p>
+<p>考虑从前往后 dp，令 <span class="math inline">\(dp_{i,j,k}\)</span> 表示位置 <span class="math inline">\(i\)</span> 放了 <span class="math inline">\(j\)</span> 号牌，前 <span class="math inline">\(i\)</span> 个位置放了哪些牌。</p>
 <p>注意算距离的时候用逆序对算就行了。</p>
-<h4 id="E-Bichromization"><a href="#E-Bichromization" class="headerlink" title="E - Bichromization"></a>E - Bichromization</h4><p>直接给一个构造方案吧。</p>
-<p>把每条边的边权设置为 $\max(d_{u_i},d_{v_i})$。</p>
-<p>$d_i$ 相同的连通块可以直接一次 dfs 黑白染色。</p>
-<p>按 $d_i$ 从小到大处理连通块，每次直接随便选一个比当前连通块的 $d_i$ 小的连通块，两个连通块之间相连的点颜色不同就行。</p>
+<h4 id="e---bichromization">E - Bichromization</h4>
+<p>直接给一个构造方案吧。</p>
+<p>把每条边的边权设置为 <span class="math inline">\(\max(d_{u_i},d_{v_i})\)</span>。</p>
+<p><span class="math inline">\(d_i\)</span> 相同的连通块可以直接一次 dfs 黑白染色。</p>
+<p>按 <span class="math inline">\(d_i\)</span> 从小到大处理连通块，每次直接随便选一个比当前连通块的 <span class="math inline">\(d_i\)</span> 小的连通块，两个连通块之间相连的点颜色不同就行。</p>
 <p>最后构造完判下 <code>-1</code> 就行。</p>
-<h4 id="F-Monochromization"><a href="#F-Monochromization" class="headerlink" title="F - Monochromization"></a>F - Monochromization</h4><p>先考虑一开始全白怎么搞。</p>
+<h4 id="f---monochromization">F - Monochromization</h4>
+<p>先考虑一开始全白怎么搞。</p>
 <p>考虑什么样的一个矩形能被操作到。</p>
 <p>显然每次一直删除一行一列全一样的，如果全删完了就能得到。</p>
-<p>考虑根据这个东西 dp，令 $f_{i,j,0/1}$ 表示删到 $i \times j$，最后一次删了行，删的行颜色是不是全一样的。</p>
-<p>$g_{i,j,0/1}$ 同理，只是行换成了列。</p>
+<p>考虑根据这个东西 dp，令 <span class="math inline">\(f_{i,j,0/1}\)</span> 表示删到 <span class="math inline">\(i \times j\)</span>，最后一次删了行，删的行颜色是不是全一样的。</p>
+<p><span class="math inline">\(g_{i,j,0/1}\)</span> 同理，只是行换成了列。</p>
 <p>为了防止算重，我们在删除的时候要做到尽量能删就删，转移也是据此设计的。</p>
-<p>$f_{i,j,0}=\sum_{k=1}^{n-i} \binom{i+k}{k} \times g_{i+k,j,0}\times (2^k-2)$</p>
-<p>$f_{i,j,1}=\sum_{k=1}^{n-i} \binom{i+k}{k} \times (2\times g_{i+k,j,0}+g_{i+k,j,1})$</p>
-<p>$g$ 的转移也是类似的。</p>
+<p><span class="math inline">\(f_{i,j,0}=\sum_{k=1}^{n-i} \binom{i+k}{k} \times g_{i+k,j,0}\times (2^k-2)\)</span></p>
+<p><span class="math inline">\(f_{i,j,1}=\sum_{k=1}^{n-i} \binom{i+k}{k} \times (2\times g_{i+k,j,0}+g_{i+k,j,1})\)</span></p>
+<p><span class="math inline">\(g\)</span> 的转移也是类似的。</p>
 <p>算答案就枚举枚举不去动哪些行和哪些列，需要保证这些不去动的行/列不能再删了，然后统计它们对答案的贡献。注意统计过程中需要再除掉组合数，因为删去的行和列都已经钦定了。</p>
-<h2 id="9-11"><a href="#9-11" class="headerlink" title="9.11"></a>9.11</h2><h3 id="AGC-043"><a href="#AGC-043" class="headerlink" title="AGC 043"></a>AGC 043</h3><hr>
-<h4 id="A-Range-Flip-Find-Route"><a href="#A-Range-Flip-Find-Route" class="headerlink" title="A - Range Flip Find Route"></a>A - Range Flip Find Route</h4><p>如果确定了一条从起点到终点路径，最小操作数就是这段路径经过了几段 <code>#</code>，根据这个 dp 就行了。</p>
-<h4 id="B-123-Triangle"><a href="#B-123-Triangle" class="headerlink" title="B - 123 Triangle"></a>B - 123 Triangle</h4><p>考虑只有 <code>0</code> 和 <code>1</code> 怎么做。</p>
-<p>每次操作可以看做是把 $x_i$ 改成了 $(x_i+x_{i+1}) \bmod \ 2$，所以每个 <code>1</code> 对最终的数的贡献就是一个组合数 $\bmod \ 2$，可以直接卢卡斯定理算。</p>
+<h2 id="section-6">9.11</h2>
+<h3 id="agc-043">AGC 043</h3>
+<hr />
+<h4 id="a---range-flip-find-route">A - Range Flip Find Route</h4>
+<p>如果确定了一条从起点到终点路径，最小操作数就是这段路径经过了几段 <code>#</code>，根据这个 dp 就行了。</p>
+<h4 id="b---123-triangle">B - 123 Triangle</h4>
+<p>考虑只有 <code>0</code> 和 <code>1</code> 怎么做。</p>
+<p>每次操作可以看做是把 <span class="math inline">\(x_i\)</span> 改成了 <span class="math inline">\((x_i+x_{i+1}) \bmod \ 2\)</span>，所以每个 <code>1</code> 对最终的数的贡献就是一个组合数 <span class="math inline">\(\bmod \ 2\)</span>，可以直接卢卡斯定理算。</p>
 <p>只有 <code>0</code> 和 <code>2</code> 是一样的。</p>
-<p>如果三种都有，可以发现其实 <code>2</code> 可以看做是 <code>0</code>，可以证明最终答案肯定不是  <code>2</code>。</p>
-<h4 id="C-Giant-Graph"><a href="#C-Giant-Graph" class="headerlink" title="C - Giant Graph"></a>C - Giant Graph</h4><p>$O(n^3)$ 的贪心大家都会，问题在于怎么优化。</p>
+<p>如果三种都有，可以发现其实 <code>2</code> 可以看做是 <code>0</code>，可以证明最终答案肯定不是 <code>2</code>。</p>
+<h4 id="c---giant-graph">C - Giant Graph</h4>
+<p><span class="math inline">\(O(n^3)\)</span> 的贪心大家都会，问题在于怎么优化。</p>
 <p>仔细观察判断每个点能否选的式子，可以发现这好像长得像个博弈的模型。</p>
 <p>多维的情况就是每一维 <code>xor</code> 起来，可以算出每个图的每个点 sg 函数，最后暴力合并。</p>
-<p>可以证明 sg 函数的值域是 $O(\sqrt{m})$ 的。</p>
-<h4 id="D-Merge-Triplets"><a href="#D-Merge-Triplets" class="headerlink" title="D - Merge Triplets"></a>D - Merge Triplets</h4><p>在元素两两不同的归并排序中，结果等价于将所有序列按照前缀最大值划分之后，按照块头大小排序得到的序列。</p>
-<p>所以就是要数满足能划分成大小为 $1,2,3$ 的块，且能拼成 $n$ 个大小为 $3$ 的块的排列个数。</p>
-<p>能拼成 $n$ 个大小为 $3$ 的块也就是大小为 $1$ 的块的个数不能比大小为 $2$ 的块的个数少。</p>
-<p>对于一个划分，方案数为 $\frac{N!}{\prod_{i=1}^{m}(\sum_{j \le i} siz_j)}$。</p>
-<p>dp 的时候记一下大小为 $1$ 的块的个数和大小为 $2$ 的块的个数的差就行了。</p>
-<h4 id="E-Topology"><a href="#E-Topology" class="headerlink" title="E - Topology"></a>E - Topology</h4><p>首先有一个结论：</p>
+<p>可以证明 sg 函数的值域是 <span class="math inline">\(O(\sqrt{m})\)</span> 的。</p>
+<h4 id="d---merge-triplets">D - Merge Triplets</h4>
+<p>在元素两两不同的归并排序中，结果等价于将所有序列按照前缀最大值划分之后，按照块头大小排序得到的序列。</p>
+<p>所以就是要数满足能划分成大小为 <span class="math inline">\(1,2,3\)</span> 的块，且能拼成 <span class="math inline">\(n\)</span> 个大小为 <span class="math inline">\(3\)</span> 的块的排列个数。</p>
+<p>能拼成 <span class="math inline">\(n\)</span> 个大小为 <span class="math inline">\(3\)</span> 的块也就是大小为 <span class="math inline">\(1\)</span> 的块的个数不能比大小为 <span class="math inline">\(2\)</span> 的块的个数少。</p>
+<p>对于一个划分，方案数为 <span class="math inline">\(\frac{N!}{\prod_{i=1}^{m}(\sum_{j \le i} siz_j)}\)</span>。</p>
+<p>dp 的时候记一下大小为 <span class="math inline">\(1\)</span> 的块的个数和大小为 <span class="math inline">\(2\)</span> 的块的个数的差就行了。</p>
+<h4 id="e---topology">E - Topology</h4>
+<p>首先有一个结论：</p>
 <blockquote>
-<p>过每个点作一条关于 $x$ 轴的垂线，从绳子的最左端开始，沿绳子指定一个方向行进，穿过第 $i$ 条线上方的时候记录一个 $u_i$，穿过第 $i$ 条线下方的时候记录一个 $d_i$，这样游走得到一个字符串，不断地在字符串中选择两个相邻且相同的字符删掉，如果能清空，则该点集合法，否则非法。</p>
+<p>过每个点作一条关于 <span class="math inline">\(x\)</span> 轴的垂线，从绳子的最左端开始，沿绳子指定一个方向行进，穿过第 <span class="math inline">\(i\)</span> 条线上方的时候记录一个 <span class="math inline">\(u_i\)</span>，穿过第 <span class="math inline">\(i\)</span> 条线下方的时候记录一个 <span class="math inline">\(d_i\)</span>，这样游走得到一个字符串，不断地在字符串中选择两个相邻且相同的字符删掉，如果能清空，则该点集合法，否则非法。</p>
 </blockquote>
 <p>每次删除两个相同字符说明可以把绳圈的一部分拉过来，能清空说明能完全分离。</p>
 <p>先把无解判了，考虑怎么构造。</p>
-<p>考虑对于一个不存在子集不合法的集合 $S$，构造一个经过 $(0,1)$ ，$S$ 不合法，$S$ 所有子集都合法的圈。最后把所有圈在 $(0,1)$ 相连。</p>
+<p>考虑对于一个不存在子集不合法的集合 <span class="math inline">\(S\)</span>，构造一个经过 <span class="math inline">\((0,1)\)</span> ，<span class="math inline">\(S\)</span> 不合法，<span class="math inline">\(S\)</span> 所有子集都合法的圈。最后把所有圈在 <span class="math inline">\((0,1)\)</span> 相连。</p>
 <p>考虑如下递归构造，当前处于所有点最左侧。</p>
 <ul>
-<li><p>只有一个点，绕个圈就行了，$ans= u_1d_1$。</p>
-</li>
-<li><p>否则 $ans=u_i+ans+u_i+d_i+\text{reverse}(ans)+d_i$。</p>
-</li>
+<li><p>只有一个点，绕个圈就行了，<span class="math inline">\(ans= u_1d_1\)</span>。</p></li>
+<li><p>否则 <span class="math inline">\(ans=u_i+ans+u_i+d_i+\text{reverse}(ans)+d_i\)</span>。</p></li>
 </ul>
 <p>正确性显然。</p>
-<p>长度上界是 $4n \times 3^n$，实际常数很小。</p>
-<h4 id="F-Jewelry-Box"><a href="#F-Jewelry-Box" class="headerlink" title="F - Jewelry Box"></a>F - Jewelry Box</h4><p>先考虑单组询问。</p>
+<p>长度上界是 <span class="math inline">\(4n \times 3^n\)</span>，实际常数很小。</p>
+<h4 id="f---jewelry-box">F - Jewelry Box</h4>
+<p>先考虑单组询问。</p>
 <p>考虑如何判断一个选择的方案是否合法。</p>
-<p>显然我们对于每家店的商品按 $siz$ 排序后按顺序选，然后 check 是否合法就行。</p>
-<p>所以一对 $(u,v,w)$ 的限制就等价于，对于 $u$ 商店，$\le S_{u,i}$ 的商品买了 $a$ 个，则 $v$ 商店 $\le S_{u,i}+w$ 的商品至少买 $a$ 个。</p>
-<p>用 $x_{i,j}$ 表示商店 $i$ 前 $j$ 轻的商品买了多少个。</p>
+<p>显然我们对于每家店的商品按 <span class="math inline">\(siz\)</span> 排序后按顺序选，然后 check 是否合法就行。</p>
+<p>所以一对 <span class="math inline">\((u,v,w)\)</span> 的限制就等价于，对于 <span class="math inline">\(u\)</span> 商店，<span class="math inline">\(\le S_{u,i}\)</span> 的商品买了 <span class="math inline">\(a\)</span> 个，则 <span class="math inline">\(v\)</span> 商店 <span class="math inline">\(\le S_{u,i}+w\)</span> 的商品至少买 <span class="math inline">\(a\)</span> 个。</p>
+<p>用 <span class="math inline">\(x_{i,j}\)</span> 表示商店 <span class="math inline">\(i\)</span> 前 <span class="math inline">\(j\)</span> 轻的商品买了多少个。</p>
 <p>容易发现这是一个线性规划问题：</p>
 <p>限制是：</p>
-<p>$$x_{i,K_i}-x_{i,0}=A$$</p>
-<p>$$x_{i,j}-x_{i,j-1} \le 0$$</p>
-<p>$$x_{i,j-1}-x_{i,j} \le -C_{i,j}$$</p>
-<p>$$x_{v_i,j}-x_{u_i,k} \le 0$$</p>
+<p><span class="math display">\[x_{i,K_i}-x_{i,0}=A\]</span></p>
+<p><span class="math display">\[x_{i,j}-x_{i,j-1} \le 0\]</span></p>
+<p><span class="math display">\[x_{i,j-1}-x_{i,j} \le -C_{i,j}\]</span></p>
+<p><span class="math display">\[x_{v_i,j}-x_{u_i,k} \le 0\]</span></p>
 <p>需要最小化：</p>
-<p>$$\min(\sum_{i,j} (x_{i,j}-x_{i,j-1})P_{i,j})=\min(\sum_{i,j}x_{i,j}(P_{i,j}-P_{i,j+1}))$$</p>
-<p>对偶一下，令上面几个限制对应的变量分别是 $a_i,b_i,c_{i,j},d_{i,j},e_{i,j}$。</p>
+<p><span class="math display">\[\min(\sum_{i,j} (x_{i,j}-x_{i,j-1})P_{i,j})=\min(\sum_{i,j}x_{i,j}(P_{i,j}-P_{i,j+1}))\]</span></p>
+<p>对偶一下，令上面几个限制对应的变量分别是 <span class="math inline">\(a_i,b_i,c_{i,j},d_{i,j},e_{i,j}\)</span>。</p>
 <p>则限制为：</p>
-<p>$$-c_{i,1}+d_{i,1}-a_i\le -P_{i,1}$$</p>
-<p>$$c_{i,K_i}-d_{i,K_i}+a_i\le P_{i,K_i}$$</p>
-<p>$$c_{i,j}-c_{i,j+1}-d_{i,j}+d_{i,j+1}+\sum e_{k,l}-e_{p,q} \le P_{i,j}-P_{i,j+1}$$</p>
+<p><span class="math display">\[-c_{i,1}+d_{i,1}-a_i\le -P_{i,1}\]</span></p>
+<p><span class="math display">\[c_{i,K_i}-d_{i,K_i}+a_i\le P_{i,K_i}\]</span></p>
+<p><span class="math display">\[c_{i,j}-c_{i,j+1}-d_{i,j}+d_{i,j+1}+\sum e_{k,l}-e_{p,q} \le P_{i,j}-P_{i,j+1}\]</span></p>
 <p>需要最大化：</p>
-<p>$$\max(\sum a_iA-d_{i,j}C_{i,j})$$</p>
+<p><span class="math display">\[\max(\sum a_iA-d_{i,j}C_{i,j})\]</span></p>
 <p>把几个限制的左右加起来可以发现都能消掉，所以几个限制不等号肯定是等号，再稍微调整下式子：</p>
-<p>$$-(c_{i,1}-P_{i,1})+d_{i,1}-a_i=0$$</p>
-<p>$$(c_{i,K_i}-P_{i,K_i})-d_{i,K_i}+a_i=0$$</p>
-<p>$$(c_{i,j}-P_{i,j})-(c_{i,j+1}-P_{i,j+1})-d_{i,j}+d_{i,j+1}+\sum e_{k,l}-e_{p,q} = 0$$</p>
+<p><span class="math display">\[-(c_{i,1}-P_{i,1})+d_{i,1}-a_i=0\]</span></p>
+<p><span class="math display">\[(c_{i,K_i}-P_{i,K_i})-d_{i,K_i}+a_i=0\]</span></p>
+<p><span class="math display">\[(c_{i,j}-P_{i,j})-(c_{i,j+1}-P_{i,j+1})-d_{i,j}+d_{i,j+1}+\sum e_{k,l}-e_{p,q} = 0\]</span></p>
 <p>可以把每个限制看做是一个点，每条边是一个变量建图，每个点流量汇入和流出的平衡就相当于等式成立。</p>
 <p>可以发现这是一个最小费用循环流问题。</p>
-<p>对于 $c_{i,j}$ 可以把 $c_{i,j}-P_{i,j}$ 看成一个整体，所以 $c_{i,j}$ 的取值变成了 $[-P_{i,j},+\infty)$，只需要 $(i,j)$ 向 $(i,j-1)$ 连 $P_{i,j}$ 的边，反过来连 $\infty$ 的边即可。</p>
-<p>注意到这个图的环肯定是从 $S$ 流向 $T$，再从 $T$ 通过 $A$ 边权的那条边回来，于是我们可以把那条边先搞掉，对于剩下的图跑费用流，对于每个流量记一下对应费用，由于费用流的凸性，最后可以二分得到跑了前几圈从而得到答案。</p>
-<h2 id="9-14"><a href="#9-14" class="headerlink" title="9.14"></a>9.14</h2><h3 id="AGC-041"><a href="#AGC-041" class="headerlink" title="AGC 041"></a>AGC 041</h3><hr>
-<h4 id="A-Table-Tennis-Training"><a href="#A-Table-Tennis-Training" class="headerlink" title="A - Table Tennis Training"></a>A - Table Tennis Training</h4><p>距离是偶数就直接往两者中间走，不然先走到两端等一局再往中间走。</p>
-<h4 id="B-Voting-Judges"><a href="#B-Voting-Judges" class="headerlink" title="B - Voting Judges"></a>B - Voting Judges</h4><p>考虑怎么判断一个数 $a_i$ 能否合法。</p>
-<p>一开始就在前 $p$ 名显然合法。</p>
-<p>加上 $m$ 还是挤不进去前 $p$ 名肯定不合法。</p>
-<p>显然 $m$ 次操作都会选择 $a_i$，另外我们可以先钦定 $p-1$ 个数在最终比当前的数大，那么这些数每次操作也都会选上，接下来就是判断把剩下的数搞出一个 $a_i+m+1$ 需要的操作数和剩下的操作数的大小关系。</p>
-<p>那显然我们会贪心的选择钦定前 $p-1$ 名的数每次都选。</p>
-<p>剩下的每个数 $a_j$ 能填的操作数就是 $\min(m,a_i+m-a_j)$。</p>
-<h4 id="C-Domino-Quality"><a href="#C-Domino-Quality" class="headerlink" title="C - Domino Quality"></a>C - Domino Quality</h4><p>先手玩出 $3,4$ 的情况然后判掉。</p>
-<p>可以手玩出 $5,6,7,8,9$ 每行每列都是三个的方案。</p>
-<p>然后每次把 $n$ 行分成左上角 $\lceil \frac{n}{2} \rceil \times \lceil \frac{n}{2} \rceil$ 和右下角 $(n-\lceil \frac{n}{2} \rceil) \times (n-\lceil \frac{n}{2} \rceil)$ 的情况，所以要手玩到 $9$…</p>
-<h4 id="D-Problem-Scores"><a href="#D-Problem-Scores" class="headerlink" title="D - Problem Scores"></a>D - Problem Scores</h4><p>限制条件推一推就可以得到就是要数满足以下条件长度为 $n$ （先假设 $n$ 为奇数，偶数情况类似）的序列个数：</p>
+<p>对于 <span class="math inline">\(c_{i,j}\)</span> 可以把 <span class="math inline">\(c_{i,j}-P_{i,j}\)</span> 看成一个整体，所以 <span class="math inline">\(c_{i,j}\)</span> 的取值变成了 <span class="math inline">\([-P_{i,j},+\infty)\)</span>，只需要 <span class="math inline">\((i,j)\)</span> 向 <span class="math inline">\((i,j-1)\)</span> 连 <span class="math inline">\(P_{i,j}\)</span> 的边，反过来连 <span class="math inline">\(\infty\)</span> 的边即可。</p>
+<p>注意到这个图的环肯定是从 <span class="math inline">\(S\)</span> 流向 <span class="math inline">\(T\)</span>，再从 <span class="math inline">\(T\)</span> 通过 <span class="math inline">\(A\)</span> 边权的那条边回来，于是我们可以把那条边先搞掉，对于剩下的图跑费用流，对于每个流量记一下对应费用，由于费用流的凸性，最后可以二分得到跑了前几圈从而得到答案。</p>
+<h2 id="section-7">9.14</h2>
+<h3 id="agc-041">AGC 041</h3>
+<hr />
+<h4 id="a---table-tennis-training">A - Table Tennis Training</h4>
+<p>距离是偶数就直接往两者中间走，不然先走到两端等一局再往中间走。</p>
+<h4 id="b---voting-judges">B - Voting Judges</h4>
+<p>考虑怎么判断一个数 <span class="math inline">\(a_i\)</span> 能否合法。</p>
+<p>一开始就在前 <span class="math inline">\(p\)</span> 名显然合法。</p>
+<p>加上 <span class="math inline">\(m\)</span> 还是挤不进去前 <span class="math inline">\(p\)</span> 名肯定不合法。</p>
+<p>显然 <span class="math inline">\(m\)</span> 次操作都会选择 <span class="math inline">\(a_i\)</span>，另外我们可以先钦定 <span class="math inline">\(p-1\)</span> 个数在最终比当前的数大，那么这些数每次操作也都会选上，接下来就是判断把剩下的数搞出一个 <span class="math inline">\(a_i+m+1\)</span> 需要的操作数和剩下的操作数的大小关系。</p>
+<p>那显然我们会贪心的选择钦定前 <span class="math inline">\(p-1\)</span> 名的数每次都选。</p>
+<p>剩下的每个数 <span class="math inline">\(a_j\)</span> 能填的操作数就是 <span class="math inline">\(\min(m,a_i+m-a_j)\)</span>。</p>
+<h4 id="c---domino-quality">C - Domino Quality</h4>
+<p>先手玩出 <span class="math inline">\(3,4\)</span> 的情况然后判掉。</p>
+<p>可以手玩出 <span class="math inline">\(5,6,7,8,9\)</span> 每行每列都是三个的方案。</p>
+<p>然后每次把 <span class="math inline">\(n\)</span> 行分成左上角 <span class="math inline">\(\lceil \frac{n}{2} \rceil \times \lceil \frac{n}{2} \rceil\)</span> 和右下角 <span class="math inline">\((n-\lceil \frac{n}{2} \rceil) \times (n-\lceil \frac{n}{2} \rceil)\)</span> 的情况，所以要手玩到 <span class="math inline">\(9\)</span>...</p>
+<h4 id="d---problem-scores">D - Problem Scores</h4>
+<p>限制条件推一推就可以得到就是要数满足以下条件长度为 <span class="math inline">\(n\)</span> （先假设 <span class="math inline">\(n\)</span> 为奇数，偶数情况类似）的序列个数：</p>
 <ul>
-<li><p>$\forall i,a_i\in [1,n]$</p>
-</li>
-<li><p>$\forall i \in [1,n),a_i \le a_{i+1}$</p>
-</li>
-<li><p>$\sum\limits_{i=1}^{\frac{n+1}{2}} a_i &gt; \sum\limits_{i=\frac{n+3}{2}}^{n} a_i$</p>
-</li>
+<li><p><span class="math inline">\(\forall i,a_i\in [1,n]\)</span></p></li>
+<li><p><span class="math inline">\(\forall i \in [1,n),a_i \le a_{i+1}\)</span></p></li>
+<li><p><span class="math inline">\(\sum\limits_{i=1}^{\frac{n+1}{2}} a_i &gt; \sum\limits_{i=\frac{n+3}{2}}^{n} a_i\)</span></p></li>
 </ul>
 <p>直接 dp 原序列有点难搞，我们可以 dp 这个序列的差分数组。</p>
-<p>问题转化为有重量为 $1,0,-1,-2,-3, \ldots ,-k$ 的物品，每种物品有无限个，求选择不超过 $n$ 个使得重量和为正整数的方案数。</p>
-<p>考虑把一个重量为 $-k$ 的物品和 $k$ 个 $1$ 捆绑，于是只要 dp 数量就行了。</p>
-<h4 id="E-Balancing-Network"><a href="#E-Balancing-Network" class="headerlink" title="E - Balancing Network"></a>E - Balancing Network</h4><p>$T=1$ 考虑从前往后考虑每个平衡器，对于每条线用 bitset 维护下能跑到这条线的线，对于当前平衡器 $(a,b)$，$a$ 和 $b$ 两条线的 bitset 变成两者的并就行了。 </p>
+<p>问题转化为有重量为 <span class="math inline">\(1,0,-1,-2,-3, \ldots ,-k\)</span> 的物品，每种物品有无限个，求选择不超过 <span class="math inline">\(n\)</span> 个使得重量和为正整数的方案数。</p>
+<p>考虑把一个重量为 <span class="math inline">\(-k\)</span> 的物品和 <span class="math inline">\(k\)</span> 个 <span class="math inline">\(1\)</span> 捆绑，于是只要 dp 数量就行了。</p>
+<h4 id="e---balancing-network">E - Balancing Network</h4>
+<p><span class="math inline">\(T=1\)</span> 考虑从前往后考虑每个平衡器，对于每条线用 bitset 维护下能跑到这条线的线，对于当前平衡器 <span class="math inline">\((a,b)\)</span>，<span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 两条线的 bitset 变成两者的并就行了。</p>
 <p>找到一条所有线能跑到的线从后往前构造就行了。</p>
-<p>$T=2$ 考虑从后往前考虑每个平衡器，对于每条线 $i$ 记一下 $i$ 最终跑到哪条线和跑到 $i$ 有多少条线，目标是不存在一条线能跑到这条线的个数为 $n$，对于当前平衡器 $(a,b)$，要么 $a$ 跑到了 $b$ 最终跑到的线，要么 $b$ 跑到了 $a$ 最终跑到的线，显然存在一种方案使得满足条件，因为当 $n&gt;2$ 的时候不会同时存在两个 $n-1$。</p>
-<h4 id="F-Histogram-Rooks"><a href="#F-Histogram-Rooks" class="headerlink" title="F - Histogram Rooks"></a>F - Histogram Rooks</h4><p>考虑从高往低 dp，具体来说就是建笛卡尔树然后从下往上合并，直接 dp 需要记上面有几列放了以及有几列有格子空着。</p>
+<p><span class="math inline">\(T=2\)</span> 考虑从后往前考虑每个平衡器，对于每条线 <span class="math inline">\(i\)</span> 记一下 <span class="math inline">\(i\)</span> 最终跑到哪条线和跑到 <span class="math inline">\(i\)</span> 有多少条线，目标是不存在一条线能跑到这条线的个数为 <span class="math inline">\(n\)</span>，对于当前平衡器 <span class="math inline">\((a,b)\)</span>，要么 <span class="math inline">\(a\)</span> 跑到了 <span class="math inline">\(b\)</span> 最终跑到的线，要么 <span class="math inline">\(b\)</span> 跑到了 <span class="math inline">\(a\)</span> 最终跑到的线，显然存在一种方案使得满足条件，因为当 <span class="math inline">\(n&gt;2\)</span> 的时候不会同时存在两个 <span class="math inline">\(n-1\)</span>。</p>
+<h4 id="f---histogram-rooks">F - Histogram Rooks</h4>
+<p>考虑从高往低 dp，具体来说就是建笛卡尔树然后从下往上合并，直接 dp 需要记上面有几列放了以及有几列有格子空着。</p>
 <p>要记两维是因为当前行一个都不放的时候，有格子空着的列数会变成当前行的长度减去上面有几列放了的个数。</p>
 <p>于是单独处理这种情况状态就能改成一维了。</p>
-<p>令 $f_{i,j}$ 表示 $i$ 子树有 $j$ 列放了的方案数，$g_{i,j}$ 表示 $i$ 子树有 $j$ 列有格子空着的方案数。</p>
-<p>这一行一个都不放就是从 $f_{i,j}$ 转移到 $g_{i,len-j}$， $f$ 转移到 $f$ 枚举另外填了几列，$g$ 转移到 $g$ 枚举有格子空了的列填了几列就行了。</p>
-<p>复杂度是 $O(n^3)$，可以用 FFT 优化到 $O(n^2\log n)$，并没能吊打标算。</p>
-<h2 id="9-15"><a href="#9-15" class="headerlink" title="9.15"></a>9.15</h2><h3 id="Dwango-Programming-Contest-6th"><a href="#Dwango-Programming-Contest-6th" class="headerlink" title="Dwango Programming Contest 6th"></a>Dwango Programming Contest 6th</h3><hr>
-<h4 id="A-Falling-Asleep"><a href="#A-Falling-Asleep" class="headerlink" title="A - Falling Asleep"></a>A - Falling Asleep</h4><p>xjb 枚举一下。</p>
-<h4 id="B-Fusing-Slimes"><a href="#B-Fusing-Slimes" class="headerlink" title="B - Fusing Slimes"></a>B - Fusing Slimes</h4><p>对于每个间隔考虑贡献，对于 $x_i$ 和 $x_{i+1}$ 之间的间隔，原先前 $i$ 个数剩 $j$ 个的时候，有 $\frac{1}{j}$ 的概率贡献 $1$，所以 $x_i$ 和 $x_{i+1}$ 之间的间隔对答案的贡献是：$(x_{i+1}-x_i)\times \sum_{j\le i}\frac{1}{j}$。</p>
-<h4 id="C-Cookie-Distribution"><a href="#C-Cookie-Distribution" class="headerlink" title="C - Cookie Distribution"></a>C - Cookie Distribution</h4><p>考虑组合意义，$\prod_{i} c_i$ 相当于每个孩子还要从他的曲奇里选一个。</p>
-<p>考虑根据这个 dp，令 $dp_{i,j}$ 表示前 $i$ 天有 $j$ 个孩子选到了曲奇。</p>
+<p>令 <span class="math inline">\(f_{i,j}\)</span> 表示 <span class="math inline">\(i\)</span> 子树有 <span class="math inline">\(j\)</span> 列放了的方案数，<span class="math inline">\(g_{i,j}\)</span> 表示 <span class="math inline">\(i\)</span> 子树有 <span class="math inline">\(j\)</span> 列有格子空着的方案数。</p>
+<p>这一行一个都不放就是从 <span class="math inline">\(f_{i,j}\)</span> 转移到 <span class="math inline">\(g_{i,len-j}\)</span>， <span class="math inline">\(f\)</span> 转移到 <span class="math inline">\(f\)</span> 枚举另外填了几列，<span class="math inline">\(g\)</span> 转移到 <span class="math inline">\(g\)</span> 枚举有格子空了的列填了几列就行了。</p>
+<p>复杂度是 <span class="math inline">\(O(n^3)\)</span>，可以用 FFT 优化到 <span class="math inline">\(O(n^2\log n)\)</span>，并没能吊打标算。</p>
+<h2 id="section-8">9.15</h2>
+<h3 id="dwango-programming-contest-6th">Dwango Programming Contest 6th</h3>
+<hr />
+<h4 id="a---falling-asleep">A - Falling Asleep</h4>
+<p>xjb 枚举一下。</p>
+<h4 id="b---fusing-slimes">B - Fusing Slimes</h4>
+<p>对于每个间隔考虑贡献，对于 <span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(x_{i+1}\)</span> 之间的间隔，原先前 <span class="math inline">\(i\)</span> 个数剩 <span class="math inline">\(j\)</span> 个的时候，有 <span class="math inline">\(\frac{1}{j}\)</span> 的概率贡献 <span class="math inline">\(1\)</span>，所以 <span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(x_{i+1}\)</span> 之间的间隔对答案的贡献是：<span class="math inline">\((x_{i+1}-x_i)\times \sum_{j\le i}\frac{1}{j}\)</span>。</p>
+<h4 id="c---cookie-distribution">C - Cookie Distribution</h4>
+<p>考虑组合意义，<span class="math inline">\(\prod_{i} c_i\)</span> 相当于每个孩子还要从他的曲奇里选一个。</p>
+<p>考虑根据这个 dp，令 <span class="math inline">\(dp_{i,j}\)</span> 表示前 <span class="math inline">\(i\)</span> 天有 <span class="math inline">\(j\)</span> 个孩子选到了曲奇。</p>
 <p>转移枚举当前天另外有几个孩子选到了曲奇，然后剩下的曲奇随便分就行。</p>
-<h4 id="D-Arrangement"><a href="#D-Arrangement" class="headerlink" title="D - Arrangement"></a>D - Arrangement</h4><p>考虑从前往后贪心放。</p>
-<p>设没被 ban 的最小值为 $x$。</p>
+<h4 id="d---arrangement">D - Arrangement</h4>
+<p>考虑从前往后贪心放。</p>
+<p>设没被 ban 的最小值为 <span class="math inline">\(x\)</span>。</p>
 <p>分三种情况讨论：</p>
-<ol>
-<li><p>存在一个数 $i$，使得还没放所有 $j$，$a_j=i$ 这个时候我们只能放 $i$，不然就会不合法。</p>
-</li>
-<li><p>放 $x$ 之后还剩两个数 $p,q$，并且 $a_{p}=q,a_{q}=p$，这个时候放 $x$ 会不合法，$p,q$ 中选一个没被 ban 的放。</p>
-</li>
-<li><p>放 $x$。</p>
-</li>
+<ol type="1">
+<li><p>存在一个数 <span class="math inline">\(i\)</span>，使得还没放所有 <span class="math inline">\(j\)</span>，<span class="math inline">\(a_j=i\)</span> 这个时候我们只能放 <span class="math inline">\(i\)</span>，不然就会不合法。</p></li>
+<li><p>放 <span class="math inline">\(x\)</span> 之后还剩两个数 <span class="math inline">\(p,q\)</span>，并且 <span class="math inline">\(a_{p}=q,a_{q}=p\)</span>，这个时候放 <span class="math inline">\(x\)</span> 会不合法，<span class="math inline">\(p,q\)</span> 中选一个没被 ban 的放。</p></li>
+<li><p>放 <span class="math inline">\(x\)</span>。</p></li>
 </ol>
-<h4 id="E-Span-Covering"><a href="#E-Span-Covering" class="headerlink" title="E - Span Covering"></a>E - Span Covering</h4><p>先套一层容斥。</p>
+<h4 id="e---span-covering">E - Span Covering</h4>
+<p>先套一层容斥。</p>
 <p>先把答案的式子写下：</p>
-<p>$$\sum_{T} (-1)^{|T|} \prod_{i} \sum_{j,\ l_j\ge L_i} l_j-L_i+1$$</p>
+<p><span class="math display">\[\sum_{T} (-1)^{|T|} \prod_{i} \sum_{j,\ l_j\ge L_i} l_j-L_i+1\]</span></p>
 <p>稍微改下：</p>
-<p>$$\sum_{T} (-1)^{|T|} \prod_{i} ((\sum_{j,\ l_j\ge L_i} l_j)-(\sum_{j}[l_j\ge L_i]\times (L_i-1))\ )$$</p>
-<p>考虑从大往小 dp，可以发现贡献只和 $\sum_{j}{l_j}$ 和 $\sum_j{1}$ 有关，状态只要记这两维就行了。</p>
+<p><span class="math display">\[\sum_{T} (-1)^{|T|} \prod_{i} ((\sum_{j,\ l_j\ge L_i} l_j)-(\sum_{j}[l_j\ge L_i]\times (L_i-1))\ )\]</span></p>
+<p>考虑从大往小 dp，可以发现贡献只和 <span class="math inline">\(\sum_{j}{l_j}\)</span> 和 <span class="math inline">\(\sum_j{1}\)</span> 有关，状态只要记这两维就行了。</p>
 <p>最后转移的时候还要乘一下组合数。</p>
-<p>稍微分析一下可以得到复杂度是 $O(X^3)$ 的。</p>
-<h3 id="DISCO-Presents-Discovery-Channel-Code-Contest-2020-Qual"><a href="#DISCO-Presents-Discovery-Channel-Code-Contest-2020-Qual" class="headerlink" title="DISCO Presents Discovery Channel Code Contest 2020 Qual"></a>DISCO Presents Discovery Channel Code Contest 2020 Qual</h3><hr>
-<h4 id="A-DDCC-Finals"><a href="#A-DDCC-Finals" class="headerlink" title="A - DDCC Finals"></a>A - DDCC Finals</h4><p>随便算算。</p>
-<h4 id="B-Iron-Bar-Cutting"><a href="#B-Iron-Bar-Cutting" class="headerlink" title="B - Iron Bar Cutting"></a>B - Iron Bar Cutting</h4><p>随便算算。</p>
-<h4 id="C-Strawberry-Cakes"><a href="#C-Strawberry-Cakes" class="headerlink" title="C - Strawberry Cakes"></a>C - Strawberry Cakes</h4><p>随便构造。</p>
-<h4 id="D-Digit-Sum-Replace"><a href="#D-Digit-Sum-Replace" class="headerlink" title="D - Digit Sum Replace"></a>D - Digit Sum Replace</h4><p>注意到怎么删次数都是一样的，于是随便算算。</p>
-<h4 id="E-Majority-of-Balls"><a href="#E-Majority-of-Balls" class="headerlink" title="E - Majority of Balls"></a>E - Majority of Balls</h4><p>如果找到了 $\frac{N-1}{2}$ 个蓝球和 $\frac{N-1}{2}$ 个红球，剩下的随便问问就行。</p>
+<p>稍微分析一下可以得到复杂度是 <span class="math inline">\(O(X^3)\)</span> 的。</p>
+<h3 id="disco-presents-discovery-channel-code-contest-2020-qual">DISCO Presents Discovery Channel Code Contest 2020 Qual</h3>
+<hr />
+<h4 id="a---ddcc-finals">A - DDCC Finals</h4>
+<p>随便算算。</p>
+<h4 id="b---iron-bar-cutting">B - Iron Bar Cutting</h4>
+<p>随便算算。</p>
+<h4 id="c---strawberry-cakes">C - Strawberry Cakes</h4>
+<p>随便构造。</p>
+<h4 id="d---digit-sum-replace">D - Digit Sum Replace</h4>
+<p>注意到怎么删次数都是一样的，于是随便算算。</p>
+<h4 id="e---majority-of-balls">E - Majority of Balls</h4>
+<p>如果找到了 <span class="math inline">\(\frac{N-1}{2}\)</span> 个蓝球和 <span class="math inline">\(\frac{N-1}{2}\)</span> 个红球，剩下的随便问问就行。</p>
 <p>注意到一定存在一个区间满足这个条件，于是二分一下就行了。</p>
-<h4 id="F-DISCOSMOS"><a href="#F-DISCOSMOS" class="headerlink" title="F - DISCOSMOS"></a>F - DISCOSMOS</h4><p>首先可以转化到 $T=1$ 的情况。</p>
-<p>对于 $T=1$ 的情况可以打表找一波规律。</p>
-<p>不难发现答案是 $2^n+2^m-1+2^{\gcd(n,m)}-2$。</p>
-<h2 id="9-16"><a href="#9-16" class="headerlink" title="9.16"></a>9.16</h2><h3 id="AGC-040"><a href="#AGC-040" class="headerlink" title="AGC 040"></a>AGC 040</h3><hr>
-<h4 id="A-gt-lt"><a href="#A-gt-lt" class="headerlink" title="A - &gt;&lt;"></a>A - &gt;&lt;</h4><p>模拟。</p>
-<h4 id="B-Two-Contests"><a href="#B-Two-Contests" class="headerlink" title="B - Two Contests"></a>B - Two Contests</h4><p>一个集合的交是 $\min{r}-\max{l}+1$。</p>
-<p>分成两个集合的话一个集合的 $\max l$ 是确定的，枚举另一个的 $\max l$，设为 $k$，最终 $k$ 所在集合要么是只有一个区间要么就是所有 $l \le k$ 的区间。</p>
-<h4 id="C-Neither-AB-nor-BA"><a href="#C-Neither-AB-nor-BA" class="headerlink" title="C - Neither AB nor BA"></a>C - Neither AB nor BA</h4><p>首先可以黑白染色，偶数位置的 $A,B$ 取反，限制转化为不能删除 <code>AA</code> 和 <code>BB</code>。</p>
-<p>可以发现这样一个合法的字符串需要满足的是 $\max(cntA,cntB) \le  \frac{n}{2}$，用合法方案减去不合法方案就行。</p>
-<h4 id="D-Balance-Beam"><a href="#D-Balance-Beam" class="headerlink" title="D - Balance Beam"></a>D - Balance Beam</h4><p>对于一种排列，显然能 win 的是一个前缀。</p>
-<p>画出两者的图像，$x$ 是距离，$y$ 是时间，显然两者的图像由 $n$ 条折线组成，如果这两条折线有交则说明能 win。上下移动第二个玩家的折线，使得两者折线的交只有一个点，此时第二个玩家与 x 轴的交点 $(k,0)$ 就是最后一个能 win 的点，我们的目标就是最大化这个 $k$。</p>
-<p>枚举 $(k,0)$ 对应的是哪条线段，设为 $p$，考虑这样一条折线：从 $(k,0)$ 出现，先沿着第二个玩家的折线向上走，走到两者交点就沿第一个玩家的折线走，最终会走到 $(n,s)$，其中 $s=\sum_{i} a_i$。容易发现每一种方案一定可以找出这样一条折线，并且这条折线能对应一种方案。要最大化 $p$ 也就是走过的线段要尽量少，也就是这些线段要尽量陡。</p>
-<p>于是我们贪心地选择 $\max(a_i,b_i)$ 最大的那些线段放到 $p$ 后面，并且这个上界是可以达到的，只要把 $a_i&lt;b_i$ 的放在两折线交点前面，其他的放在交点后面即可。</p>
-<p>于是我们只要二分出，取前多少个线段能使得 $\sum_{i} \max(a_i,b_i) \ge s-b_p$，小数部分特殊算算就行。</p>
-<h4 id="E-Prefix-Suffix-Addition"><a href="#E-Prefix-Suffix-Addition" class="headerlink" title="E - Prefix Suffix Addition"></a>E - Prefix Suffix Addition</h4><p>设 $x_i$ 表示第 $i$ 个数通过第二种操作增加的值，$y_i$ 为第一种操作增加的值，$\forall i,x_i+y_i = a_i$，需要的操作数则为 $\sum_{i} [x_i&gt;x_{i-1}]+[y_{i+1}&lt;y_i]$。</p>
-<p>考虑一个一个贪心，不难发现对于代价相同的方案，$x_i$ 小的一定更优，并且对于代价比当前最优方案代价要大至少 $2$ 的方案，它一定不会更优。</p>
+<h4 id="f---discosmos">F - DISCOSMOS</h4>
+<p>首先可以转化到 <span class="math inline">\(T=1\)</span> 的情况。</p>
+<p>对于 <span class="math inline">\(T=1\)</span> 的情况可以打表找一波规律。</p>
+<p>不难发现答案是 <span class="math inline">\(2^n+2^m-1+2^{\gcd(n,m)}-2\)</span>。</p>
+<h2 id="section-9">9.16</h2>
+<h3 id="agc-040">AGC 040</h3>
+<hr />
+<h4 id="a--">A - &gt;&lt;</h4>
+<p>模拟。</p>
+<h4 id="b---two-contests">B - Two Contests</h4>
+<p>一个集合的交是 <span class="math inline">\(\min{r}-\max{l}+1\)</span>。</p>
+<p>分成两个集合的话一个集合的 <span class="math inline">\(\max l\)</span> 是确定的，枚举另一个的 <span class="math inline">\(\max l\)</span>，设为 <span class="math inline">\(k\)</span>，最终 <span class="math inline">\(k\)</span> 所在集合要么是只有一个区间要么就是所有 <span class="math inline">\(l \le k\)</span> 的区间。</p>
+<h4 id="c---neither-ab-nor-ba">C - Neither AB nor BA</h4>
+<p>首先可以黑白染色，偶数位置的 <span class="math inline">\(A,B\)</span> 取反，限制转化为不能删除 <code>AA</code> 和 <code>BB</code>。</p>
+<p>可以发现这样一个合法的字符串需要满足的是 <span class="math inline">\(\max(cntA,cntB) \le \frac{n}{2}\)</span>，用合法方案减去不合法方案就行。</p>
+<h4 id="d---balance-beam">D - Balance Beam</h4>
+<p>对于一种排列，显然能 win 的是一个前缀。</p>
+<p>画出两者的图像，<span class="math inline">\(x\)</span> 是距离，<span class="math inline">\(y\)</span> 是时间，显然两者的图像由 <span class="math inline">\(n\)</span> 条折线组成，如果这两条折线有交则说明能 win。上下移动第二个玩家的折线，使得两者折线的交只有一个点，此时第二个玩家与 x 轴的交点 <span class="math inline">\((k,0)\)</span> 就是最后一个能 win 的点，我们的目标就是最大化这个 <span class="math inline">\(k\)</span>。</p>
+<p>枚举 <span class="math inline">\((k,0)\)</span> 对应的是哪条线段，设为 <span class="math inline">\(p\)</span>，考虑这样一条折线：从 <span class="math inline">\((k,0)\)</span> 出现，先沿着第二个玩家的折线向上走，走到两者交点就沿第一个玩家的折线走，最终会走到 <span class="math inline">\((n,s)\)</span>，其中 <span class="math inline">\(s=\sum_{i} a_i\)</span>。容易发现每一种方案一定可以找出这样一条折线，并且这条折线能对应一种方案。要最大化 <span class="math inline">\(p\)</span> 也就是走过的线段要尽量少，也就是这些线段要尽量陡。</p>
+<p>于是我们贪心地选择 <span class="math inline">\(\max(a_i,b_i)\)</span> 最大的那些线段放到 <span class="math inline">\(p\)</span> 后面，并且这个上界是可以达到的，只要把 <span class="math inline">\(a_i&lt;b_i\)</span> 的放在两折线交点前面，其他的放在交点后面即可。</p>
+<p>于是我们只要二分出，取前多少个线段能使得 <span class="math inline">\(\sum_{i} \max(a_i,b_i) \ge s-b_p\)</span>，小数部分特殊算算就行。</p>
+<h4 id="e---prefix-suffix-addition">E - Prefix Suffix Addition</h4>
+<p>设 <span class="math inline">\(x_i\)</span> 表示第 <span class="math inline">\(i\)</span> 个数通过第二种操作增加的值，<span class="math inline">\(y_i\)</span> 为第一种操作增加的值，<span class="math inline">\(\forall i,x_i+y_i = a_i\)</span>，需要的操作数则为 <span class="math inline">\(\sum_{i} [x_i&gt;x_{i-1}]+[y_{i+1}&lt;y_i]\)</span>。</p>
+<p>考虑一个一个贪心，不难发现对于代价相同的方案，<span class="math inline">\(x_i\)</span> 小的一定更优，并且对于代价比当前最优方案代价要大至少 <span class="math inline">\(2\)</span> 的方案，它一定不会更优。</p>
 <p>于是我们只要记最优解和次优解就行。</p>
-<h4 id="F-Two-Pieces"><a href="#F-Two-Pieces" class="headerlink" title="F - Two Pieces"></a>F - Two Pieces</h4><p>考虑用 $(p,q)$ 来表示一个点，其中 $p $表示较远的点的坐标，$q$ 表示两者的距离。</p>
+<h4 id="f---two-pieces">F - Two Pieces</h4>
+<p>考虑用 <span class="math inline">\((p,q)\)</span> 来表示一个点，其中 $p <span class="math inline">\(表示较远的点的坐标，\)</span>q$ 表示两者的距离。</p>
 <p>有三种操作：</p>
-<ol>
-<li><p>$p,q$ 同时加一。</p>
-</li>
-<li><p>$q$ 减一，但此时要满足 $q\ge 2$。</p>
-</li>
-<li><p>将 $q$ 清零。</p>
-</li>
+<ol type="1">
+<li><p><span class="math inline">\(p,q\)</span> 同时加一。</p></li>
+<li><p><span class="math inline">\(q\)</span> 减一，但此时要满足 <span class="math inline">\(q\ge 2\)</span>。</p></li>
+<li><p>将 <span class="math inline">\(q\)</span> 清零。</p></li>
 </ol>
 <p>考虑确定前两个操作序列，然后插入第三种操作算方案。</p>
-<p>不难发现第一种操作会恰好执行 $B$ 次，枚举第二种操作次数，设为 $k$。</p>
-<p>如果 $n=B+k$，直接折线法算算就行。</p>
+<p>不难发现第一种操作会恰好执行 <span class="math inline">\(B\)</span> 次，枚举第二种操作次数，设为 <span class="math inline">\(k\)</span>。</p>
+<p>如果 <span class="math inline">\(n=B+k\)</span>，直接折线法算算就行。</p>
 <p>否则考虑插入第三种操作，可以发现插入的第三种操作必须满足以下两个条件：</p>
-<ol>
-<li><p>最后插入的第三种操作必须插在最后一个 $q=A-k$ 的位置。</p>
-</li>
-<li><p>不会使得第二种操作不合法。</p>
-</li>
+<ol type="1">
+<li><p>最后插入的第三种操作必须插在最后一个 <span class="math inline">\(q=A-k\)</span> 的位置。</p></li>
+<li><p>不会使得第二种操作不合法。</p></li>
 </ol>
-<p>为了满足第二个条件，如果要在某个 $q=t$ 的位置后面插入一个第三种操作，那么这个位置后面不能出现 $q’ \le t$ 的位置，也就是说可以在最后一次 $q=0,1,2,3,\dots,A-k$ 的位置后面可以插入任意个数的第三种操作。注意到确定第一种和第二种操作顺序和插入第三种操作是独立的。确定第一种和第二种操作顺序的方案数可以折线法，插入第三种操作可以隔板法。</p>
-<h2 id="9-17"><a href="#9-17" class="headerlink" title="9.17"></a>9.17</h2><h3 id="AGC-039"><a href="#AGC-039" class="headerlink" title="AGC 039"></a>AGC 039</h3><hr>
-<h4 id="A-Connection-and-Disconnection"><a href="#A-Connection-and-Disconnection" class="headerlink" title="A - Connection and Disconnection"></a>A - Connection and Disconnection</h4><p>长度为 $len$ 的连续段需要替换 $\lfloor \frac{len}{2} \rfloor$ 个。</p>
+<p>为了满足第二个条件，如果要在某个 <span class="math inline">\(q=t\)</span> 的位置后面插入一个第三种操作，那么这个位置后面不能出现 <span class="math inline">\(q&#39; \le t\)</span> 的位置，也就是说可以在最后一次 <span class="math inline">\(q=0,1,2,3,\dots,A-k\)</span> 的位置后面可以插入任意个数的第三种操作。注意到确定第一种和第二种操作顺序和插入第三种操作是独立的。确定第一种和第二种操作顺序的方案数可以折线法，插入第三种操作可以隔板法。</p>
+<h2 id="section-10">9.17</h2>
+<h3 id="agc-039">AGC 039</h3>
+<hr />
+<h4 id="a---connection-and-disconnection">A - Connection and Disconnection</h4>
+<p>长度为 <span class="math inline">\(len\)</span> 的连续段需要替换 <span class="math inline">\(\lfloor \frac{len}{2} \rfloor\)</span> 个。</p>
 <p>注意头尾连续段如果字符相同且长度都为奇数还需要额外替换一些。</p>
-<h4 id="B-Graph-Partition"><a href="#B-Graph-Partition" class="headerlink" title="B - Graph Partition"></a>B - Graph Partition</h4><p>如果存在奇环则无解。</p>
+<h4 id="b---graph-partition">B - Graph Partition</h4>
+<p>如果存在奇环则无解。</p>
 <p>否则求下直径就行了。</p>
-<h4 id="C-Division-by-Two-with-Something"><a href="#C-Division-by-Two-with-Something" class="headerlink" title="C - Division by Two with Something"></a>C - Division by Two with Something</h4><p>先定义一个二进制数存在一个长度为 $d$ 的循环节需要满足以下条件：</p>
-<ol>
-<li><p>$d$ 是 $n$ 的一个因子，且 $\frac nd$ 是奇数。</p>
-</li>
-<li><p>$\forall i \in [d+1,n], x_i\ne x_{i-d}$。</p>
-</li>
+<h4 id="c---division-by-two-with-something">C - Division by Two with Something</h4>
+<p>先定义一个二进制数存在一个长度为 <span class="math inline">\(d\)</span> 的循环节需要满足以下条件：</p>
+<ol type="1">
+<li><p><span class="math inline">\(d\)</span> 是 <span class="math inline">\(n\)</span> 的一个因子，且 <span class="math inline">\(\frac nd\)</span> 是奇数。</p></li>
+<li><p><span class="math inline">\(\forall i \in [d+1,n], x_i\ne x_{i-d}\)</span>。</p></li>
 </ol>
-<p>打表找规律可以发现，一个数最短的循环节如果长度为 $len$，那么这个数对答案的贡献是 $2\times len$。</p>
-<p>从小到大对每个合法的长度 $d$ 求一下存在一个长度为 $d$ 的循环节且满足限制的数的个数，然后减去最短循环节小于 $d$ 且是 $d$ 的因子的数的个数就行。</p>
-<h4 id="D-Incenters"><a href="#D-Incenters" class="headerlink" title="D - Incenters"></a>D - Incenters</h4><p>考虑单位圆上 $\Delta ABC$，取这三段弧的中点，分别记为 $A’,B’ ,C’$。</p>
-<p>首先，$\Delta ABC$ 的内心和 $\Delta A’B’C’$ 的垂心是一样的。</p>
-<p>然后，根据欧拉线的知识，$\Delta A’B’C’$ 的垂心就是三个点的坐标和。</p>
+<p>打表找规律可以发现，一个数最短的循环节如果长度为 <span class="math inline">\(len\)</span>，那么这个数对答案的贡献是 <span class="math inline">\(2\times len\)</span>。</p>
+<p>从小到大对每个合法的长度 <span class="math inline">\(d\)</span> 求一下存在一个长度为 <span class="math inline">\(d\)</span> 的循环节且满足限制的数的个数，然后减去最短循环节小于 <span class="math inline">\(d\)</span> 且是 <span class="math inline">\(d\)</span> 的因子的数的个数就行。</p>
+<h4 id="d---incenters">D - Incenters</h4>
+<p>考虑单位圆上 <span class="math inline">\(\Delta ABC\)</span>，取这三段弧的中点，分别记为 <span class="math inline">\(A&#39;,B&#39; ,C&#39;\)</span>。</p>
+<p>首先，<span class="math inline">\(\Delta ABC\)</span> 的内心和 <span class="math inline">\(\Delta A&#39;B&#39;C&#39;\)</span> 的垂心是一样的。</p>
+<p>然后，根据欧拉线的知识，<span class="math inline">\(\Delta A&#39;B&#39;C&#39;\)</span> 的垂心就是三个点的坐标和。</p>
 <p>于是对每对点算贡献就行了。</p>
-<h4 id="E-Pairing-Points"><a href="#E-Pairing-Points" class="headerlink" title="E - Pairing Points"></a>E - Pairing Points</h4><p>先枚举 1 和谁连，圆被分成了两半。</p>
-<p>记 $f_{l,r,L,R}$ 表示区间 $[l,r]$ 和区间 $[L,R]$ 中的点配对的方案。</p>
-<p>可以发现配对方案一定是在 $[l,r]$ 中选一些点 $x_1,x_2,\dots,x_m(x_i&lt;x_{i+1})$ 和 $[L,R]$ 中选一些点 $y_1,y_2,\dots,y_m(y_i&gt;y_{i+1})$，然后 $x_i$ 和 $y_i$ 配对，再然后是 $[l,r]$ 和 $[L,R]$ 中的点自己配对。</p>
-<p>我们可以据此设计转移，另外为了防止算重，我们再记 $g_{l,r,L,R}$ 表示区间 $[l,r]$ 和区间 $[L,R]$ 中的点配对，$[l,r]$ 中的点和 $[L,R]$ 中的点配的只有一对。</p>
-<p>考虑枚举最后一对 $(x_m,y_m)$ 所在区间：</p>
-<p>$f_{l,r,L,R}=\sum_{i,j} f_{l,i,j,R}\times g_{i+1,r,L,j-1}$</p>
-<p>$g$ 的转移就枚举配的那对点就行：</p>
-<p>$g_{l,r,L,R}=\sum_{i,j} f_{l,i-1,i+1,r}\times f_{L,j-1,j+1,R}$</p>
-<p>复杂度是 $O(n^6)$ 的，但是常数小的一批。</p>
-<h4 id="F-Min-Product-Sum"><a href="#F-Min-Product-Sum" class="headerlink" title="F - Min Product Sum"></a>F - Min Product Sum</h4><p>首先有一个显然错误的计算方式，如果每行每列钦定了最小值 $a_i,b_j$，那么这种情况的价值是 $\prod_{i,j} \min(a_i,b_j)$，方案数是 $\prod_{i,j} (k+1-\max(a_i,b_j))$。</p>
+<h4 id="e---pairing-points">E - Pairing Points</h4>
+<p>先枚举 1 和谁连，圆被分成了两半。</p>
+<p>记 <span class="math inline">\(f_{l,r,L,R}\)</span> 表示区间 <span class="math inline">\([l,r]\)</span> 和区间 <span class="math inline">\([L,R]\)</span> 中的点配对的方案。</p>
+<p>可以发现配对方案一定是在 <span class="math inline">\([l,r]\)</span> 中选一些点 <span class="math inline">\(x_1,x_2,\dots,x_m(x_i&lt;x_{i+1})\)</span> 和 <span class="math inline">\([L,R]\)</span> 中选一些点 <span class="math inline">\(y_1,y_2,\dots,y_m(y_i&gt;y_{i+1})\)</span>，然后 <span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(y_i\)</span> 配对，再然后是 <span class="math inline">\([l,r]\)</span> 和 <span class="math inline">\([L,R]\)</span> 中的点自己配对。</p>
+<p>我们可以据此设计转移，另外为了防止算重，我们再记 <span class="math inline">\(g_{l,r,L,R}\)</span> 表示区间 <span class="math inline">\([l,r]\)</span> 和区间 <span class="math inline">\([L,R]\)</span> 中的点配对，<span class="math inline">\([l,r]\)</span> 中的点和 <span class="math inline">\([L,R]\)</span> 中的点配的只有一对。</p>
+<p>考虑枚举最后一对 <span class="math inline">\((x_m,y_m)\)</span> 所在区间：</p>
+<p><span class="math inline">\(f_{l,r,L,R}=\sum_{i,j} f_{l,i,j,R}\times g_{i+1,r,L,j-1}\)</span></p>
+<p><span class="math inline">\(g\)</span> 的转移就枚举配的那对点就行：</p>
+<p><span class="math inline">\(g_{l,r,L,R}=\sum_{i,j} f_{l,i-1,i+1,r}\times f_{L,j-1,j+1,R}\)</span></p>
+<p>复杂度是 <span class="math inline">\(O(n^6)\)</span> 的，但是常数小的一批。</p>
+<h4 id="f---min-product-sum">F - Min Product Sum</h4>
+<p>首先有一个显然错误的计算方式，如果每行每列钦定了最小值 <span class="math inline">\(a_i,b_j\)</span>，那么这种情况的价值是 <span class="math inline">\(\prod_{i,j} \min(a_i,b_j)\)</span>，方案数是 <span class="math inline">\(\prod_{i,j} (k+1-\max(a_i,b_j))\)</span>。</p>
 <p>但是我们可以套一层容斥让这种方式正确。</p>
-<p>考虑 dp 这个东西，令 $f_{i,j,k}$ 表示填到 $k$，已经填满了 $i$ 行 $j$ 列。</p>
-<p>转移考虑枚举加入的不被容斥的行数、不被容斥的列数、容斥的行数、容斥的列数，但这样复杂度很高，我们可以依次枚举这些东西转移，时间复杂度就优化到了 $O(knm(n+m))$。</p>
-<h2 id="9-19"><a href="#9-19" class="headerlink" title="9.19"></a>9.19</h2><h3 id="NIKKEI-Programming-Contest-2019-2"><a href="#NIKKEI-Programming-Contest-2019-2" class="headerlink" title="NIKKEI Programming Contest 2019-2"></a>NIKKEI Programming Contest 2019-2</h3><hr>
-<h4 id="C-Swaps"><a href="#C-Swaps" class="headerlink" title="C - Swaps"></a>C - Swaps</h4><p>显然 $A,B$ 分别排序后，如果存在一个位置 $A_i&gt;B_i$，则无解。</p>
-<p>$N-1$ 次操作显然可以把整个序列排序，而 $N-2$ 次操作相当于是再交换一对 $(i,j)$ 则可以把整个序列排序，所以如果存在 $A_i\le B_{i-1}$，显然肯定有解。</p>
-<p>另外还有就是 $N-2$ 次操作就能把整个序列排序，也就是排列的置换环不止一个。</p>
-<h4 id="D-Shortest-Path-on-a-Line"><a href="#D-Shortest-Path-on-a-Line" class="headerlink" title="D - Shortest Path on a Line"></a>D - Shortest Path on a Line</h4><p>每个 $(L,R,C)$ 可以看做是 $[L,R]$ 向 $R$ 连了一条边权为 $C$ 的边。</p>
+<p>考虑 dp 这个东西，令 <span class="math inline">\(f_{i,j,k}\)</span> 表示填到 <span class="math inline">\(k\)</span>，已经填满了 <span class="math inline">\(i\)</span> 行 <span class="math inline">\(j\)</span> 列。</p>
+<p>转移考虑枚举加入的不被容斥的行数、不被容斥的列数、容斥的行数、容斥的列数，但这样复杂度很高，我们可以依次枚举这些东西转移，时间复杂度就优化到了 <span class="math inline">\(O(knm(n+m))\)</span>。</p>
+<h2 id="section-11">9.19</h2>
+<h3 id="nikkei-programming-contest-2019-2">NIKKEI Programming Contest 2019-2</h3>
+<hr />
+<h4 id="c---swaps">C - Swaps</h4>
+<p>显然 <span class="math inline">\(A,B\)</span> 分别排序后，如果存在一个位置 <span class="math inline">\(A_i&gt;B_i\)</span>，则无解。</p>
+<p><span class="math inline">\(N-1\)</span> 次操作显然可以把整个序列排序，而 <span class="math inline">\(N-2\)</span> 次操作相当于是再交换一对 <span class="math inline">\((i,j)\)</span> 则可以把整个序列排序，所以如果存在 <span class="math inline">\(A_i\le B_{i-1}\)</span>，显然肯定有解。</p>
+<p>另外还有就是 <span class="math inline">\(N-2\)</span> 次操作就能把整个序列排序，也就是排列的置换环不止一个。</p>
+<h4 id="d---shortest-path-on-a-line">D - Shortest Path on a Line</h4>
+<p>每个 <span class="math inline">\((L,R,C)\)</span> 可以看做是 <span class="math inline">\([L,R]\)</span> 向 <span class="math inline">\(R\)</span> 连了一条边权为 <span class="math inline">\(C\)</span> 的边。</p>
 <p>从前往后一个一个算就行。</p>
-<h4 id="E-Non-triangular-Triplets"><a href="#E-Non-triangular-Triplets" class="headerlink" title="E - Non-triangular Triplets"></a>E - Non-triangular Triplets</h4><p>如果 $\sum_{i=K}^{K+2N-1} i &gt; \sum_{i=K+2N}^{K+3N-1} i$ 就无解，否则肯定有解。</p>
+<h4 id="e---non-triangular-triplets">E - Non-triangular Triplets</h4>
+<p>如果 <span class="math inline">\(\sum_{i=K}^{K+2N-1} i &gt; \sum_{i=K+2N}^{K+3N-1} i\)</span> 就无解，否则肯定有解。</p>
 <p>直接给出构造方法吧，可以证明当上面条件满足的时候这样构造肯定是对的。</p>
-<p>$\forall i \in [1,\lceil \frac{n}{2} \rceil ]$，$k+i-1$ 和 $k+n+\lfloor \frac{n}{2} \rfloor+i-1$ 配对。</p>
-<p>$\forall i \in [\lceil \frac{n}{2} \rceil+1,n]$，$k+i-1$ 和 $k+n+i-1$ 配对。</p>
-<p>按照 $a+b$ 的和从小到大和 $[K+2N,K+3N-1]$ 配对就行。</p>
-<h4 id="F-Mirror-Frame"><a href="#F-Mirror-Frame" class="headerlink" title="F - Mirror Frame"></a>F - Mirror Frame</h4><p>一个环上的点 $x+y$ 的奇偶性是相同的，奇偶性相同的环才会有交点，于是独立的，另外两个环的四个交点肯定是一样的。</p>
-<p>考虑一个完全图 $G$，图中每个点代表原图的每一个环，每条边代表这两个环的交点。</p>
+<p><span class="math inline">\(\forall i \in [1,\lceil \frac{n}{2} \rceil ]\)</span>，<span class="math inline">\(k+i-1\)</span> 和 <span class="math inline">\(k+n+\lfloor \frac{n}{2} \rfloor+i-1\)</span> 配对。</p>
+<p><span class="math inline">\(\forall i \in [\lceil \frac{n}{2} \rceil+1,n]\)</span>，<span class="math inline">\(k+i-1\)</span> 和 <span class="math inline">\(k+n+i-1\)</span> 配对。</p>
+<p>按照 <span class="math inline">\(a+b\)</span> 的和从小到大和 <span class="math inline">\([K+2N,K+3N-1]\)</span> 配对就行。</p>
+<h4 id="f---mirror-frame">F - Mirror Frame</h4>
+<p>一个环上的点 <span class="math inline">\(x+y\)</span> 的奇偶性是相同的，奇偶性相同的环才会有交点，于是独立的，另外两个环的四个交点肯定是一样的。</p>
+<p>考虑一个完全图 <span class="math inline">\(G\)</span>，图中每个点代表原图的每一个环，每条边代表这两个环的交点。</p>
 <p>则一次操作相当于选择一条边，反转边的两个端点相邻的边的状态。</p>
-<p>目标是把边置为 $0$。</p>
+<p>目标是把边置为 <span class="math inline">\(0\)</span>。</p>
 <p>考虑确定了边的状态后怎么判断是否存在一种操作的方案。</p>
 <p>如果操作一个环上的所有边，则会使环上所有边状态反转，环外所有边状态不变，也就是说，存在合法方案的充分条件为图中的 open 边存在欧拉回路。</p>
-<ol>
-<li><p>点数是偶数肯定有解，如果我们翻转两个点 $(a,b)$ ,那么 $a,b$ 相邻的 $1$ 边度数的奇偶性发生变化,所以可以通过操作使得所有点的度数为偶数.所以当 $n$ 为偶数的时候一定合法。</p>
-</li>
-<li><p>点数是奇数，那么存在操作方法的条件是只考虑状态为 open 的边时，所有点的度数都是偶数，因为翻转两个点 $(a,b)$ 时, $a,b$ 的度数奇偶性不会发生变化。</p>
-</li>
+<ol type="1">
+<li><p>点数是偶数肯定有解，如果我们翻转两个点 <span class="math inline">\((a,b)\)</span> ,那么 <span class="math inline">\(a,b\)</span> 相邻的 <span class="math inline">\(1\)</span> 边度数的奇偶性发生变化,所以可以通过操作使得所有点的度数为偶数.所以当 <span class="math inline">\(n\)</span> 为偶数的时候一定合法。</p></li>
+<li><p>点数是奇数，那么存在操作方法的条件是只考虑状态为 open 的边时，所有点的度数都是偶数，因为翻转两个点 <span class="math inline">\((a,b)\)</span> 时, <span class="math inline">\(a,b\)</span> 的度数奇偶性不会发生变化。</p></li>
 </ol>
-<p>统计方案考虑每个不确定的边的连通块，open 边度数为奇数的点必须是偶数个，否则无解，另外只要考虑搞出一棵生成树，生成树以外的边随便选，最终可以调整生成树上的边，方案数就是 $2^{m-(n-1)}$。</p>
-<h3 id="Japanese-Student-Championship-2019-Qualification"><a href="#Japanese-Student-Championship-2019-Qualification" class="headerlink" title="Japanese Student Championship 2019 Qualification"></a>Japanese Student Championship 2019 Qualification</h3><hr>
-<h4 id="C-Cell-Inversion"><a href="#C-Cell-Inversion" class="headerlink" title="C - Cell Inversion"></a>C - Cell Inversion</h4><p>考虑差分，每个位置最终是选为左端点还是右端点可以确定。</p>
+<p>统计方案考虑每个不确定的边的连通块，open 边度数为奇数的点必须是偶数个，否则无解，另外只要考虑搞出一棵生成树，生成树以外的边随便选，最终可以调整生成树上的边，方案数就是 <span class="math inline">\(2^{m-(n-1)}\)</span>。</p>
+<h3 id="japanese-student-championship-2019-qualification">Japanese Student Championship 2019 Qualification</h3>
+<hr />
+<h4 id="c---cell-inversion">C - Cell Inversion</h4>
+<p>考虑差分，每个位置最终是选为左端点还是右端点可以确定。</p>
 <p>判下无解后，随便算算方案就行了。</p>
-<h4 id="D-Classified"><a href="#D-Classified" class="headerlink" title="D - Classified"></a>D - Classified</h4><p>对于一个颜色的边组成的图必须是个二分图，于是每次把图分成两半，两两之间的边为同一个颜色，然后递归下去做就行。</p>
-<h4 id="E-Card-Collector"><a href="#E-Card-Collector" class="headerlink" title="E - Card Collector"></a>E - Card Collector</h4><p>考虑我们现在选了一些点，怎么判是否存在一种拿的方案、</p>
-<p>考虑这样一个图，行列是图中的 $H+W$ 个点，每个选择的数 $(x,y)$ 相当于 $x$ 向 $H+y$ 连一条边。</p>
+<h4 id="d---classified">D - Classified</h4>
+<p>对于一个颜色的边组成的图必须是个二分图，于是每次把图分成两半，两两之间的边为同一个颜色，然后递归下去做就行。</p>
+<h4 id="e---card-collector">E - Card Collector</h4>
+<p>考虑我们现在选了一些点，怎么判是否存在一种拿的方案、</p>
+<p>考虑这样一个图，行列是图中的 <span class="math inline">\(H+W\)</span> 个点，每个选择的数 <span class="math inline">\((x,y)\)</span> 相当于 <span class="math inline">\(x\)</span> 向 <span class="math inline">\(H+y\)</span> 连一条边。</p>
 <p>那么存在一种方案就相当于存在一种匹配使得每条边能恰好和一个端点匹配，每条边和每个点都只能匹配一次。</p>
 <p>稍稍画个图想想就能发现，一个连通块最多只能允许存在一个环，也就是说如果这个图是基环树森林就是合法的。</p>
 <p>于是我们考虑从大到小考虑每个点，如果加入合法就加入这个点。</p>
 <p>具体维护可以用并查集。</p>
 <p>正确性可以用拟阵证。</p>
-<h4 id="F-Candy-Retribution"><a href="#F-Candy-Retribution" class="headerlink" title="F - Candy Retribution"></a>F - Candy Retribution</h4><p>考虑用合法方案减去不合法方案。</p>
-<p>也就是存在一个 $x$ 使得前 $m$ 大的数大于等于 $x$，而剩下的数小于 $x$。</p>
-<p>枚举这个 $x$，容斥计算方案就行。</p>
-<h2 id="9-21"><a href="#9-21" class="headerlink" title="9.21"></a>9.21</h2><h3 id="AGC-038"><a href="#AGC-038" class="headerlink" title="AGC 038"></a>AGC 038</h3><hr>
-<h4 id="A-01-Matrix"><a href="#A-01-Matrix" class="headerlink" title="A - 01 Matrix"></a>A - 01 Matrix</h4><p>左上角是 $b\times a$ 的全 1 矩阵，右下角是 $(n-b)\times (m-a)$ 的全 1 矩阵就行。</p>
-<h4 id="B-Sorting-a-Segment"><a href="#B-Sorting-a-Segment" class="headerlink" title="B - Sorting a Segment"></a>B - Sorting a Segment</h4><p>可以发现分别对两个区间排序后是否长一样和被 sort 到的第一个数和最后一个数有关。</p>
+<h4 id="f---candy-retribution">F - Candy Retribution</h4>
+<p>考虑用合法方案减去不合法方案。</p>
+<p>也就是存在一个 <span class="math inline">\(x\)</span> 使得前 <span class="math inline">\(m\)</span> 大的数大于等于 <span class="math inline">\(x\)</span>，而剩下的数小于 <span class="math inline">\(x\)</span>。</p>
+<p>枚举这个 <span class="math inline">\(x\)</span>，容斥计算方案就行。</p>
+<h2 id="section-12">9.21</h2>
+<h3 id="agc-038">AGC 038</h3>
+<hr />
+<h4 id="a---01-matrix">A - 01 Matrix</h4>
+<p>左上角是 <span class="math inline">\(b\times a\)</span> 的全 1 矩阵，右下角是 <span class="math inline">\((n-b)\times (m-a)\)</span> 的全 1 矩阵就行。</p>
+<h4 id="b---sorting-a-segment">B - Sorting a Segment</h4>
+<p>可以发现分别对两个区间排序后是否长一样和被 sort 到的第一个数和最后一个数有关。</p>
 <p>于是正着倒着分别做一遍找到每个区间 sort 到的第一个数和最后一个数就行，set 或者单调队列维护就行。</p>
-<h4 id="C-LCMs"><a href="#C-LCMs" class="headerlink" title="C - LCMs"></a>C - LCMs</h4><p>随便推推式子就行了。</p>
-<h4 id="D-Unique-Path"><a href="#D-Unique-Path" class="headerlink" title="D - Unique Path"></a>D - Unique Path</h4><p>显然 $0$ 边的连通块不能存在一个 $1$ 边。</p>
-<p>把 $0$ 边的连通块可以看成一个点，为了解决 $1$ 边，至少需要把这些点连成一个环，至多可以连成完全图。</p>
-<p>判下 $m$ 是不是在那个区间内就行。</p>
-<p>注意判下不存在 $1$ 边。 </p>
-<h4 id="E-Gachapon"><a href="#E-Gachapon" class="headerlink" title="E - Gachapon"></a>E - Gachapon</h4><p>考虑先套一层 Min-Max 容斥，枚举每一个子集，计算其中存在一个满足要求时步数期望，考虑转化为求 $i$ 次还没达到条件的概率之和。</p>
+<h4 id="c---lcms">C - LCMs</h4>
+<p>随便推推式子就行了。</p>
+<h4 id="d---unique-path">D - Unique Path</h4>
+<p>显然 <span class="math inline">\(0\)</span> 边的连通块不能存在一个 <span class="math inline">\(1\)</span> 边。</p>
+<p>把 <span class="math inline">\(0\)</span> 边的连通块可以看成一个点，为了解决 <span class="math inline">\(1\)</span> 边，至少需要把这些点连成一个环，至多可以连成完全图。</p>
+<p>判下 <span class="math inline">\(m\)</span> 是不是在那个区间内就行。</p>
+<p>注意判下不存在 <span class="math inline">\(1\)</span> 边。</p>
+<h4 id="e---gachapon">E - Gachapon</h4>
+<p>考虑先套一层 Min-Max 容斥，枚举每一个子集，计算其中存在一个满足要求时步数期望，考虑转化为求 <span class="math inline">\(i\)</span> 次还没达到条件的概率之和。</p>
 <p>也就是对于每一个未结束的局面要算出到达该局面的概率，该局面对于答案的贡献是概率乘上保持该局面的概率。</p>
-<p>写一下一个未结束的局面的贡献的具体式子，大概是 $\dfrac{(\sum x_i)!}{\prod x_i!}\times \prod p_i^{x_i}$，其中 $x_i$ 表示 $i$ 被随到的次数，$p_i$ 表示在这个集合中选出 $i$ 的概率，少写了容斥系数和保持该局面的概率，但是没有影响。不难发现只和 $\sum{a_i}$ 和集合内的点被随机到的总次数之和有关，于是 dp 的时候只要记这两维就行了，容斥系数可以在 dp 的时候乘进去，保持该局面的概率可以在最后乘。</p>
-<p>可以证明复杂度是 $O((\sum a_i)(\sum b_i)^2)$ 的。</p>
-<h4 id="F-Two-Permutations"><a href="#F-Two-Permutations" class="headerlink" title="F - Two Permutations"></a>F - Two Permutations</h4><p>先转化为求 $\min(\sum_{i} [A_i=B_i])$。</p>
-<p>不难发现一个置换环要么是转动一次 $(A_i=P_i)$，要么不转动 $(A_i=i)$。</p>
-<p>考虑这样一个最小割模型，$P$ 和 $Q$ 中的大小大于 $1$ 的环是图中的点。</p>
-<p>$P$ 中的一个环 $p$ 如果最终归到 $S$ 集，表示 $p$ 转动了，否则表示 $p$ 没转。</p>
-<p>$Q$ 中的一个环 $q$ 如果最终归到 $S$ 集，表示 $q$ 没转，否则表示 $p$ 转动了。</p>
-<p>可以发现如果两个有交的环 $p,q$ 最终归到同一个集合，这两个点之间是不会产生任何贡献的，因为一个没转一个转了，而两者的大小都大于 $1$，也就是不存在 $P_i=i$，此时的贡献应该是不转的那个集合对应的自环的个数。</p>
-<p>如果两者归到同一个集合，可以发现贡献要么是两者对应的自环个数之和和两者交的大小，要么是两者的交 $P_{x_i}=Q_{x_i}$ 的个数。</p>
+<p>写一下一个未结束的局面的贡献的具体式子，大概是 <span class="math inline">\(\dfrac{(\sum x_i)!}{\prod x_i!}\times \prod p_i^{x_i}\)</span>，其中 <span class="math inline">\(x_i\)</span> 表示 <span class="math inline">\(i\)</span> 被随到的次数，<span class="math inline">\(p_i\)</span> 表示在这个集合中选出 <span class="math inline">\(i\)</span> 的概率，少写了容斥系数和保持该局面的概率，但是没有影响。不难发现只和 <span class="math inline">\(\sum{a_i}\)</span> 和集合内的点被随机到的总次数之和有关，于是 dp 的时候只要记这两维就行了，容斥系数可以在 dp 的时候乘进去，保持该局面的概率可以在最后乘。</p>
+<p>可以证明复杂度是 <span class="math inline">\(O((\sum a_i)(\sum b_i)^2)\)</span> 的。</p>
+<h4 id="f---two-permutations">F - Two Permutations</h4>
+<p>先转化为求 <span class="math inline">\(\min(\sum_{i} [A_i=B_i])\)</span>。</p>
+<p>不难发现一个置换环要么是转动一次 <span class="math inline">\((A_i=P_i)\)</span>，要么不转动 <span class="math inline">\((A_i=i)\)</span>。</p>
+<p>考虑这样一个最小割模型，<span class="math inline">\(P\)</span> 和 <span class="math inline">\(Q\)</span> 中的大小大于 <span class="math inline">\(1\)</span> 的环是图中的点。</p>
+<p><span class="math inline">\(P\)</span> 中的一个环 <span class="math inline">\(p\)</span> 如果最终归到 <span class="math inline">\(S\)</span> 集，表示 <span class="math inline">\(p\)</span> 转动了，否则表示 <span class="math inline">\(p\)</span> 没转。</p>
+<p><span class="math inline">\(Q\)</span> 中的一个环 <span class="math inline">\(q\)</span> 如果最终归到 <span class="math inline">\(S\)</span> 集，表示 <span class="math inline">\(q\)</span> 没转，否则表示 <span class="math inline">\(p\)</span> 转动了。</p>
+<p>可以发现如果两个有交的环 <span class="math inline">\(p,q\)</span> 最终归到同一个集合，这两个点之间是不会产生任何贡献的，因为一个没转一个转了，而两者的大小都大于 <span class="math inline">\(1\)</span>，也就是不存在 <span class="math inline">\(P_i=i\)</span>，此时的贡献应该是不转的那个集合对应的自环的个数。</p>
+<p>如果两者归到同一个集合，可以发现贡献要么是两者对应的自环个数之和和两者交的大小，要么是两者的交 <span class="math inline">\(P_{x_i}=Q_{x_i}\)</span> 的个数。</p>
 <p>于是根据这个建图就行。</p>
-<p>可以发现这个图是个二分图，众所周知二分图跑 Dinic 复杂度是 $O(m\sqrt n)$ 的。</p>
-<h2 id="9-22"><a href="#9-22" class="headerlink" title="9.22"></a>9.22</h2><h3 id="AGC-037"><a href="#AGC-037" class="headerlink" title="AGC 037"></a>AGC 037</h3><hr>
-<h4 id="A-Dividing-a-String"><a href="#A-Dividing-a-String" class="headerlink" title="A - Dividing a String"></a>A - Dividing a String</h4><p>如果不能分出一个就分出两个，判一下最后末尾分不出来就要合并最后两个串。</p>
-<h4 id="B-RGB-Balls"><a href="#B-RGB-Balls" class="headerlink" title="B - RGB Balls"></a>B - RGB Balls</h4><p>每个点是三元组的哪个位置可以确定，于是随便算算方案就行了。</p>
-<h4 id="C-Numbers-on-a-Circle"><a href="#C-Numbers-on-a-Circle" class="headerlink" title="C - Numbers on a Circle"></a>C - Numbers on a Circle</h4><p>考虑倒着做就完事了。</p>
-<h4 id="D-Sorting-a-Grid"><a href="#D-Sorting-a-Grid" class="headerlink" title="D - Sorting a Grid"></a>D - Sorting a Grid</h4><p>把最终矩阵的所有第 $i$ 行的数看成是 $i$ ，第一步相当于是排列行，使得每一列是个排列。</p>
+<p>可以发现这个图是个二分图，众所周知二分图跑 Dinic 复杂度是 <span class="math inline">\(O(m\sqrt n)\)</span> 的。</p>
+<h2 id="section-13">9.22</h2>
+<h3 id="agc-037">AGC 037</h3>
+<hr />
+<h4 id="a---dividing-a-string">A - Dividing a String</h4>
+<p>如果不能分出一个就分出两个，判一下最后末尾分不出来就要合并最后两个串。</p>
+<h4 id="b---rgb-balls">B - RGB Balls</h4>
+<p>每个点是三元组的哪个位置可以确定，于是随便算算方案就行了。</p>
+<h4 id="c---numbers-on-a-circle">C - Numbers on a Circle</h4>
+<p>考虑倒着做就完事了。</p>
+<h4 id="d---sorting-a-grid">D - Sorting a Grid</h4>
+<p>把最终矩阵的所有第 <span class="math inline">\(i\)</span> 行的数看成是 <span class="math inline">\(i\)</span> ，第一步相当于是排列行，使得每一列是个排列。</p>
 <p>考虑一列一列做，每次是一个二分图匹配。</p>
 <p>正确性可以用 Hall 定理证。</p>
-<h4 id="E-Reversing-and-Concatenating"><a href="#E-Reversing-and-Concatenating" class="headerlink" title="E - Reversing and Concatenating"></a>E - Reversing and Concatenating</h4><p>前 $k-1$ 次取倒过来后字典序最小的串，最后一次取字典序最小的串。</p>
-<p>显然当 $k&gt;\log n $ 的时候答案是长度为 $n$ 由原字符串最小字符组成的串。</p>
-<p>直接做 $k$ 次，每次暴力判断两个串的字典序的话复杂度就是 $O(n^2\log n)$ 的，但还是跑的飞快。</p>
-<p>可以用二分+哈希或者后缀数组优化到 $O(n\log n)$，但没啥必要。</p>
-<h4 id="F-Counting-of-Subarrays"><a href="#F-Counting-of-Subarrays" class="headerlink" title="F - Counting of Subarrays"></a>F - Counting of Subarrays</h4><p>考虑一个序列怎么判是否合法。</p>
-<p>要么长度为 $1$，要么每次取出最小的数 $x$ 构成的连续段，合成尽量多的 $x+1$，最后能合成一个大于 $\max$ 的数。</p>
-<p>维护所有值域相同的连续段，每次取出值最小的段，合并成 $x+1$，并计算方案。</p>
-<p>为了算方案，我们需要维护每个点分别表示一个数充当左端点的方案数与一个数充当右端点的方案数，分别记为 $lv_i$ 和 $rv_i$。</p>
-<p>对于一个区间 $[l,r]$，$[l,l+L)$ 显然无法充当右端点，$[l+L,l+2L-1]$ 可以充当第一个 $x + 1$ 的右端点，将所以第一个  $x+1$ 的 $rv$ 为 $\sum_{i=l+L}^{l+2L-1} rv_i$，第二个 $x+1$ 的 $rv$，第三个 $x+1$ 的 $rv$.. 也是同理。</p>
-<p>$lv$ 也是同理。</p>
-<p>注意可能会算重，需要在 $x$ 合成 $x + 1$ 的过程中，减去 $x + 1$ 合成 $x + 2$ 产生的贡献。</p>
-<p>具体实现可以用链表删减元素，用 set 取出最小 $x$。</p>
-<h2 id="9-23"><a href="#9-23" class="headerlink" title="9.23"></a>9.23</h2><h3 id="diverta-2019-Programming-Contest-2"><a href="#diverta-2019-Programming-Contest-2" class="headerlink" title="diverta 2019 Programming Contest 2"></a>diverta 2019 Programming Contest 2</h3><hr>
-<h4 id="C-Successive-Subtraction"><a href="#C-Successive-Subtraction" class="headerlink" title="C - Successive Subtraction"></a>C - Successive Subtraction</h4><p>有负数答案就是所有数的绝对值之和，全正数就是除了最小值的数的和减去最小值，全负数同理，可以根据答案构造。</p>
-<h4 id="D-Squirrel-Merchant"><a href="#D-Squirrel-Merchant" class="headerlink" title="D - Squirrel Merchant"></a>D - Squirrel Merchant</h4><p>考虑一个贪心的想法，A 便宜肯定在 A 尽量买了后在 B 卖，B 便宜肯定在 B 尽量买了后在 A 卖。</p>
+<h4 id="e---reversing-and-concatenating">E - Reversing and Concatenating</h4>
+<p>前 <span class="math inline">\(k-1\)</span> 次取倒过来后字典序最小的串，最后一次取字典序最小的串。</p>
+<p>显然当 $k&gt;n $ 的时候答案是长度为 <span class="math inline">\(n\)</span> 由原字符串最小字符组成的串。</p>
+<p>直接做 <span class="math inline">\(k\)</span> 次，每次暴力判断两个串的字典序的话复杂度就是 <span class="math inline">\(O(n^2\log n)\)</span> 的，但还是跑的飞快。</p>
+<p>可以用二分+哈希或者后缀数组优化到 <span class="math inline">\(O(n\log n)\)</span>，但没啥必要。</p>
+<h4 id="f---counting-of-subarrays">F - Counting of Subarrays</h4>
+<p>考虑一个序列怎么判是否合法。</p>
+<p>要么长度为 <span class="math inline">\(1\)</span>，要么每次取出最小的数 <span class="math inline">\(x\)</span> 构成的连续段，合成尽量多的 <span class="math inline">\(x+1\)</span>，最后能合成一个大于 <span class="math inline">\(\max\)</span> 的数。</p>
+<p>维护所有值域相同的连续段，每次取出值最小的段，合并成 <span class="math inline">\(x+1\)</span>，并计算方案。</p>
+<p>为了算方案，我们需要维护每个点分别表示一个数充当左端点的方案数与一个数充当右端点的方案数，分别记为 <span class="math inline">\(lv_i\)</span> 和 <span class="math inline">\(rv_i\)</span>。</p>
+<p>对于一个区间 <span class="math inline">\([l,r]\)</span>，<span class="math inline">\([l,l+L)\)</span> 显然无法充当右端点，<span class="math inline">\([l+L,l+2L-1]\)</span> 可以充当第一个 <span class="math inline">\(x + 1\)</span> 的右端点，将所以第一个 <span class="math inline">\(x+1\)</span> 的 <span class="math inline">\(rv\)</span> 为 <span class="math inline">\(\sum_{i=l+L}^{l+2L-1} rv_i\)</span>，第二个 <span class="math inline">\(x+1\)</span> 的 <span class="math inline">\(rv\)</span>，第三个 <span class="math inline">\(x+1\)</span> 的 <span class="math inline">\(rv\)</span>.. 也是同理。</p>
+<p><span class="math inline">\(lv\)</span> 也是同理。</p>
+<p>注意可能会算重，需要在 <span class="math inline">\(x\)</span> 合成 <span class="math inline">\(x + 1\)</span> 的过程中，减去 <span class="math inline">\(x + 1\)</span> 合成 <span class="math inline">\(x + 2\)</span> 产生的贡献。</p>
+<p>具体实现可以用链表删减元素，用 set 取出最小 <span class="math inline">\(x\)</span>。</p>
+<h2 id="section-14">9.23</h2>
+<h3 id="diverta-2019-programming-contest-2">diverta 2019 Programming Contest 2</h3>
+<hr />
+<h4 id="c---successive-subtraction">C - Successive Subtraction</h4>
+<p>有负数答案就是所有数的绝对值之和，全正数就是除了最小值的数的和减去最小值，全负数同理，可以根据答案构造。</p>
+<h4 id="d---squirrel-merchant">D - Squirrel Merchant</h4>
+<p>考虑一个贪心的想法，A 便宜肯定在 A 尽量买了后在 B 卖，B 便宜肯定在 B 尽量买了后在 A 卖。</p>
 <p>考虑讨论有几种商品在 A 便宜，枚举便宜的商品在 A 买了几件就行，如果有三种的只要枚举其中两种就行，因为另外一种肯定是尽量买的。</p>
-<h4 id="E-Balanced-Piles"><a href="#E-Balanced-Piles" class="headerlink" title="E - Balanced Piles"></a>E - Balanced Piles</h4><p>考虑这是一个不断把 $\min$ 扔到 $\max$ 的过程，如果 $\min$ 有 $a$ 个那么把所有 $\min$ 扔到 $\max$ 的方案就是 $a!$。</p>
-<p>考虑如果当前 $\max$ 不是 $H$，那么 $\max$ 肯定还会再往上扔，于是原本要这些 $\max$ 变成 $\min$ 再算的贡献现在算就行。</p>
-<p>于是我们就有了一个 $O(n^2)$ 的做法，状态两维记得是 $\max$ 和 $\max$ 的个数。</p>
-<p>再分析一下可以发现，我们其实也并不关心 $\max$ 有几个，因为只要有至少一个 $\max$ 在了，所有的数都能扔到 $[\max+1,\max+D]$，于是状态只要记一维 $\max$ 就行了，每次乘个 $\sum_{i=1}^{n} i!$ 的系数就行。</p>
-<h4 id="F-Diverta-City"><a href="#F-Diverta-City" class="headerlink" title="F - Diverta City"></a>F - Diverta City</h4><p>考虑增量法。</p>
-<p>我们可以构造一个非常优秀的序列 $f={1,2,4,7,12,20,29,38,52,73}$，这个数列满足任意两个数字都不相同、任意两个数字的和也都不相同。</p>
-<p>每次加入一个点 $i$ ，对于每个 $j\ (j&lt;i)$ 连边权为 $(mx+1)\times f_j$ 的边，其中 $mx$ 为之前的哈密顿路长队的最大值。</p>
+<h4 id="e---balanced-piles">E - Balanced Piles</h4>
+<p>考虑这是一个不断把 <span class="math inline">\(\min\)</span> 扔到 <span class="math inline">\(\max\)</span> 的过程，如果 <span class="math inline">\(\min\)</span> 有 <span class="math inline">\(a\)</span> 个那么把所有 <span class="math inline">\(\min\)</span> 扔到 <span class="math inline">\(\max\)</span> 的方案就是 <span class="math inline">\(a!\)</span>。</p>
+<p>考虑如果当前 <span class="math inline">\(\max\)</span> 不是 <span class="math inline">\(H\)</span>，那么 <span class="math inline">\(\max\)</span> 肯定还会再往上扔，于是原本要这些 <span class="math inline">\(\max\)</span> 变成 <span class="math inline">\(\min\)</span> 再算的贡献现在算就行。</p>
+<p>于是我们就有了一个 <span class="math inline">\(O(n^2)\)</span> 的做法，状态两维记得是 <span class="math inline">\(\max\)</span> 和 <span class="math inline">\(\max\)</span> 的个数。</p>
+<p>再分析一下可以发现，我们其实也并不关心 <span class="math inline">\(\max\)</span> 有几个，因为只要有至少一个 <span class="math inline">\(\max\)</span> 在了，所有的数都能扔到 <span class="math inline">\([\max+1,\max+D]\)</span>，于是状态只要记一维 <span class="math inline">\(\max\)</span> 就行了，每次乘个 <span class="math inline">\(\sum_{i=1}^{n} i!\)</span> 的系数就行。</p>
+<h4 id="f---diverta-city">F - Diverta City</h4>
+<p>考虑增量法。</p>
+<p>我们可以构造一个非常优秀的序列 <span class="math inline">\(f=\{1,2,4,7,12,20,29,38,52,73\}\)</span>，这个数列满足任意两个数字都不相同、任意两个数字的和也都不相同。</p>
+<p>每次加入一个点 <span class="math inline">\(i\)</span> ，对于每个 <span class="math inline">\(j\ (j&lt;i)\)</span> 连边权为 <span class="math inline">\((mx+1)\times f_j\)</span> 的边，其中 <span class="math inline">\(mx\)</span> 为之前的哈密顿路长队的最大值。</p>
 <p>每次新增加的哈密顿回路肯定比之前的长，并且两两不等，所以是对的。</p>
-<h3 id="M-SOLUTIONS-Programming-Contest"><a href="#M-SOLUTIONS-Programming-Contest" class="headerlink" title="M-SOLUTIONS Programming Contest"></a>M-SOLUTIONS Programming Contest</h3><hr>
-<h4 id="E-Product-of-Arithmetic-Progression"><a href="#E-Product-of-Arithmetic-Progression" class="headerlink" title="E - Product of Arithmetic Progression"></a>E - Product of Arithmetic Progression</h4><p>把 $x$ 转化成 $kd$  的形式。</p>
-<h4 id="F-Random-Tournament"><a href="#F-Random-Tournament" class="headerlink" title="F - Random Tournament"></a>F - Random Tournament</h4><p>设 $F_{l,r,0/1}$ 表示只考虑区间 $[l, r]$ 中的人，$l / r$ 能否 win。</p>
-<p>如果在区间 $[l,r]$ 中 $x$ 可以 win，可以发现 $[l,x]$ 和 $[x,r]$ 中的战斗是独立的，所以只要 $F_{l,x,1}=1$ 且 $F_{x,r,0}=1$ 即可。</p>
-<p>暴力转移考虑枚举最后一次和 $l/r$ 打的 $x$，判断是否存在一个 $x$ 满足在少了 $l/r$ 的区间中能 win，并且 $l/r$ 能打过 $x$。</p>
+<h3 id="m-solutions-programming-contest">M-SOLUTIONS Programming Contest</h3>
+<hr />
+<h4 id="e---product-of-arithmetic-progression">E - Product of Arithmetic Progression</h4>
+<p>把 <span class="math inline">\(x\)</span> 转化成 <span class="math inline">\(kd\)</span> 的形式。</p>
+<h4 id="f---random-tournament">F - Random Tournament</h4>
+<p>设 <span class="math inline">\(F_{l,r,0/1}\)</span> 表示只考虑区间 <span class="math inline">\([l, r]\)</span> 中的人，<span class="math inline">\(l / r\)</span> 能否 win。</p>
+<p>如果在区间 <span class="math inline">\([l,r]\)</span> 中 <span class="math inline">\(x\)</span> 可以 win，可以发现 <span class="math inline">\([l,x]\)</span> 和 <span class="math inline">\([x,r]\)</span> 中的战斗是独立的，所以只要 <span class="math inline">\(F_{l,x,1}=1\)</span> 且 <span class="math inline">\(F_{x,r,0}=1\)</span> 即可。</p>
+<p>暴力转移考虑枚举最后一次和 <span class="math inline">\(l/r\)</span> 打的 <span class="math inline">\(x\)</span>，判断是否存在一个 <span class="math inline">\(x\)</span> 满足在少了 <span class="math inline">\(l/r\)</span> 的区间中能 win，并且 <span class="math inline">\(l/r\)</span> 能打过 <span class="math inline">\(x\)</span>。</p>
 <p>不难发现可以用 bitset 优化。</p>
-<h2 id="9-24"><a href="#9-24" class="headerlink" title="9.24"></a>9.24</h2><h3 id="AGC-036"><a href="#AGC-036" class="headerlink" title="AGC 036"></a>AGC 036</h3><hr>
-<h4 id="A-Triangle"><a href="#A-Triangle" class="headerlink" title="A - Triangle"></a>A - Triangle</h4><p>第一个点选在 $(0,0)$，可以用叉积表示三角形的面积。</p>
-<p>转化为构造四个非负整数 $a,b,c,d$ 满足 $ab-cd=s$。</p>
-<p>令 $a=10^9,b=\lceil \dfrac{s}{10^9} \rceil,c=1,d=s-ab$ 就行。</p>
-<h4 id="B-Do-Not-Duplicate"><a href="#B-Do-Not-Duplicate" class="headerlink" title="B - Do Not Duplicate"></a>B - Do Not Duplicate</h4><p>令 $nxt_i$ 表示目前第一个数是 $A_i$ 下一次只剩一个数的时候那个数的下标。</p>
-<p>显然不断加入 $X_i$ 就是一直从 $i$ 跳到 $nxt_i$ 的过程。</p>
+<h2 id="section-15">9.24</h2>
+<h3 id="agc-036">AGC 036</h3>
+<hr />
+<h4 id="a---triangle">A - Triangle</h4>
+<p>第一个点选在 <span class="math inline">\((0,0)\)</span>，可以用叉积表示三角形的面积。</p>
+<p>转化为构造四个非负整数 <span class="math inline">\(a,b,c,d\)</span> 满足 <span class="math inline">\(ab-cd=s\)</span>。</p>
+<p>令 <span class="math inline">\(a=10^9,b=\lceil \dfrac{s}{10^9} \rceil,c=1,d=s-ab\)</span> 就行。</p>
+<h4 id="b---do-not-duplicate">B - Do Not Duplicate</h4>
+<p>令 <span class="math inline">\(nxt_i\)</span> 表示目前第一个数是 <span class="math inline">\(A_i\)</span> 下一次只剩一个数的时候那个数的下标。</p>
+<p>显然不断加入 <span class="math inline">\(X_i\)</span> 就是一直从 <span class="math inline">\(i\)</span> 跳到 <span class="math inline">\(nxt_i\)</span> 的过程。</p>
 <p>找出循环节后暴力做做就行。</p>
-<h4 id="C-GP-2"><a href="#C-GP-2" class="headerlink" title="C - GP 2"></a>C - GP 2</h4><p>考虑一个序列是合法的需要满足下面三个条件：</p>
-<ol>
-<li><p>$\max(a_i) \le 2m$</p>
-</li>
-<li><p>$\sum a_i = 3m$</p>
-</li>
-<li><p>$\sum [a_i \bmod 2=1] \le m$</p>
-</li>
+<h4 id="c---gp-2">C - GP 2</h4>
+<p>考虑一个序列是合法的需要满足下面三个条件：</p>
+<ol type="1">
+<li><p><span class="math inline">\(\max(a_i) \le 2m\)</span></p></li>
+<li><p><span class="math inline">\(\sum a_i = 3m\)</span></p></li>
+<li><p><span class="math inline">\(\sum [a_i \bmod 2=1] \le m\)</span></p></li>
 </ol>
 <p>注意到如果不满足第一个条件一定满足第三个条件。</p>
 <p>于是可以用满足第二个条件和第三个条件的方案减去不满足第一个条件且满足第二个条件的方案。</p>
-<h4 id="D-Negative-Cycle"><a href="#D-Negative-Cycle" class="headerlink" title="D - Negative Cycle"></a>D - Negative Cycle</h4><p>考虑差分约束的模型，图中不存在负环等价于存在一组合法的差分约束的解。</p>
-<p>考虑每个节点作为一个变量，第 $i$ 个节点对应的变量为 $x_i$。</p>
-<p>令 $y_i=x_i-x_{i+1}$，由于边权都是 $1$ 或者 $-1$ 并且存在不能删的 $0$ 边, 显然 $y_i$ 值只能是 0 和 1 中的一个。</p>
-<p>假设保留了一条边 $i \to j\ (i&lt;j)$，就会有 $x_i-1\ge x_j$，也就是 $\sum_{k=i}^{j-1} y_k \ge 1$。</p>
-<p>假设保留了一条边 $i \to j\ (i&gt;j)$，就会有 $x_i+1\ge x_j$，也就是 $\sum_{k=i}^{j-1} y_k \le 1$。</p>
-<p>于是就可以 dp 了，令 $f_{i,j}$ 表示最后两个 1 分别位于 $i,j$。</p>
+<h4 id="d---negative-cycle">D - Negative Cycle</h4>
+<p>考虑差分约束的模型，图中不存在负环等价于存在一组合法的差分约束的解。</p>
+<p>考虑每个节点作为一个变量，第 <span class="math inline">\(i\)</span> 个节点对应的变量为 <span class="math inline">\(x_i\)</span>。</p>
+<p>令 <span class="math inline">\(y_i=x_i-x_{i+1}\)</span>，由于边权都是 <span class="math inline">\(1\)</span> 或者 <span class="math inline">\(-1\)</span> 并且存在不能删的 <span class="math inline">\(0\)</span> 边, 显然 <span class="math inline">\(y_i\)</span> 值只能是 0 和 1 中的一个。</p>
+<p>假设保留了一条边 <span class="math inline">\(i \to j\ (i&lt;j)\)</span>，就会有 <span class="math inline">\(x_i-1\ge x_j\)</span>，也就是 <span class="math inline">\(\sum_{k=i}^{j-1} y_k \ge 1\)</span>。</p>
+<p>假设保留了一条边 <span class="math inline">\(i \to j\ (i&gt;j)\)</span>，就会有 <span class="math inline">\(x_i+1\ge x_j\)</span>，也就是 <span class="math inline">\(\sum_{k=i}^{j-1} y_k \le 1\)</span>。</p>
+<p>于是就可以 dp 了，令 <span class="math inline">\(f_{i,j}\)</span> 表示最后两个 1 分别位于 <span class="math inline">\(i,j\)</span>。</p>
 <p>转移枚举下一个 1 放哪里，可以二维前缀和快速算需要删掉的边的边权和。</p>
-<p>复杂度 $O(n^3)$。</p>
-<h4 id="E-ABC-String"><a href="#E-ABC-String" class="headerlink" title="E - ABC String"></a>E - ABC String</h4><p>显然先可以去重。</p>
-<p>设 $cntA,cntB,cntC$ 分别表示 $A,B,C$ 的个数，并且假设 $cntA\le cntB\le cntC$，为了最大化答案，我们希望删尽量少的 A，来使得三者相同。</p>
-<p>首先先通过一些删除使得 $cntB=cntC$。首先可以把两边字符不同的 <code>C</code>，即左右是一个 <code>A</code> 一个 <code>B</code> 的 <code>C</code> 删掉，其实也就是删掉形如 <code>ACBCB...BCA</code> 的子串两边的 <code>C</code>，然后剩下的串每一段要么是 <code>ABCB...CBA</code>，这种类型 <code>B</code> 只能比 <code>C</code> 多 1 个，不可再更改；要么是 <code>ACA</code>，这我们可以删除第一个 <code>A</code> 和 <code>C</code> 来删除一个 <code>C</code>，可以发现我们只能通过删除这些 <code>A</code> 来让 $cntB=cntC$。</p>
-<p>现在就是 $cntA\le cntB=cntC$。考虑删除形如 <code>ABCBC..BCA</code> 中间的若干对 <code>BC</code> 或者 <code>ACBCB..CBA</code> 中间的若干对 <code>CB</code>，需要注意的是删除完这些后两个 <code>A</code> 不能靠在一起。最后如果还有 <code>A</code>，则至少都有 <code>ABCACBA...BCA</code>，即两个 <code>A</code> 中间夹一个 <code>BC</code> 或 <code>CB</code>，这时有 $cntA &gt; cntB = cntC$，所以删的过程中肯定存在一个时刻使得 $cntA=cntB=cntC$。</p>
-<h4 id="F-Square-Constraints"><a href="#F-Square-Constraints" class="headerlink" title="F - Square Constraints"></a>F - Square Constraints</h4><p>每个位置能选的数显然是一个区间，设这个区间是 $[l_i,r_i]$。</p>
-<p>首先如果没有 $l$ 的限制，将 $r$ 从小到大排序后，答案就是 $\prod_{i} (r_i-i+1)$。</p>
-<p>考虑容斥掉 $l$ 的限制。</p>
+<p>复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h4 id="e---abc-string">E - ABC String</h4>
+<p>显然先可以去重。</p>
+<p>设 <span class="math inline">\(cntA,cntB,cntC\)</span> 分别表示 <span class="math inline">\(A,B,C\)</span> 的个数，并且假设 <span class="math inline">\(cntA\le cntB\le cntC\)</span>，为了最大化答案，我们希望删尽量少的 A，来使得三者相同。</p>
+<p>首先先通过一些删除使得 <span class="math inline">\(cntB=cntC\)</span>。首先可以把两边字符不同的 <code>C</code>，即左右是一个 <code>A</code> 一个 <code>B</code> 的 <code>C</code> 删掉，其实也就是删掉形如 <code>ACBCB...BCA</code> 的子串两边的 <code>C</code>，然后剩下的串每一段要么是 <code>ABCB...CBA</code>，这种类型 <code>B</code> 只能比 <code>C</code> 多 1 个，不可再更改；要么是 <code>ACA</code>，这我们可以删除第一个 <code>A</code> 和 <code>C</code> 来删除一个 <code>C</code>，可以发现我们只能通过删除这些 <code>A</code> 来让 <span class="math inline">\(cntB=cntC\)</span>。</p>
+<p>现在就是 <span class="math inline">\(cntA\le cntB=cntC\)</span>。考虑删除形如 <code>ABCBC..BCA</code> 中间的若干对 <code>BC</code> 或者 <code>ACBCB..CBA</code> 中间的若干对 <code>CB</code>，需要注意的是删除完这些后两个 <code>A</code> 不能靠在一起。最后如果还有 <code>A</code>，则至少都有 <code>ABCACBA...BCA</code>，即两个 <code>A</code> 中间夹一个 <code>BC</code> 或 <code>CB</code>，这时有 <span class="math inline">\(cntA &gt; cntB = cntC\)</span>，所以删的过程中肯定存在一个时刻使得 <span class="math inline">\(cntA=cntB=cntC\)</span>。</p>
+<h4 id="f---square-constraints">F - Square Constraints</h4>
+<p>每个位置能选的数显然是一个区间，设这个区间是 <span class="math inline">\([l_i,r_i]\)</span>。</p>
+<p>首先如果没有 <span class="math inline">\(l\)</span> 的限制，将 <span class="math inline">\(r\)</span> 从小到大排序后，答案就是 <span class="math inline">\(\prod_{i} (r_i-i+1)\)</span>。</p>
+<p>考虑容斥掉 <span class="math inline">\(l\)</span> 的限制。</p>
 <p>观察几个性质：</p>
-<ol>
-<li><p>$\forall i \in [1,2n), l_i \le l_{i-1},r_i\le r_{i-1}$</p>
-</li>
-<li><p>$\forall i \in [n,2n), l_i=0$</p>
-</li>
-<li><p>$r_n\ge l_0$</p>
-</li>
+<ol type="1">
+<li><p><span class="math inline">\(\forall i \in [1,2n), l_i \le l_{i-1},r_i\le r_{i-1}\)</span></p></li>
+<li><p><span class="math inline">\(\forall i \in [n,2n), l_i=0\)</span></p></li>
+<li><p><span class="math inline">\(r_n\ge l_0\)</span></p></li>
 </ol>
-<p>如果暴力枚举了前 $n$ 个数每个数的限制，对所有限制排序就相当于是先归并 $[n,2n)$ 和 $[0,n)$ 中选了 $l$ 的那些限制，再在后面加上 $[0,n)$ 中选了 $r$ 的限制。</p>
-<p>于是可以发现第 $i\ (i\in [0,n))$ 个数的限制如果选了 $l_i$，贡献是和 $[i+1,n)$ 中有几个数的限制是选了 $l$ 有关的；如果第 $i \ (i \in [0,n))$ 个数的限制选了 $r_i$，贡献是和 $[0,n)$ 中一共有几个数限制选了 $l$ 和 $[i+1,n)$ 中有几个数的限制是选了 $r$ 有关的。</p>
+<p>如果暴力枚举了前 <span class="math inline">\(n\)</span> 个数每个数的限制，对所有限制排序就相当于是先归并 <span class="math inline">\([n,2n)\)</span> 和 <span class="math inline">\([0,n)\)</span> 中选了 <span class="math inline">\(l\)</span> 的那些限制，再在后面加上 <span class="math inline">\([0,n)\)</span> 中选了 <span class="math inline">\(r\)</span> 的限制。</p>
+<p>于是可以发现第 <span class="math inline">\(i\ (i\in [0,n))\)</span> 个数的限制如果选了 <span class="math inline">\(l_i\)</span>，贡献是和 <span class="math inline">\([i+1,n)\)</span> 中有几个数的限制是选了 <span class="math inline">\(l\)</span> 有关的；如果第 <span class="math inline">\(i \ (i \in [0,n))\)</span> 个数的限制选了 <span class="math inline">\(r_i\)</span>，贡献是和 <span class="math inline">\([0,n)\)</span> 中一共有几个数限制选了 <span class="math inline">\(l\)</span> 和 <span class="math inline">\([i+1,n)\)</span> 中有几个数的限制是选了 <span class="math inline">\(r\)</span> 有关的。</p>
 <p>于是 dp 的时候状态记这两维就行了。</p>
-<p>令 $f_{i,j,k}$ 表示当前做到 $i$，$[i,n)$ 有 $j$ 个数选了 $l$ 的限制，$[0,n)$ 一共要有 $k$ 个数选了 $l$ 的限制。</p>
-<p>每当 $i$ 移动的时候，双指针算算 $[n,2n)$ 的贡献。</p>
-<p>转移就考虑当前点的限制是选 $l$ 还是选 $r$。</p>
+<p>令 <span class="math inline">\(f_{i,j,k}\)</span> 表示当前做到 <span class="math inline">\(i\)</span>，<span class="math inline">\([i,n)\)</span> 有 <span class="math inline">\(j\)</span> 个数选了 <span class="math inline">\(l\)</span> 的限制，<span class="math inline">\([0,n)\)</span> 一共要有 <span class="math inline">\(k\)</span> 个数选了 <span class="math inline">\(l\)</span> 的限制。</p>
+<p>每当 <span class="math inline">\(i\)</span> 移动的时候，双指针算算 <span class="math inline">\([n,2n)\)</span> 的贡献。</p>
+<p>转移就考虑当前点的限制是选 <span class="math inline">\(l\)</span> 还是选 <span class="math inline">\(r\)</span>。</p>
 <p><del>凑系数太痛苦了，建议直接找一个人的代码借鉴</del></p>
-<p>复杂度是 $O(n^3)$ 的。</p>
-<h2 id="9-25"><a href="#9-25" class="headerlink" title="9.25"></a>9.25</h2><h3 id="AGC-035"><a href="#AGC-035" class="headerlink" title="AGC 035"></a>AGC 035</h3><hr>
-<h4 id="A-XOR-Circle"><a href="#A-XOR-Circle" class="headerlink" title="A - XOR Circle"></a>A - XOR Circle</h4><p>可以发现 $a_i=a_{i+3}$。</p>
-<p>所以不同的 $a_i$ 的值就三个，分情况判一下就行。</p>
-<h4 id="B-Even-Degrees"><a href="#B-Even-Degrees" class="headerlink" title="B - Even Degrees"></a>B - Even Degrees</h4><p>边数为偶数肯定有解，否则肯定无解。</p>
+<p>复杂度是 <span class="math inline">\(O(n^3)\)</span> 的。</p>
+<h2 id="section-16">9.25</h2>
+<h3 id="agc-035">AGC 035</h3>
+<hr />
+<h4 id="a---xor-circle">A - XOR Circle</h4>
+<p>可以发现 <span class="math inline">\(a_i=a_{i+3}\)</span>。</p>
+<p>所以不同的 <span class="math inline">\(a_i\)</span> 的值就三个，分情况判一下就行。</p>
+<h4 id="b---even-degrees">B - Even Degrees</h4>
+<p>边数为偶数肯定有解，否则肯定无解。</p>
 <p>可以撸出一棵生成树，非树边随便选最后通过树边调整就行。</p>
-<h4 id="C-Skolem-XOR-Tree"><a href="#C-Skolem-XOR-Tree" class="headerlink" title="C - Skolem XOR Tree"></a>C - Skolem XOR Tree</h4><p>显然当 $n$ 为 $2^k$ 时肯定无解，因为 $n$ 和 $2n$ 之间的路径的值不可能为 $n$。</p>
-<p>考虑构造一棵以 $1$ 为根的类菊花树，把 $2k$ 和 $2k+1$ 分为一组然后这样构造。</p>
-<p>$$ 2k - 2k+1 - 1 - 2k+1 - 2k $$</p>
-<p>当 $n$ 为偶数的时候还会剩下一个 $n$，可以这样构造。</p>
-<p>$$n-\text{lowbit}(n)\ \text{xor}\  1 - 1 -n \ \text{xor} \ \text{lowbit}(n) - n$$</p>
-<h4 id="D-Add-and-Remove"><a href="#D-Add-and-Remove" class="headerlink" title="D - Add and Remove"></a>D - Add and Remove</h4><p>考虑倒着做，每次插入一个最后删除的数。</p>
+<h4 id="c---skolem-xor-tree">C - Skolem XOR Tree</h4>
+<p>显然当 <span class="math inline">\(n\)</span> 为 <span class="math inline">\(2^k\)</span> 时肯定无解，因为 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(2n\)</span> 之间的路径的值不可能为 <span class="math inline">\(n\)</span>。</p>
+<p>考虑构造一棵以 <span class="math inline">\(1\)</span> 为根的类菊花树，把 <span class="math inline">\(2k\)</span> 和 <span class="math inline">\(2k+1\)</span> 分为一组然后这样构造。</p>
+<p><span class="math display">\[ 2k - 2k+1 - 1 - 2k+1 - 2k \]</span></p>
+<p>当 <span class="math inline">\(n\)</span> 为偶数的时候还会剩下一个 <span class="math inline">\(n\)</span>，可以这样构造。</p>
+<p><span class="math display">\[n-\text{lowbit}(n)\ \text{xor}\  1 - 1 -n \ \text{xor} \ \text{lowbit}(n) - n\]</span></p>
+<h4 id="d---add-and-remove">D - Add and Remove</h4>
+<p>考虑倒着做，每次插入一个最后删除的数。</p>
 <p>可以发现这样原本的序列会被分成两个独立的区间，加入的数对答案的贡献和序列两边的数对最终的答案贡献次数有关。</p>
 <p>于是状态记左右端点和左右端点对答案的贡献次数就行了。</p>
-<p>可以证明复杂度是 $O(2^n\text{poly}(n))$ 的。</p>
-<h4 id="E-Develop"><a href="#E-Develop" class="headerlink" title="E - Develop"></a>E - Develop</h4><p>考虑一个删除序列是否合法，每个点 $i$ 往 $i-2$ 和 $i+k$ 连边，如果删除序列中的点有环则不合法，反之则合法。</p>
-<p>如果 $k$ 为偶数，则编号为奇数的点和编号为偶数的点是独立的，分别随便 dp 算算就行。</p>
-<p>如果 $k$ 为奇数，我们将奇数和偶数分别排开，得到了两条链，并把 $x$ 和 $x+k$ 放在同一层，那么一个不合法的环显然就是长先从左边往上走，然后走到右边，再往上走，最后再走回左边这样的。</p>
-<p>于是就可以 dp 了，令 $f_{i,j,k}$ 考虑第 $i$ 层，往上然后往右再往上的路径长度为 $j$，右边链往上的路径长度为 $k$ 。</p>
+<p>可以证明复杂度是 <span class="math inline">\(O(2^n\text{poly}(n))\)</span> 的。</p>
+<h4 id="e---develop">E - Develop</h4>
+<p>考虑一个删除序列是否合法，每个点 <span class="math inline">\(i\)</span> 往 <span class="math inline">\(i-2\)</span> 和 <span class="math inline">\(i+k\)</span> 连边，如果删除序列中的点有环则不合法，反之则合法。</p>
+<p>如果 <span class="math inline">\(k\)</span> 为偶数，则编号为奇数的点和编号为偶数的点是独立的，分别随便 dp 算算就行。</p>
+<p>如果 <span class="math inline">\(k\)</span> 为奇数，我们将奇数和偶数分别排开，得到了两条链，并把 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(x+k\)</span> 放在同一层，那么一个不合法的环显然就是长先从左边往上走，然后走到右边，再往上走，最后再走回左边这样的。</p>
+<p>于是就可以 dp 了，令 <span class="math inline">\(f_{i,j,k}\)</span> 考虑第 <span class="math inline">\(i\)</span> 层，往上然后往右再往上的路径长度为 <span class="math inline">\(j\)</span>，右边链往上的路径长度为 <span class="math inline">\(k\)</span> 。</p>
 <p>转移考虑当前层怎么选就行。</p>
-<p>复杂度 $O(n^3)$。</p>
-<h4 id="F-Two-Histograms"><a href="#F-Two-Histograms" class="headerlink" title="F - Two Histograms"></a>F - Two Histograms</h4><p>可以发现，这样的形状（见下图）有两种填的方法。</p>
-<p><img src="https://i.loli.net/2020/09/25/Whzpk1eRdtmNoKx.png"></p>
-<p>于是为了避免算重，对于上图的填充方式我们只取两种中的一种，也就是对于一种方案如果存在一对 $(x,y)$ 满足 $k_x=y-1,l_y=x$，那么这个方案就是不合法的；否则就是合法的。</p>
-<p>可以发现一个网格唯一对应了一个合法方案，因为可以对一个网格的某一个方案，不停把不合法的操作调整成合法的操作，<br>从而得到一个合法方案。所以直接考虑如何计数合法方案即可，这可以直接容斥，枚举 $k_x=y-1,l_y=x$ 的对数计算就行。</p>
-<h2 id="9-26"><a href="#9-26" class="headerlink" title="9.26"></a>9.26</h2><h3 id="diverta-2019-Programming-Contest"><a href="#diverta-2019-Programming-Contest" class="headerlink" title="diverta 2019 Programming Contest"></a>diverta 2019 Programming Contest</h3><hr>
-<h4 id="E-XOR-Partitioning"><a href="#E-XOR-Partitioning" class="headerlink" title="E - XOR Partitioning"></a>E - XOR Partitioning</h4><p> 先前缀和一下， 可以发现一个合法的划分选的位置一定是 <code>..x..0..x..0</code> 这样的形式。</p>
-<p>对每个 $x$ DP 一下就行。</p>
-<h4 id="F-Edge-Ordering"><a href="#F-Edge-Ordering" class="headerlink" title="F - Edge Ordering"></a>F - Edge Ordering</h4><p>首先，一条非树边 $(u,v)$ 必须大于 $u \to v$ 这条链上的所有边。</p>
-<p>考虑从大到小依次加入每条树边，则加入第 $i$ 条树边之前必须先加入第 $i$ 条树边控制的非树边。</p>
+<p>复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h4 id="f---two-histograms">F - Two Histograms</h4>
+<p>可以发现，这样的形状（见下图）有两种填的方法。</p>
+<p><img src="https://i.loli.net/2020/09/25/Whzpk1eRdtmNoKx.png" /></p>
+<p>于是为了避免算重，对于上图的填充方式我们只取两种中的一种，也就是对于一种方案如果存在一对 <span class="math inline">\((x,y)\)</span> 满足 <span class="math inline">\(k_x=y-1,l_y=x\)</span>，那么这个方案就是不合法的；否则就是合法的。</p>
+<p>可以发现一个网格唯一对应了一个合法方案，因为可以对一个网格的某一个方案，不停把不合法的操作调整成合法的操作， 从而得到一个合法方案。所以直接考虑如何计数合法方案即可，这可以直接容斥，枚举 <span class="math inline">\(k_x=y-1,l_y=x\)</span> 的对数计算就行。</p>
+<h2 id="section-17">9.26</h2>
+<h3 id="diverta-2019-programming-contest">diverta 2019 Programming Contest</h3>
+<hr />
+<h4 id="e---xor-partitioning">E - XOR Partitioning</h4>
+<p>先前缀和一下， 可以发现一个合法的划分选的位置一定是 <code>..x..0..x..0</code> 这样的形式。</p>
+<p>对每个 <span class="math inline">\(x\)</span> DP 一下就行。</p>
+<h4 id="f---edge-ordering">F - Edge Ordering</h4>
+<p>首先，一条非树边 <span class="math inline">\((u,v)\)</span> 必须大于 <span class="math inline">\(u \to v\)</span> 这条链上的所有边。</p>
+<p>考虑从大到小依次加入每条树边，则加入第 <span class="math inline">\(i\)</span> 条树边之前必须先加入第 <span class="math inline">\(i\)</span> 条树边控制的非树边。</p>
 <p>每次加入的树边的权值必须是最小值，而非树边可以随便选。</p>
 <p>问题在于如何统计答案。</p>
-<p>设当前一共加入了 $n$ 条边，合法的序列种数 $c$，树边数为 $b$，和价值和为 $s$。</p>
-<p>加入一条树边，这条树边的权值只能是 1，所以每种合法序列的每条树边权值会往后移动 1，所以 $(n,c,b,s)\to (n+1,c,b+1,s+(b+1)c)$</p>
-<p>加入一条非树边，这条边的权值可以是 $[1,n+1]$ 中的任意一个数，先不考虑每条树边权值的移动，$s$ 会被计算 $n+1$ 次，可以发现对于一个合法序列 $p$，这条边的权值取遍 $[1,n+1]$ 中的所有数后，所有树边移动的权值和就是原先这个合法序列 $p$ 所有树边边权和，所以这一部分的贡献是 $s$，于是可以得到 $(n,c,b,s)\to (n+1,c(n+1),b,s(n+1)+s)$。</p>
-<p>加入 $k$ 条非树边就是 $(n,c,b,s)\to (n+k,c(n+1)(n+2)\cdots(n+k),b,s(n+2)(n+3)\cdots(n+k+1))$</p>
+<p>设当前一共加入了 <span class="math inline">\(n\)</span> 条边，合法的序列种数 <span class="math inline">\(c\)</span>，树边数为 <span class="math inline">\(b\)</span>，和价值和为 <span class="math inline">\(s\)</span>。</p>
+<p>加入一条树边，这条树边的权值只能是 1，所以每种合法序列的每条树边权值会往后移动 1，所以 <span class="math inline">\((n,c,b,s)\to (n+1,c,b+1,s+(b+1)c)\)</span></p>
+<p>加入一条非树边，这条边的权值可以是 <span class="math inline">\([1,n+1]\)</span> 中的任意一个数，先不考虑每条树边权值的移动，<span class="math inline">\(s\)</span> 会被计算 <span class="math inline">\(n+1\)</span> 次，可以发现对于一个合法序列 <span class="math inline">\(p\)</span>，这条边的权值取遍 <span class="math inline">\([1,n+1]\)</span> 中的所有数后，所有树边移动的权值和就是原先这个合法序列 <span class="math inline">\(p\)</span> 所有树边边权和，所以这一部分的贡献是 <span class="math inline">\(s\)</span>，于是可以得到 <span class="math inline">\((n,c,b,s)\to (n+1,c(n+1),b,s(n+1)+s)\)</span>。</p>
+<p>加入 <span class="math inline">\(k\)</span> 条非树边就是 <span class="math inline">\((n,c,b,s)\to (n+k,c(n+1)(n+2)\cdots(n+k),b,s(n+2)(n+3)\cdots(n+k+1))\)</span></p>
 <p>于是我们就可以 DP。</p>
 <p>状态是哪些树边的边权已经确定，转移每次加入一条边就行。</p>
-<p>本题不需要精密的实现，随便写个 $O(2^nm\alpha(n))$ 也能过。</p>
-<h3 id="Tenka1-Programmer-Contest-2019"><a href="#Tenka1-Programmer-Contest-2019" class="headerlink" title="Tenka1 Programmer Contest 2019"></a>Tenka1 Programmer Contest 2019</h3><hr>
-<h4 id="D-Three-Colors"><a href="#D-Three-Colors" class="headerlink" title="D - Three Colors"></a>D - Three Colors</h4><p>设 $A,B,C$ 分别表示三种颜色的数的和，$S$  表示所有数的和。</p>
-<p>根据小学知识，如果 $A,B,C$ 能够是一个三角形的三条边，需要满足任意两个数的和大于第三个。</p>
-<p>我们用 $S-A-B$ 代替 $C$，把限制就是 $\max(2a,2b)\le S\le 2(a+b)$。</p>
-<p>答案就是所有方案减去 $2(a+b)\le S$ 的方案和 $\max(2a,2b)\ge S$ 的方案，再加上  $2a=S=2(a+b)$ 的方案的三倍。</p>
-<p>时间复杂度 $O(n^3)$。</p>
-<h4 id="E-Polynomial-Divisors"><a href="#E-Polynomial-Divisors" class="headerlink" title="E - Polynomial Divisors"></a>E - Polynomial Divisors</h4><p>可以发现当 $p&gt;n$ 时需要满足所有系数都是 $p$ 的倍数。</p>
-<p>$p\le n$ 暴力判判就行。</p>
-<h4 id="F-Banned-X"><a href="#F-Banned-X" class="headerlink" title="F - Banned X"></a>F - Banned X</h4><p>先对整个序列前缀和一下，如果存在 $y$ 则不能存在 $y-x$。</p>
-<p>如果我们知道整个序列不同的值有 $a$ 个，则可以用组合数算出对应的原序列的方案数。</p>
-<p>可以发现如果首次在 $i$ 出现了 $i$ 和 $i+1$ 同时存在的情况，显然 $i&lt;x-1$，则最多只能选到 $i+x-1$，并且 $x$ 到 $i+x-1$ 的选法唯一，$i+2$ 到 $x-1$ 可以随便选，枚举下 $i+2$ 到 $x-1$ 选了几个（这一部分的具体方案数可以一开始 DP 一下，其实就是个组合数）可以发现合法的不同的值的个数是一个区间，差分最后算一下就行。</p>
-<p>另外还要算一下不存在 $i$ 和 $i+1$ 同时存在的情况就行。</p>
-<h2 id="9-28"><a href="#9-28" class="headerlink" title="9.28"></a>9.28</h2><h3 id="ACL-Contest-1"><a href="#ACL-Contest-1" class="headerlink" title="ACL Contest 1"></a>ACL Contest 1</h3><hr>
-<h4 id="A-Reachable-Towns"><a href="#A-Reachable-Towns" class="headerlink" title="A - Reachable Towns"></a>A - Reachable Towns</h4><p>先按 $x$ 坐标排序，$y$ 坐标的顺序对连边求连通块大小。</p>
+<p>本题不需要精密的实现，随便写个 <span class="math inline">\(O(2^nm\alpha(n))\)</span> 也能过。</p>
+<h3 id="tenka1-programmer-contest-2019">Tenka1 Programmer Contest 2019</h3>
+<hr />
+<h4 id="d---three-colors">D - Three Colors</h4>
+<p>设 <span class="math inline">\(A,B,C\)</span> 分别表示三种颜色的数的和，<span class="math inline">\(S\)</span> 表示所有数的和。</p>
+<p>根据小学知识，如果 <span class="math inline">\(A,B,C\)</span> 能够是一个三角形的三条边，需要满足任意两个数的和大于第三个。</p>
+<p>我们用 <span class="math inline">\(S-A-B\)</span> 代替 <span class="math inline">\(C\)</span>，把限制就是 <span class="math inline">\(\max(2a,2b)\le S\le 2(a+b)\)</span>。</p>
+<p>答案就是所有方案减去 <span class="math inline">\(2(a+b)\le S\)</span> 的方案和 <span class="math inline">\(\max(2a,2b)\ge S\)</span> 的方案，再加上 <span class="math inline">\(2a=S=2(a+b)\)</span> 的方案的三倍。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h4 id="e---polynomial-divisors">E - Polynomial Divisors</h4>
+<p>可以发现当 <span class="math inline">\(p&gt;n\)</span> 时需要满足所有系数都是 <span class="math inline">\(p\)</span> 的倍数。</p>
+<p><span class="math inline">\(p\le n\)</span> 暴力判判就行。</p>
+<h4 id="f---banned-x">F - Banned X</h4>
+<p>先对整个序列前缀和一下，如果存在 <span class="math inline">\(y\)</span> 则不能存在 <span class="math inline">\(y-x\)</span>。</p>
+<p>如果我们知道整个序列不同的值有 <span class="math inline">\(a\)</span> 个，则可以用组合数算出对应的原序列的方案数。</p>
+<p>可以发现如果首次在 <span class="math inline">\(i\)</span> 出现了 <span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 同时存在的情况，显然 <span class="math inline">\(i&lt;x-1\)</span>，则最多只能选到 <span class="math inline">\(i+x-1\)</span>，并且 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(i+x-1\)</span> 的选法唯一，<span class="math inline">\(i+2\)</span> 到 <span class="math inline">\(x-1\)</span> 可以随便选，枚举下 <span class="math inline">\(i+2\)</span> 到 <span class="math inline">\(x-1\)</span> 选了几个（这一部分的具体方案数可以一开始 DP 一下，其实就是个组合数）可以发现合法的不同的值的个数是一个区间，差分最后算一下就行。</p>
+<p>另外还要算一下不存在 <span class="math inline">\(i\)</span> 和 <span class="math inline">\(i+1\)</span> 同时存在的情况就行。</p>
+<h2 id="section-18">9.28</h2>
+<h3 id="acl-contest-1">ACL Contest 1</h3>
+<hr />
+<h4 id="a---reachable-towns">A - Reachable Towns</h4>
+<p>先按 <span class="math inline">\(x\)</span> 坐标排序，<span class="math inline">\(y\)</span> 坐标的顺序对连边求连通块大小。</p>
 <p>显然一个连通块肯定是一个区间。</p>
-<p>前缀 $\min$ 和后缀 $\max$ 求出分界点就行。</p>
-<h4 id="B-Sum-is-Multiple"><a href="#B-Sum-is-Multiple" class="headerlink" title="B - Sum is Multiple"></a>B - Sum is Multiple</h4><p>显然问题等价于求一个最小的正整数 $k$ 满足 $k(k+1) \bmod n=0$。</p>
-<p>$k$ 和 $k+1$ 互质，于是对于 $n$ 的一个质因数肯定属于两者之一。</p>
-<p>枚举 $n$ 的因数 $i$，且满足 $(i,\dfrac{n}{i})=1$，问题转化为求一个不定方程（$x\cdot i+y \cdot \dfrac{n}{i}=1$）的解。</p>
-<h4 id="C-Moving-Pieces"><a href="#C-Moving-Pieces" class="headerlink" title="C - Moving Pieces"></a>C - Moving Pieces</h4><p>看数据范围感觉就是个网络流。</p>
-<p>原点往每个硬币连流量为 $1$，费用为 $0$ 的边。</p>
-<p>每个不是障碍的点往下面和右边不是障碍的点连流量为无穷，费用为 $-1$ 的边。</p>
-<p>每个不是障碍的点往汇点连流量为 $1$，费用为 $0$ 的点。</p>
+<p>前缀 <span class="math inline">\(\min\)</span> 和后缀 <span class="math inline">\(\max\)</span> 求出分界点就行。</p>
+<h4 id="b---sum-is-multiple">B - Sum is Multiple</h4>
+<p>显然问题等价于求一个最小的正整数 <span class="math inline">\(k\)</span> 满足 <span class="math inline">\(k(k+1) \bmod n=0\)</span>。</p>
+<p><span class="math inline">\(k\)</span> 和 <span class="math inline">\(k+1\)</span> 互质，于是对于 <span class="math inline">\(n\)</span> 的一个质因数肯定属于两者之一。</p>
+<p>枚举 <span class="math inline">\(n\)</span> 的因数 <span class="math inline">\(i\)</span>，且满足 <span class="math inline">\((i,\dfrac{n}{i})=1\)</span>，问题转化为求一个不定方程（<span class="math inline">\(x\cdot i+y \cdot \dfrac{n}{i}=1\)</span>）的解。</p>
+<h4 id="c---moving-pieces">C - Moving Pieces</h4>
+<p>看数据范围感觉就是个网络流。</p>
+<p>原点往每个硬币连流量为 <span class="math inline">\(1\)</span>，费用为 <span class="math inline">\(0\)</span> 的边。</p>
+<p>每个不是障碍的点往下面和右边不是障碍的点连流量为无穷，费用为 <span class="math inline">\(-1\)</span> 的边。</p>
+<p>每个不是障碍的点往汇点连流量为 <span class="math inline">\(1\)</span>，费用为 <span class="math inline">\(0\)</span> 的点。</p>
 <p>跑费用流即可。</p>
-<h4 id="D-Keep-Distances"><a href="#D-Keep-Distances" class="headerlink" title="D - Keep Distances"></a>D - Keep Distances</h4><p>每个点往它后面第一个距离它至少为 $k$ 和它前面第一个距离它至少为 $k$ 的点连边。</p>
-<p>显然对于一个询问 $[l,r]$ 在答案集合内的点是下图中画横线中间的点。</p>
-<p><img src="https://i.loli.net/2020/09/28/jHTxaOyAk9sC5FQ.png" alt="QQ图片20200928194813.png"></p>
+<h4 id="d---keep-distances">D - Keep Distances</h4>
+<p>每个点往它后面第一个距离它至少为 <span class="math inline">\(k\)</span> 和它前面第一个距离它至少为 <span class="math inline">\(k\)</span> 的点连边。</p>
+<p>显然对于一个询问 <span class="math inline">\([l,r]\)</span> 在答案集合内的点是下图中画横线中间的点。</p>
+<figure>
+<img src="https://i.loli.net/2020/09/28/jHTxaOyAk9sC5FQ.png" alt="QQ图片20200928194813.png" /><figcaption>QQ图片20200928194813.png</figcaption>
+</figure>
 <p>可以倍增算出所有合法区间的右端点之和和所有合法区间的左端点之和。</p>
 <p>然后就做完了。</p>
-<h4 id="E-Shuffle-Window"><a href="#E-Shuffle-Window" class="headerlink" title="E - Shuffle Window"></a>E - Shuffle Window</h4><p>问题显然可以转化为每次把 shuffle 的一个数加入序列的末尾，然后在 shuffle 的数中加入一个数。</p>
-<p>考虑对每一对满足 $i&lt;j$ 的权值 $(i,j)$ 算贡献。</p>
+<h4 id="e---shuffle-window">E - Shuffle Window</h4>
+<p>问题显然可以转化为每次把 shuffle 的一个数加入序列的末尾，然后在 shuffle 的数中加入一个数。</p>
+<p>考虑对每一对满足 <span class="math inline">\(i&lt;j\)</span> 的权值 <span class="math inline">\((i,j)\)</span> 算贡献。</p>
 <p>懒得具体写式子了，直接放个暴力的代码吧。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">For</span>(i,<span class="number">2</span>,n) <span class="built_in">FOR</span>(j,<span class="number">1</span>,i)&#123;</span><br><span class="line">	<span class="keyword">int</span> x=p[i],y=p[j],ret=<span class="number">0</span>,nw=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">FOR</span>(l,<span class="built_in">max</span>(<span class="number">1</span>,x-k+<span class="number">1</span>),<span class="built_in">max</span>(<span class="number">1</span>,y-k+<span class="number">1</span>))&#123;</span><br><span class="line">		ret=(ret+nw)%mod;</span><br><span class="line">		nw=<span class="number">1ll</span>*nw*inv[k]%mod*(k<span class="number">-1</span>)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	ans=(ans+<span class="number">1ll</span>*ret*inv[k])%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">For</span>(i,<span class="number">1</span>,n) <span class="built_in">For</span>(j,i+<span class="number">1</span>,n)&#123;</span><br><span class="line">	<span class="keyword">int</span> x=i,y=j,ret=<span class="number">0</span>,nw=<span class="number">0</span>;</span><br><span class="line">	nw=<span class="built_in">power</span>(<span class="number">1ll</span>*inv[k]*(k<span class="number">-1</span>)%mod,<span class="built_in">max</span>(<span class="number">1</span>,y-k+<span class="number">1</span>)-<span class="built_in">max</span>(<span class="number">1</span>,x-k+<span class="number">1</span>));</span><br><span class="line">	<span class="built_in">FOR</span>(l,<span class="built_in">max</span>(<span class="number">1</span>,y-k+<span class="number">1</span>),n)&#123;</span><br><span class="line">		ret=(ret+<span class="number">1ll</span>*nw*inv[<span class="built_in">min</span>(k,n-l+<span class="number">1</span>)])%mod;</span><br><span class="line">		nw=<span class="number">1ll</span>*nw*inv[<span class="built_in">min</span>(k,n-l+<span class="number">1</span>)]%mod*(<span class="built_in">min</span>(k,n-l+<span class="number">1</span>)<span class="number">-2</span>)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	ans=(ans+ret)%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 $inv[k]$ 表示 $k^{-1}$，$p[i]$ 表示权值 $i$ 的下标。</p>
-<p> 大概是分类讨论 $p_i$ 和 $p_j$ 大小关系，在 $i$ 加入后 $j$ 加入之前，每次必须不能选到 $i$，之后枚举什么时候会删除 $i$，删除之前不能选两者之一。把这个代码写出来后会发现两部分好像是独立的，于是就有了上面的代码。</p>
+<p>其中 <span class="math inline">\(inv[k]\)</span> 表示 <span class="math inline">\(k^{-1}\)</span>，<span class="math inline">\(p[i]\)</span> 表示权值 <span class="math inline">\(i\)</span> 的下标。</p>
+<p>大概是分类讨论 <span class="math inline">\(p_i\)</span> 和 <span class="math inline">\(p_j\)</span> 大小关系，在 <span class="math inline">\(i\)</span> 加入后 <span class="math inline">\(j\)</span> 加入之前，每次必须不能选到 <span class="math inline">\(i\)</span>，之后枚举什么时候会删除 <span class="math inline">\(i\)</span>，删除之前不能选两者之一。把这个代码写出来后会发现两部分好像是独立的，于是就有了上面的代码。</p>
 <p>上面的代码就很好优化了，第一段可以从小到大加入每个数，线段树随便维护一下。</p>
-<p>第二段随便化化式子就可以做到 $O(n)$ 的。</p>
-<h4 id="F-Center-Rearranging"><a href="#F-Center-Rearranging" class="headerlink" title="F - Center Rearranging"></a>F - Center Rearranging</h4><p>首先 $B$ 中肯定有连续一段是 $A$ 没动的数组成的，将它们称为 <code>M</code> 类型数； <code>M</code> 左边是由于 push_front 操作而得到的称为 <code>L</code> 类型数； <code>M</code> 右边是由于 push_back 操作而得到的称为 <code>R</code> 类型数。</p>
-<p>最终 $B$ 肯定是长 <code>L...LM...MR...R</code> 这样的，我们可以枚举 <code>M</code> 的区间，这样 $B$ 所有数是怎么得到的就确定了。</p>
-<p>考虑对每三个 $x$，$B$ 中每个 $x$ 对应了 $A$ 中的哪个 $x$。</p>
-<p>先考虑 $B$ 中这三个数(位置从小到大)都分别是怎么操作得到的，共有 10 中可能，其中 <code>LLL</code> 和  <code>RRR</code> 显然肯定是不可能。</p>
+<p>第二段随便化化式子就可以做到 <span class="math inline">\(O(n)\)</span> 的。</p>
+<h4 id="f---center-rearranging">F - Center Rearranging</h4>
+<p>首先 <span class="math inline">\(B\)</span> 中肯定有连续一段是 <span class="math inline">\(A\)</span> 没动的数组成的，将它们称为 <code>M</code> 类型数； <code>M</code> 左边是由于 push_front 操作而得到的称为 <code>L</code> 类型数； <code>M</code> 右边是由于 push_back 操作而得到的称为 <code>R</code> 类型数。</p>
+<p>最终 <span class="math inline">\(B\)</span> 肯定是长 <code>L...LM...MR...R</code> 这样的，我们可以枚举 <code>M</code> 的区间，这样 <span class="math inline">\(B\)</span> 所有数是怎么得到的就确定了。</p>
+<p>考虑对每三个 <span class="math inline">\(x\)</span>，<span class="math inline">\(B\)</span> 中每个 <span class="math inline">\(x\)</span> 对应了 <span class="math inline">\(A\)</span> 中的哪个 <span class="math inline">\(x\)</span>。</p>
+<p>先考虑 <span class="math inline">\(B\)</span> 中这三个数(位置从小到大)都分别是怎么操作得到的，共有 10 中可能，其中 <code>LLL</code> 和 <code>RRR</code> 显然肯定是不可能。</p>
 <p>剩下的八种情况就需要自己手玩了，具体可以见下表。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A:M** ***</span><br><span class="line">B:LMR LLR 我们称这两组是第一种类型</span><br><span class="line"></span><br><span class="line">A:**M ***</span><br><span class="line">B:LMR LRR 我们称这两组是第二种类型</span><br><span class="line"></span><br><span class="line">A:M** **M MMM M*M M*M</span><br><span class="line">B:MRR LLM MMM LMM MMR 我们称这五组是第三种类型</span><br></pre></td></tr></table></figure>
-
-<p>可以发现除了 <code>LMR</code> 之外，所有 <code>M</code> 的在 $A$ 中的位置其实是确定的。</p>
-<p>确定 <code>M</code> 的位置可以来帮助我们确认当前划分方案是否有解，对于所有 <code>M</code>，如果其在 $A$ 的位置和其在 $B$ 的位置连一条边，显然这些边如果相交了就无解了，因为 <code>M</code> 是不会动的，所有原先在左边的不可能跑到右边去。</p>
-<p>我们先来考虑如果有解最小步数是多少，不难发现，其实就是 $3n-cntM$，$cntM$ 表示 $M$ 的个数，这显然是答案的下界，也显然能构造一种合法的操作方案。</p>
+<p>可以发现除了 <code>LMR</code> 之外，所有 <code>M</code> 的在 <span class="math inline">\(A\)</span> 中的位置其实是确定的。</p>
+<p>确定 <code>M</code> 的位置可以来帮助我们确认当前划分方案是否有解，对于所有 <code>M</code>，如果其在 <span class="math inline">\(A\)</span> 的位置和其在 <span class="math inline">\(B\)</span> 的位置连一条边，显然这些边如果相交了就无解了，因为 <code>M</code> 是不会动的，所有原先在左边的不可能跑到右边去。</p>
+<p>我们先来考虑如果有解最小步数是多少，不难发现，其实就是 <span class="math inline">\(3n-cntM\)</span>，<span class="math inline">\(cntM\)</span> 表示 <span class="math inline">\(M\)</span> 的个数，这显然是答案的下界，也显然能构造一种合法的操作方案。</p>
 <p>现在先考虑如果每个 <code>LMR</code> 是什么类型都确定了，怎么判是否有解。</p>
 <p>首先可以发现，第一、二组不同于第三组的地方是，第一、二组的 <code>L</code> 和 <code>R</code> 的操作顺序会多一些限制，比如第一组中 <code>LLR</code>，第一步必须是 push_back。</p>
-<p>考虑这样一个图 $G$，图中一条边 $u \to v$ 表示，$u$ 必须必 $v$ 先操作。所以对于第一种类型，第三个在 $B$ 中的位置向第一个在 $B$ 中的位置连一条边；对于第二组同理。另外还有就是右边的 <code>L</code> 向左边的 <code>L</code> 连边，左边的 <code>R</code> 向右边的 <code>R</code> 连边。如果图 $G$ 不存在环，就可以按照拓扑序做操作；否则，这说明无解。</p>
+<p>考虑这样一个图 <span class="math inline">\(G\)</span>，图中一条边 <span class="math inline">\(u \to v\)</span> 表示，<span class="math inline">\(u\)</span> 必须必 <span class="math inline">\(v\)</span> 先操作。所以对于第一种类型，第三个在 <span class="math inline">\(B\)</span> 中的位置向第一个在 <span class="math inline">\(B\)</span> 中的位置连一条边；对于第二组同理。另外还有就是右边的 <code>L</code> 向左边的 <code>L</code> 连边，左边的 <code>R</code> 向右边的 <code>R</code> 连边。如果图 <span class="math inline">\(G\)</span> 不存在环，就可以按照拓扑序做操作；否则，这说明无解。</p>
 <p>可以发现这个图非常特殊，如果存在环，只能是一个某个第一种类型的第一、三位置都比某一个第二种类型更小。</p>
 <p>于是现在问题转化为是否存在一种确定每个 <code>LMR</code> 属于第一个类型还是第二个类型的方案，使得上面的条件都满足。</p>
 <p>不难发现所有限制都是一个二元限制，每个 <code>LMR</code> 有两种选择，所以我们可以用 2-sat 判是否有解。</p>
-<h2 id="10-2"><a href="#10-2" class="headerlink" title="10.2"></a>10.2</h2><h3 id="AGC-034"><a href="#AGC-034" class="headerlink" title="AGC 034"></a>AGC 034</h3><hr>
-<h4 id="A-Kenken-Race"><a href="#A-Kenken-Race" class="headerlink" title="A - Kenken Race"></a>A - Kenken Race</h4><p>如果 $C&lt;D$，$B$ 先跳到 $D$，$A$ 再跳，只要判下 $[A,D]$ 是否存在两个连续的障碍就行。</p>
-<p>否则，$[B,D]$ 还需要存在一个长度至少为 $3$ 的空地，让 $B$ 跳到中间，让 $A$ 跳过 $B$。</p>
-<h4 id="B-ABC"><a href="#B-ABC" class="headerlink" title="B - ABC"></a>B - ABC</h4><p>随便数吧。</p>
-<h4 id="C-Tests"><a href="#C-Tests" class="headerlink" title="C - Tests"></a>C - Tests</h4><p>注意到最终不是满分或者零分的科目最多只有一个。</p>
-<p>二分答案后，枚举不是满分或者零分的科目，满分的科目肯定取 $b_i\times l_i+(X-b_i)\times r_i$ 最大的那几个。</p>
-<h4 id="D-Manhattan-Max-Matching"><a href="#D-Manhattan-Max-Matching" class="headerlink" title="D - Manhattan Max Matching"></a>D - Manhattan Max Matching</h4><p>众所周知绝对值里面的正负号如果取错，答案肯定比取对小。</p>
+<h2 id="section-19">10.2</h2>
+<h3 id="agc-034">AGC 034</h3>
+<hr />
+<h4 id="a---kenken-race">A - Kenken Race</h4>
+<p>如果 <span class="math inline">\(C&lt;D\)</span>，<span class="math inline">\(B\)</span> 先跳到 <span class="math inline">\(D\)</span>，<span class="math inline">\(A\)</span> 再跳，只要判下 <span class="math inline">\([A,D]\)</span> 是否存在两个连续的障碍就行。</p>
+<p>否则，<span class="math inline">\([B,D]\)</span> 还需要存在一个长度至少为 <span class="math inline">\(3\)</span> 的空地，让 <span class="math inline">\(B\)</span> 跳到中间，让 <span class="math inline">\(A\)</span> 跳过 <span class="math inline">\(B\)</span>。</p>
+<h4 id="b---abc">B - ABC</h4>
+<p>随便数吧。</p>
+<h4 id="c---tests">C - Tests</h4>
+<p>注意到最终不是满分或者零分的科目最多只有一个。</p>
+<p>二分答案后，枚举不是满分或者零分的科目，满分的科目肯定取 <span class="math inline">\(b_i\times l_i+(X-b_i)\times r_i\)</span> 最大的那几个。</p>
+<h4 id="d---manhattan-max-matching">D - Manhattan Max Matching</h4>
+<p>众所周知绝对值里面的正负号如果取错，答案肯定比取对小。</p>
 <p>于是把每个点拆成四个点，分别表示每个坐标前取什么符号的四种情况，红球和蓝球对应的再往一个中间点连边就行。</p>
 <p>感觉可以模拟费用流，但是不太会这个东西，先鸽着。</p>
-<h4 id="E-Complete-Compress"><a href="#E-Complete-Compress" class="headerlink" title="E - Complete Compress"></a>E - Complete Compress</h4><p>先枚举最终所有点聚到哪个点。</p>
+<h4 id="e---complete-compress">E - Complete Compress</h4>
+<p>先枚举最终所有点聚到哪个点。</p>
 <p>注意到一个子树可行的还需要的操作次数是一个区间，这里的操作是指操作的两个点一个点在这个子树内，一个点在这个子树外。</p>
 <p>于是随便 dp 下就行。</p>
-<h4 id="F-RNG-and-XOR"><a href="#F-RNG-and-XOR" class="headerlink" title="F - RNG and XOR"></a>F - RNG and XOR</h4><p><del>AGC 抄袭 ZJOI 石锤</del></p>
-<p>令 $f_S$ 表示 $S$ 的答案，为表示方便 $p_i = \frac{p_i}{\sum_{i}p_i}$。</p>
-<p>对于 $S\ne \varnothing$，有：</p>
-<p>$$f_S=1+\sum_{T} p_T f_{S\oplus T}$$</p>
-<p>令 $G=\sum_{S} p_Sx^S$，$F=\sum_{s} f_sx^s$ 为集合幂级数。</p>
+<h4 id="f---rng-and-xor">F - RNG and XOR</h4>
+<p><del>AGC 抄袭 ZJOI 石锤</del></p>
+<p>令 <span class="math inline">\(f_S\)</span> 表示 <span class="math inline">\(S\)</span> 的答案，为表示方便 <span class="math inline">\(p_i = \frac{p_i}{\sum_{i}p_i}\)</span>。</p>
+<p>对于 <span class="math inline">\(S\ne \varnothing\)</span>，有：</p>
+<p><span class="math display">\[f_S=1+\sum_{T} p_T f_{S\oplus T}\]</span></p>
+<p>令 <span class="math inline">\(G=\sum_{S} p_Sx^S\)</span>，<span class="math inline">\(F=\sum_{s} f_sx^s\)</span> 为集合幂级数。</p>
 <p>于是可以得到：</p>
-<p>$$F=\sum_{S}x^S+F\times G+cx^{\varnothing}$$</p>
-<p>因为 $f_0=0$ 所以 $c$  为一个需要确定的待定系数。</p>
+<p><span class="math display">\[F=\sum_{S}x^S+F\times G+cx^{\varnothing}\]</span></p>
+<p>因为 <span class="math inline">\(f_0=0\)</span> 所以 <span class="math inline">\(c\)</span> 为一个需要确定的待定系数。</p>
 <p>考虑先对该式做 FWT。</p>
-<p>令 $\widetilde{F}$ 为 $F$ 的 FWT 结果，可以得到：</p>
-<p>$$[x^S]\widetilde{F}\times(1-[x^S]\widetilde{G})=\sum_{T} (-1)^{|T\cap S|} +c$$</p>
-<p>当 $S=\varnothing$ 时，$[x^{\varnothing}]\widetilde{G}=1$，所以左式为 $0$，所以可以得到 $c=-2^n$。</p>
-<p>对于其他 $S\ne\varnothing$ ，$[x^{S}]\widetilde{G}&lt;1$，所以可以得到 $[x^S]\widetilde{F}=\dfrac{c}{1-[x^S]\widetilde{G}}$。</p>
+<p>令 <span class="math inline">\(\widetilde{F}\)</span> 为 <span class="math inline">\(F\)</span> 的 FWT 结果，可以得到：</p>
+<p><span class="math display">\[[x^S]\widetilde{F}\times(1-[x^S]\widetilde{G})=\sum_{T} (-1)^{|T\cap S|} +c\]</span></p>
+<p>当 <span class="math inline">\(S=\varnothing\)</span> 时，<span class="math inline">\([x^{\varnothing}]\widetilde{G}=1\)</span>，所以左式为 <span class="math inline">\(0\)</span>，所以可以得到 <span class="math inline">\(c=-2^n\)</span>。</p>
+<p>对于其他 <span class="math inline">\(S\ne\varnothing\)</span> ，<span class="math inline">\([x^{S}]\widetilde{G}&lt;1\)</span>，所以可以得到 <span class="math inline">\([x^S]\widetilde{F}=\dfrac{c}{1-[x^S]\widetilde{G}}\)</span>。</p>
 <p>做 IFWT，得到：</p>
-<p>$$f_S=\dfrac{1}{2^n}\sum_{T}(-1)^{|S\cap T|} [x^T] \widetilde{F}=\dfrac{[x^{\varnothing}] \widetilde{F}}{2^n}-\sum_{T\ne \varnothing} (-1)^{|S\cap T|} \dfrac{1}{1-[x^T]\widetilde{G}}$$</p>
-<p>因为 $f_{\varnothing}=0$，可以得到：</p>
-<p>$$\dfrac{[x^{\varnothing}] \widetilde{F}}{2^n}=\sum_{T\ne \varnothing} (-1)^{|S\cap T|} \dfrac{1}{1-[x^T]\widetilde{G}}$$</p>
+<p><span class="math display">\[f_S=\dfrac{1}{2^n}\sum_{T}(-1)^{|S\cap T|} [x^T] \widetilde{F}=\dfrac{[x^{\varnothing}] \widetilde{F}}{2^n}-\sum_{T\ne \varnothing} (-1)^{|S\cap T|} \dfrac{1}{1-[x^T]\widetilde{G}}\]</span></p>
+<p>因为 <span class="math inline">\(f_{\varnothing}=0\)</span>，可以得到：</p>
+<p><span class="math display">\[\dfrac{[x^{\varnothing}] \widetilde{F}}{2^n}=\sum_{T\ne \varnothing} (-1)^{|S\cap T|} \dfrac{1}{1-[x^T]\widetilde{G}}\]</span></p>
 <p>所以最终可以得到：</p>
-<p>$$f_S=\sum_{T\ne \varnothing} (1-(-1)^{|S\cap T|}) \frac{1}{1-[x^T]\widetilde{G}}$$</p>
+<p><span class="math display">\[f_S=\sum_{T\ne \varnothing} (1-(-1)^{|S\cap T|}) \frac{1}{1-[x^T]\widetilde{G}}\]</span></p>
 <p>以上内容基本抄自 lyx 「ZJOI2019」开关的题解。</p>
-<p>令 $g_i=\dfrac{1}{1-[x^T]\widetilde{G}},h_i=[\text{popcount}(i) \bmod 2=1]$。</p>
+<p>令 <span class="math inline">\(g_i=\dfrac{1}{1-[x^T]\widetilde{G}},h_i=[\text{popcount}(i) \bmod 2=1]\)</span>。</p>
 <p>则原式为：</p>
-<p>$$f_S=\sum_{T} g_Th_{S\cap T}$$</p>
-<p>注意到这是一个 $\text{BITANDMUL}(g)$ 的转置。</p>
-<p>对 $h$ 做的变换都是转置的就行。</p>
-<h2 id="10-4"><a href="#10-4" class="headerlink" title="10.4"></a>10.4</h2><h3 id="ARC-104"><a href="#ARC-104" class="headerlink" title="ARC 104"></a>ARC 104</h3><hr>
-<h4 id="D-Multiset-Mean"><a href="#D-Multiset-Mean" class="headerlink" title="D - Multiset Mean"></a>D - Multiset Mean</h4><p>直接背包就完事了。</p>
-<h4 id="E-Random-LIS"><a href="#E-Random-LIS" class="headerlink" title="E - Random LIS"></a>E - Random LIS</h4><p>暴搜大小关系，然后就是划艇了。</p>
-<h4 id="F-Visibility-Sequence"><a href="#F-Visibility-Sequence" class="headerlink" title="F - Visibility Sequence"></a>F - Visibility Sequence</h4><p>可以发现一个 $P$ 序列对应一棵笛卡尔树。</p>
+<p><span class="math display">\[f_S=\sum_{T} g_Th_{S\cap T}\]</span></p>
+<p>注意到这是一个 <span class="math inline">\(\text{BITANDMUL}(g)\)</span> 的转置。</p>
+<p>对 <span class="math inline">\(h\)</span> 做的变换都是转置的就行。</p>
+<h2 id="section-20">10.4</h2>
+<h3 id="arc-104">ARC 104</h3>
+<hr />
+<h4 id="d---multiset-mean">D - Multiset Mean</h4>
+<p>直接背包就完事了。</p>
+<h4 id="e---random-lis">E - Random LIS</h4>
+<p>暴搜大小关系，然后就是划艇了。</p>
+<h4 id="f---visibility-sequence">F - Visibility Sequence</h4>
+<p>可以发现一个 <span class="math inline">\(P\)</span> 序列对应一棵笛卡尔树。</p>
 <p>于是转为 dp 笛卡尔树的结构。</p>
-<p>令 $f_{l,r,i}$ 表示区间 $[l,r]$ 根的值为 $i$ 有多少种不同的笛卡尔树结构。</p>
-<p>为了防止算重每个点的值尽量要小，根据这个转移就行，也就是当前根的值为 $\max(val_{lson},val_{rson}+1)$。</p>
-<p>可以前缀和优化到 $O(n^4)$，但是显然不优化 $O(n^5)$ 也能过。</p>
-<h2 id="10-10"><a href="#10-10" class="headerlink" title="10.10"></a>10.10</h2><p>写题解好麻烦啊，好几场一起写了吧。</p>
-<h3 id="AGC-033"><a href="#AGC-033" class="headerlink" title="AGC 033"></a>AGC 033</h3><hr>
-<h4 id="A-Darker-and-Darker"><a href="#A-Darker-and-Darker" class="headerlink" title="A - Darker and Darker"></a>A - Darker and Darker</h4><p>等价于求所有 <code>.</code> 到某个 <code>#</code> 最短路的最大值。</p>
-<h4 id="B-LRUD-Game"><a href="#B-LRUD-Game" class="headerlink" title="B - LRUD Game"></a>B - LRUD Game</h4><p>注意到每个方向是独立的。</p>
-<h4 id="C-Removing-Coins"><a href="#C-Removing-Coins" class="headerlink" title="C - Removing Coins"></a>C - Removing Coins</h4><p>注意到和只有一条直径是等价的。</p>
-<h4 id="D-Complexity"><a href="#D-Complexity" class="headerlink" title="D - Complexity"></a>D - Complexity</h4><p>直接 DP 是 $O(n^5)$ 的时间和 $O(n^4)$ 的空间的。</p>
-<p>注意到答案是 $O(\log n)$ 级别的，并且如果固定左、上、下边界，随着右边界的增大，答案递增。</p>
+<p>令 <span class="math inline">\(f_{l,r,i}\)</span> 表示区间 <span class="math inline">\([l,r]\)</span> 根的值为 <span class="math inline">\(i\)</span> 有多少种不同的笛卡尔树结构。</p>
+<p>为了防止算重每个点的值尽量要小，根据这个转移就行，也就是当前根的值为 <span class="math inline">\(\max(val_{lson},val_{rson}+1)\)</span>。</p>
+<p>可以前缀和优化到 <span class="math inline">\(O(n^4)\)</span>，但是显然不优化 <span class="math inline">\(O(n^5)\)</span> 也能过。</p>
+<h2 id="section-21">10.10</h2>
+<p>写题解好麻烦啊，好几场一起写了吧。</p>
+<h3 id="agc-033">AGC 033</h3>
+<hr />
+<h4 id="a---darker-and-darker">A - Darker and Darker</h4>
+<p>等价于求所有 <code>.</code> 到某个 <code>#</code> 最短路的最大值。</p>
+<h4 id="b---lrud-game">B - LRUD Game</h4>
+<p>注意到每个方向是独立的。</p>
+<h4 id="c---removing-coins">C - Removing Coins</h4>
+<p>注意到和只有一条直径是等价的。</p>
+<h4 id="d---complexity">D - Complexity</h4>
+<p>直接 DP 是 <span class="math inline">\(O(n^5)\)</span> 的时间和 <span class="math inline">\(O(n^4)\)</span> 的空间的。</p>
+<p>注意到答案是 <span class="math inline">\(O(\log n)\)</span> 级别的，并且如果固定左、上、下边界，随着右边界的增大，答案递增。</p>
 <p>于是把 DP 的一维换成答案，转为 DP 右边界就行。</p>
 <p>考虑先枚举答案就能转移了。</p>
-<p>双指针一下可以做到 $O(n^3\log n)$，不过 $O(n^3\log^2 n)$ 也能过。</p>
-<h4 id="E-Go-around-a-Circle"><a href="#E-Go-around-a-Circle" class="headerlink" title="E - Go around a Circle"></a>E - Go around a Circle</h4><p>假设第一个字母是 <code>R</code>，可以发现最终序列需要满足以下两个性质：</p>
-<ol>
-<li><p>不能有相邻的 <code>B</code>。</p>
-</li>
-<li><p>每段连续的 <code>R</code> 长度是奇数的，并且长度的限制是不小于 $S$ 第一段的长度最小的奇数和 $S$ 另外所有长度为奇数的段的长度的 $\min$。</p>
-</li>
+<p>双指针一下可以做到 <span class="math inline">\(O(n^3\log n)\)</span>，不过 <span class="math inline">\(O(n^3\log^2 n)\)</span> 也能过。</p>
+<h4 id="e---go-around-a-circle">E - Go around a Circle</h4>
+<p>假设第一个字母是 <code>R</code>，可以发现最终序列需要满足以下两个性质：</p>
+<ol type="1">
+<li><p>不能有相邻的 <code>B</code>。</p></li>
+<li><p>每段连续的 <code>R</code> 长度是奇数的，并且长度的限制是不小于 <span class="math inline">\(S\)</span> 第一段的长度最小的奇数和 <span class="math inline">\(S\)</span> 另外所有长度为奇数的段的长度的 <span class="math inline">\(\min\)</span>。</p></li>
 </ol>
 <p>具体证明并不难。</p>
 <p>于是随便算算就行。</p>
-<h4 id="F-Adding-Edges"><a href="#F-Adding-Edges" class="headerlink" title="F - Adding Edges"></a>F - Adding Edges</h4><p>可以看 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/nealchen/p/AGC033F.html">nealchen的题解</a>。</p>
-<h3 id="AGC-032"><a href="#AGC-032" class="headerlink" title="AGC 032"></a>AGC 032</h3><hr>
-<h4 id="A-Limited-Insertion"><a href="#A-Limited-Insertion" class="headerlink" title="A - Limited Insertion"></a>A - Limited Insertion</h4><p>从前往后一个一个插入就行。</p>
-<h4 id="B-Balanced-Neighbors"><a href="#B-Balanced-Neighbors" class="headerlink" title="B - Balanced Neighbors"></a>B - Balanced Neighbors</h4><p>完全图去掉 $i$ 和 $n-(n \bmod 2)-i$ 的边就行。</p>
-<h4 id="C-Three-Circuits"><a href="#C-Three-Circuits" class="headerlink" title="C - Three Circuits"></a>C - Three Circuits</h4><p>首先显然要每个点度数都是偶数。</p>
-<p>如果边数大于 $n+2$ 肯定有解，小于 $n+2$ 肯定无解。</p>
-<p>边数等于 $n+2$ 的时候，有一种情况会无解，大概是类似于一个西瓜的形状，两个度为 $4$ 的中间连了四条链，另外都是有解的。</p>
-<h4 id="D-Rotation-Sort"><a href="#D-Rotation-Sort" class="headerlink" title="D - Rotation Sort"></a>D - Rotation Sort</h4><p>显然如果操作了肯定是一步到位，于是一次操作可以认为是插入一个数。</p>
+<h4 id="f---adding-edges">F - Adding Edges</h4>
+<p>可以看 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/nealchen/p/AGC033F.html">nealchen的题解</a>。</p>
+<h3 id="agc-032">AGC 032</h3>
+<hr />
+<h4 id="a---limited-insertion">A - Limited Insertion</h4>
+<p>从前往后一个一个插入就行。</p>
+<h4 id="b---balanced-neighbors">B - Balanced Neighbors</h4>
+<p>完全图去掉 <span class="math inline">\(i\)</span> 和 <span class="math inline">\(n-(n \bmod 2)-i\)</span> 的边就行。</p>
+<h4 id="c---three-circuits">C - Three Circuits</h4>
+<p>首先显然要每个点度数都是偶数。</p>
+<p>如果边数大于 <span class="math inline">\(n+2\)</span> 肯定有解，小于 <span class="math inline">\(n+2\)</span> 肯定无解。</p>
+<p>边数等于 <span class="math inline">\(n+2\)</span> 的时候，有一种情况会无解，大概是类似于一个西瓜的形状，两个度为 <span class="math inline">\(4\)</span> 的中间连了四条链，另外都是有解的。</p>
+<h4 id="d---rotation-sort">D - Rotation Sort</h4>
+<p>显然如果操作了肯定是一步到位，于是一次操作可以认为是插入一个数。</p>
 <p>DP 的时候记最后一个没动的数就行。</p>
-<p>可以做到 $O(n\log n)$，具体可以看 wzp 9102 年的集训队作业。</p>
-<h4 id="E-Modulo-Pairing"><a href="#E-Modulo-Pairing" class="headerlink" title="E - Modulo Pairing"></a>E - Modulo Pairing</h4><p>我们先最终配对的两个点 $x+y$ 的值大于 $m-1$，则把这两个数称为第一类数，否则则称为第二类数。</p>
-<p>如果每个点确定了种类，则每个种类肯定是最小和最大配，第二小和第二大配…这样配。</p>
-<p>又可以发现最终答案的配对方案肯定存在一种是，前 $k$ 大的数是第一类数，另外的数是第二类数，具体可以通过调整法证明。</p>
-<p>于是我们得到了一个 $O(n^2)$ 的做法。</p>
+<p>可以做到 <span class="math inline">\(O(n\log n)\)</span>，具体可以看 wzp 9102 年的集训队作业。</p>
+<h4 id="e---modulo-pairing">E - Modulo Pairing</h4>
+<p>我们先最终配对的两个点 <span class="math inline">\(x+y\)</span> 的值大于 <span class="math inline">\(m-1\)</span>，则把这两个数称为第一类数，否则则称为第二类数。</p>
+<p>如果每个点确定了种类，则每个种类肯定是最小和最大配，第二小和第二大配...这样配。</p>
+<p>又可以发现最终答案的配对方案肯定存在一种是，前 <span class="math inline">\(k\)</span> 大的数是第一类数，另外的数是第二类数，具体可以通过调整法证明。</p>
+<p>于是我们得到了一个 <span class="math inline">\(O(n^2)\)</span> 的做法。</p>
 <p>考虑二分答案，可以发现可以作为第一类数的是一个后缀，可以作为第二类数的是一个前缀，如果有一个数既不能是第一类数也不能是第二类数则无解，另外还需要第二类数的配对满足条件。</p>
-<h4 id="F-One-Third"><a href="#F-One-Third" class="headerlink" title="F - One Third"></a>F - One Third</h4><p><del>感觉像是个知乎题。也确实一部分结论在知乎看到过。</del></p>
+<h4 id="f---one-third">F - One Third</h4>
+<p><del>感觉像是个知乎题。也确实一部分结论在知乎看到过。</del></p>
 <p>可以看<a target="_blank" rel="noopener" href="https://blog.csdn.net/zxyoi_dreamer/article/details/102054689">这里</a>。</p>
-<h3 id="ExaWizards-2019"><a href="#ExaWizards-2019" class="headerlink" title="ExaWizards 2019"></a>ExaWizards 2019</h3><hr>
-<h4 id="C-Snuke-the-Wizard"><a href="#C-Snuke-the-Wizard" class="headerlink" title="C - Snuke the Wizard"></a>C - Snuke the Wizard</h4><p>注意到最后不会出去的是一个区间，二分一下左右边界就行。</p>
-<h4 id="D-Modulo-Operations"><a href="#D-Modulo-Operations" class="headerlink" title="D - Modulo Operations"></a>D - Modulo Operations</h4><p>如果在 $\bmod x$ 之前先 $\bmod$ 了一个小于等于 $x$ 的数 $y$，则 $\bmod x$ 是无效的。</p>
-<p> 于是从大到小插入一个 $a_i$ 随便 DP 下就行。</p>
-<p>大概转移就是考虑当前数是否有效，无效就是插到了后面的 $n-i$ 个位置中的一个。</p>
-<h4 id="E-Black-or-White"><a href="#E-Black-or-White" class="headerlink" title="E - Black or White"></a>E - Black or White</h4><p>枚举下最后一段长度然后随便算算。</p>
-<h4 id="F-More-Realistic-Manhattan-Distance"><a href="#F-More-Realistic-Manhattan-Distance" class="headerlink" title="F - More Realistic Manhattan Distance"></a>F - More Realistic Manhattan Distance</h4><p>把有用的几条路抠出来跑最短路就行。</p>
+<h3 id="exawizards-2019">ExaWizards 2019</h3>
+<hr />
+<h4 id="c---snuke-the-wizard">C - Snuke the Wizard</h4>
+<p>注意到最后不会出去的是一个区间，二分一下左右边界就行。</p>
+<h4 id="d---modulo-operations">D - Modulo Operations</h4>
+<p>如果在 <span class="math inline">\(\bmod x\)</span> 之前先 <span class="math inline">\(\bmod\)</span> 了一个小于等于 <span class="math inline">\(x\)</span> 的数 <span class="math inline">\(y\)</span>，则 <span class="math inline">\(\bmod x\)</span> 是无效的。</p>
+<p>于是从大到小插入一个 <span class="math inline">\(a_i\)</span> 随便 DP 下就行。</p>
+<p>大概转移就是考虑当前数是否有效，无效就是插到了后面的 <span class="math inline">\(n-i\)</span> 个位置中的一个。</p>
+<h4 id="e---black-or-white">E - Black or White</h4>
+<p>枚举下最后一段长度然后随便算算。</p>
+<h4 id="f---more-realistic-manhattan-distance">F - More Realistic Manhattan Distance</h4>
+<p>把有用的几条路抠出来跑最短路就行。</p>
 <p>有用的大概是起点和终点上下左右某个方向的第一条路。</p>
-<h2 id="10-15"><a href="#10-15" class="headerlink" title="10.15"></a>10.15</h2><p>写题解好麻烦啊，以后只记想记的题吧。</p>
-<h3 id="AGC-031"><a href="#AGC-031" class="headerlink" title="AGC 031"></a>AGC 031</h3><hr>
-<h4 id="C-Differ-by-1-Bit"><a href="#C-Differ-by-1-Bit" class="headerlink" title="C - Differ by 1 Bit"></a>C - Differ by 1 Bit</h4><p>可以发现如果 $A,B$ 差奇数位才有解。</p>
-<p>考虑怎么构造区间 $[l,r]$ 的答案，把 $a_{mid}$ 和 $a_{mid+1}$ 设置成只有一位不同且和 $a_l$ 和 $a_r$ 有奇数位不同，设 $a_{mid}$ 和 $a_{mid+1}$ 不同的那一位是第 $k$ 位，则还需要把 $[l,mid-1]$ 第 $k$ 位设置和 $a_{mid}$ 相同，把 $[mid+1,r]$ 第 $k$ 位设置和 $a_{mid+1}$ 相同，递归构造 $[l,mid]$ 和 $[mid+1,r]$ 就行。</p>
+<h2 id="section-22">10.15</h2>
+<p>写题解好麻烦啊，以后只记想记的题吧。</p>
+<h3 id="agc-031">AGC 031</h3>
+<hr />
+<h4 id="c---differ-by-1-bit">C - Differ by 1 Bit</h4>
+<p>可以发现如果 <span class="math inline">\(A,B\)</span> 差奇数位才有解。</p>
+<p>考虑怎么构造区间 <span class="math inline">\([l,r]\)</span> 的答案，把 <span class="math inline">\(a_{mid}\)</span> 和 <span class="math inline">\(a_{mid+1}\)</span> 设置成只有一位不同且和 <span class="math inline">\(a_l\)</span> 和 <span class="math inline">\(a_r\)</span> 有奇数位不同，设 <span class="math inline">\(a_{mid}\)</span> 和 <span class="math inline">\(a_{mid+1}\)</span> 不同的那一位是第 <span class="math inline">\(k\)</span> 位，则还需要把 <span class="math inline">\([l,mid-1]\)</span> 第 <span class="math inline">\(k\)</span> 位设置和 <span class="math inline">\(a_{mid}\)</span> 相同，把 <span class="math inline">\([mid+1,r]\)</span> 第 <span class="math inline">\(k\)</span> 位设置和 <span class="math inline">\(a_{mid+1}\)</span> 相同，递归构造 <span class="math inline">\([l,mid]\)</span> 和 <span class="math inline">\([mid+1,r]\)</span> 就行。</p>
 <p>正确性可以归纳。</p>
-<h4 id="D-A-Sequence-of-Permutations"><a href="#D-A-Sequence-of-Permutations" class="headerlink" title="D - A Sequence of Permutations"></a>D - A Sequence of Permutations</h4><p>可以发现运算 $f(p,q)=q\cdot p^{-1}$。</p>
-<p>手动算出 $f$ 的前几项，可以发现有规律。</p>
-<h4 id="E-Snuke-the-Phantom-Thief"><a href="#E-Snuke-the-Phantom-Thief" class="headerlink" title="E - Snuke the Phantom Thief"></a>E - Snuke the Phantom Thief</h4><p>枚举选了几个，每个 $x$ 的前缀选了几个必须在一个区间内，$y$ 同理。</p>
-<p>考虑根据这个建图，一共两排点，一排表示 $x$ 的前缀和一排表示 $y$ 的前缀。</p>
-<p>$x$ 和 $y$ 对应的连一条流量为 $1$ 费用为对应价值的边，两排点建流量有上下界，费用为 $0$ 的边表示区间的限制就行。</p>
+<h4 id="d---a-sequence-of-permutations">D - A Sequence of Permutations</h4>
+<p>可以发现运算 <span class="math inline">\(f(p,q)=q\cdot p^{-1}\)</span>。</p>
+<p>手动算出 <span class="math inline">\(f\)</span> 的前几项，可以发现有规律。</p>
+<h4 id="e---snuke-the-phantom-thief">E - Snuke the Phantom Thief</h4>
+<p>枚举选了几个，每个 <span class="math inline">\(x\)</span> 的前缀选了几个必须在一个区间内，<span class="math inline">\(y\)</span> 同理。</p>
+<p>考虑根据这个建图，一共两排点，一排表示 <span class="math inline">\(x\)</span> 的前缀和一排表示 <span class="math inline">\(y\)</span> 的前缀。</p>
+<p><span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 对应的连一条流量为 <span class="math inline">\(1\)</span> 费用为对应价值的边，两排点建流量有上下界，费用为 <span class="math inline">\(0\)</span> 的边表示区间的限制就行。</p>
 <p>注意到最大流肯定是费用最大的，于是跑上下界最大费用可行流就行。</p>
-<h4 id="F-Walk-on-Graph"><a href="#F-Walk-on-Graph" class="headerlink" title="F - Walk on Graph"></a>F - Walk on Graph</h4><p>考虑倒着考虑这个过程。</p>
-<p>令 $(u,x)$ 表示当前在 $u$，值为 $x$，如果存在一条 $(u,v,c)$ 的边，则可以从 $(u,x)$ 到 $(v,2x+c)$，注意到模数是一个奇数，$2$ 存在逆元，所以 $x$ 和 $2x+c$ 是一一对应的，$2x+c$ 一直走一定能走回 $x$，所以 $(u,x)$ 和 $(v,2x+c)$ 能互相到达。</p>
-<p>然后如果一个点存在边权为 $a$ 和 $b$ 的连边，那么如果我们这样走：</p>
-<p>$$(v,4x+3a) \rightarrow (u,x) \rightarrow (v’,4x+3b)$$</p>
-<p>可以得到 $(u,x)$ 能到达 $(u,x+3k(b-a))$，因为 $4$ 存在逆元，所以 $4x$ 可以是 $[0,mod)$ 中任意一个数。</p>
-<p>考虑到整个图是连通的，令 $g$ 表示两两边权的在模域下的差的 $\gcd$，模数可以改成 $\gcd(3g,mod)$，由于 $g|(a-b)$ 且 $g|(b-a)$ 所以 $g$ 肯定整除 $mod$，所以新模数肯定是 $g$ 或者 $3g$。</p>
-<p>所有 $C_i$ 在模 $g$ 域下是同余的，这样每个边权 $C_i$ 可以表示成 $c_ig+b$ 的形式，我们还可以通过一些处理，去掉 $b$。</p>
-<p>我们把所有的当前的值 $x$ 都加上 $b$，所有边权都减去 $b$，可以发现这样转化后问题和原问题是等价的。</p>
-<p>$$x’-b=x\rightarrow (2x+c_ig+b)=(2(x+b)+c_ig)-b=(2x’+c_ig)-b$$</p>
-<p>于是我们可以把所有边权减去 $b$，每次询问改成 $(t,b)$ 能否达到 $(s,b+r)$。</p>
-<p>注意到从 $(u,x)$ 出发能到达的状态一定能表示成 $(v,2^px+qg)$ 的形式，显然 $q$ 的取值只能是 ${0,1,2}$。</p>
-<p>另外注意到 $(u,x) \rightarrow (u,4x+3c_ig)=(u,4x)$，所以所有 $2^px+qg$ 中 $p$ 的奇偶性相同的点又可以缩起来，那一共就只剩下 $O(6n)$ 个点了。</p>
-<p>查询就是询问是否存在一对 $p,q$ 满足 $r+b=2^pb+qg$，预处理 $2^{p}b$ 的点有哪些就可以快速判断了。</p>
-<p>复杂度 $O(m\log mod+6(m+q)\alpha(n)+mod)$。</p>
-<h3 id="ARC-105"><a href="#ARC-105" class="headerlink" title="ARC 105"></a>ARC 105</h3><hr>
-<h4 id="F-Lights-Out-on-Connected-Graph"><a href="#F-Lights-Out-on-Connected-Graph" class="headerlink" title="F - Lights Out on Connected Graph"></a>F - Lights Out on Connected Graph</h4><p>问题等价于求生成连通二分图计数。</p>
+<h4 id="f---walk-on-graph">F - Walk on Graph</h4>
+<p>考虑倒着考虑这个过程。</p>
+<p>令 <span class="math inline">\((u,x)\)</span> 表示当前在 <span class="math inline">\(u\)</span>，值为 <span class="math inline">\(x\)</span>，如果存在一条 <span class="math inline">\((u,v,c)\)</span> 的边，则可以从 <span class="math inline">\((u,x)\)</span> 到 <span class="math inline">\((v,2x+c)\)</span>，注意到模数是一个奇数，<span class="math inline">\(2\)</span> 存在逆元，所以 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(2x+c\)</span> 是一一对应的，<span class="math inline">\(2x+c\)</span> 一直走一定能走回 <span class="math inline">\(x\)</span>，所以 <span class="math inline">\((u,x)\)</span> 和 <span class="math inline">\((v,2x+c)\)</span> 能互相到达。</p>
+<p>然后如果一个点存在边权为 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 的连边，那么如果我们这样走：</p>
+<p><span class="math display">\[(v,4x+3a) \rightarrow (u,x) \rightarrow (v&#39;,4x+3b)\]</span></p>
+<p>可以得到 <span class="math inline">\((u,x)\)</span> 能到达 <span class="math inline">\((u,x+3k(b-a))\)</span>，因为 <span class="math inline">\(4\)</span> 存在逆元，所以 <span class="math inline">\(4x\)</span> 可以是 <span class="math inline">\([0,mod)\)</span> 中任意一个数。</p>
+<p>考虑到整个图是连通的，令 <span class="math inline">\(g\)</span> 表示两两边权的在模域下的差的 <span class="math inline">\(\gcd\)</span>，模数可以改成 <span class="math inline">\(\gcd(3g,mod)\)</span>，由于 <span class="math inline">\(g|(a-b)\)</span> 且 <span class="math inline">\(g|(b-a)\)</span> 所以 <span class="math inline">\(g\)</span> 肯定整除 <span class="math inline">\(mod\)</span>，所以新模数肯定是 <span class="math inline">\(g\)</span> 或者 <span class="math inline">\(3g\)</span>。</p>
+<p>所有 <span class="math inline">\(C_i\)</span> 在模 <span class="math inline">\(g\)</span> 域下是同余的，这样每个边权 <span class="math inline">\(C_i\)</span> 可以表示成 <span class="math inline">\(c_ig+b\)</span> 的形式，我们还可以通过一些处理，去掉 <span class="math inline">\(b\)</span>。</p>
+<p>我们把所有的当前的值 <span class="math inline">\(x\)</span> 都加上 <span class="math inline">\(b\)</span>，所有边权都减去 <span class="math inline">\(b\)</span>，可以发现这样转化后问题和原问题是等价的。</p>
+<p><span class="math display">\[x&#39;-b=x\rightarrow (2x+c_ig+b)=(2(x+b)+c_ig)-b=(2x&#39;+c_ig)-b\]</span></p>
+<p>于是我们可以把所有边权减去 <span class="math inline">\(b\)</span>，每次询问改成 <span class="math inline">\((t,b)\)</span> 能否达到 <span class="math inline">\((s,b+r)\)</span>。</p>
+<p>注意到从 <span class="math inline">\((u,x)\)</span> 出发能到达的状态一定能表示成 <span class="math inline">\((v,2^px+qg)\)</span> 的形式，显然 <span class="math inline">\(q\)</span> 的取值只能是 <span class="math inline">\(\{0,1,2\}\)</span>。</p>
+<p>另外注意到 <span class="math inline">\((u,x) \rightarrow (u,4x+3c_ig)=(u,4x)\)</span>，所以所有 <span class="math inline">\(2^px+qg\)</span> 中 <span class="math inline">\(p\)</span> 的奇偶性相同的点又可以缩起来，那一共就只剩下 <span class="math inline">\(O(6n)\)</span> 个点了。</p>
+<p>查询就是询问是否存在一对 <span class="math inline">\(p,q\)</span> 满足 <span class="math inline">\(r+b=2^pb+qg\)</span>，预处理 <span class="math inline">\(2^{p}b\)</span> 的点有哪些就可以快速判断了。</p>
+<p>复杂度 <span class="math inline">\(O(m\log mod+6(m+q)\alpha(n)+mod)\)</span>。</p>
+<h3 id="arc-105">ARC 105</h3>
+<hr />
+<h4 id="f---lights-out-on-connected-graph">F - Lights Out on Connected Graph</h4>
+<p>问题等价于求生成连通二分图计数。</p>
 <p>首先有一个显然不对的计算方法。</p>
 <p>枚举每个点处于这个二分图左边还是右边，每条连接左边和右边的点的边有选不选都可以，只连接左边和左边的边不能选，右边同理。</p>
-<p>可以发现这样算每个生成二分图会被计算 $2^k$ 次，$k$ 表示连通块数。</p>
-<p>令 $f_S$ 表示集合 $S$ 中的点生成连通二分图的个数，$g_S$ 表示集合 $S$ 中的点生成二分图的个数，$h_S$ 表示集合 $S$ 中的点用上面的计算方法得到的答案。</p>
-<p>可以发现对于一个有 $k$ 个连通块的生成二分图，把这个图分成两部分使得每一部分都是二分图的方案也是 $2^k$。</p>
-<p>于是我们可以得到 $g^2=h$。</p>
-<p>又可以通过 $f=\ln g$ 得到 $f$ 而得到答案。</p>
-<h3 id="Yahoo-Programming-Contest-2019"><a href="#Yahoo-Programming-Contest-2019" class="headerlink" title="Yahoo Programming Contest 2019"></a>Yahoo Programming Contest 2019</h3><p>没啥好记的。</p>
-<h2 id="10-19"><a href="#10-19" class="headerlink" title="10.19"></a>10.19</h2><h3 id="NIKKEI-Programming-Contest-2019"><a href="#NIKKEI-Programming-Contest-2019" class="headerlink" title="NIKKEI Programming Contest 2019"></a>NIKKEI Programming Contest 2019</h3><hr>
-<h4 id="E-Weights-on-Vertices-and-Edges"><a href="#E-Weights-on-Vertices-and-Edges" class="headerlink" title="E - Weights on Vertices and Edges"></a>E - Weights on Vertices and Edges</h4><p>按边权从小到大加边，每次加边的时候如果不合法就先加进去，如果后面这个连通块加边成功了就算上之前加入但不合法的边。</p>
-<h4 id="F-Jewels"><a href="#F-Jewels" class="headerlink" title="F - Jewels"></a>F - Jewels</h4><p>把每个颜色最大的两个捆绑，每种颜色要先加入捆绑的才能加入单个的。</p>
+<p>可以发现这样算每个生成二分图会被计算 <span class="math inline">\(2^k\)</span> 次，<span class="math inline">\(k\)</span> 表示连通块数。</p>
+<p>令 <span class="math inline">\(f_S\)</span> 表示集合 <span class="math inline">\(S\)</span> 中的点生成连通二分图的个数，<span class="math inline">\(g_S\)</span> 表示集合 <span class="math inline">\(S\)</span> 中的点生成二分图的个数，<span class="math inline">\(h_S\)</span> 表示集合 <span class="math inline">\(S\)</span> 中的点用上面的计算方法得到的答案。</p>
+<p>可以发现对于一个有 <span class="math inline">\(k\)</span> 个连通块的生成二分图，把这个图分成两部分使得每一部分都是二分图的方案也是 <span class="math inline">\(2^k\)</span>。</p>
+<p>于是我们可以得到 <span class="math inline">\(g^2=h\)</span>。</p>
+<p>又可以通过 <span class="math inline">\(f=\ln g\)</span> 得到 <span class="math inline">\(f\)</span> 而得到答案。</p>
+<h3 id="yahoo-programming-contest-2019">Yahoo Programming Contest 2019</h3>
+<p>没啥好记的。</p>
+<h2 id="section-23">10.19</h2>
+<h3 id="nikkei-programming-contest-2019">NIKKEI Programming Contest 2019</h3>
+<hr />
+<h4 id="e---weights-on-vertices-and-edges">E - Weights on Vertices and Edges</h4>
+<p>按边权从小到大加边，每次加边的时候如果不合法就先加进去，如果后面这个连通块加边成功了就算上之前加入但不合法的边。</p>
+<h4 id="f---jewels">F - Jewels</h4>
+<p>把每个颜色最大的两个捆绑，每种颜色要先加入捆绑的才能加入单个的。</p>
 <p>每次加入一个新的有四种方案：</p>
-<ol>
-<li><p>直接加入一个单个的。</p>
-</li>
-<li><p>删除一个单个，加入一个捆绑的。</p>
-</li>
-<li><p>删除一个捆绑的，加入一个颜色的捆绑的和一个单个的。</p>
-</li>
-<li><p>删除一个单个和一个捆绑的，加入两个捆绑的。</p>
-</li>
+<ol type="1">
+<li><p>直接加入一个单个的。</p></li>
+<li>删除一个单个，加入一个捆绑的。</li>
+<li>删除一个捆绑的，加入一个颜色的捆绑的和一个单个的。</li>
+<li><p>删除一个单个和一个捆绑的，加入两个捆绑的。</p></li>
 </ol>
 <p>于是五个堆维护一下就行。</p>
-<h3 id="KEYENCE-Programming-Contest-2019"><a href="#KEYENCE-Programming-Contest-2019" class="headerlink" title="KEYENCE Programming Contest 2019"></a>KEYENCE Programming Contest 2019</h3><p>没啥好记的。</p>
-<h2 id="10-21"><a href="#10-21" class="headerlink" title="10.21"></a>10.21</h2><h3 id="AGC-030"><a href="#AGC-030" class="headerlink" title="AGC 030"></a>AGC 030</h3><hr>
+<h3 id="keyence-programming-contest-2019">KEYENCE Programming Contest 2019</h3>
+<p>没啥好记的。</p>
+<h2 id="section-24">10.21</h2>
+<h3 id="agc-030">AGC 030</h3>
+<hr />
 <p>会做 A,B,D,F，这几题也没啥高论，就记下我不会的题吧。</p>
-<h4 id="C-Coloring-Torus"><a href="#C-Coloring-Torus" class="headerlink" title="C - Coloring Torus"></a>C - Coloring Torus</h4><p>构造苦手。</p>
-<p>如果 $K\le 500$，一行放一种数就行；</p>
-<p>如果 $K&gt;500$，可以在同一对角线上交替放两种颜色。</p>
-<h4 id="E-Less-than-3"><a href="#E-Less-than-3" class="headerlink" title="E - Less than 3"></a>E - Less than 3</h4><p>思维题苦手。</p>
-<p>在一个串的每个 $01$ 子串中放一个红色的标记，每个 $10$ 子串中放一个蓝色标记。</p>
-<p>发现修改就是把某个标记移动一格，或者在头尾加入/删除一个标记，并且需要满足任意两个相邻标记之间的距离小于等于 $2$。</p>
+<h4 id="c---coloring-torus">C - Coloring Torus</h4>
+<p>构造苦手。</p>
+<p>如果 <span class="math inline">\(K\le 500\)</span>，一行放一种数就行；</p>
+<p>如果 <span class="math inline">\(K&gt;500\)</span>，可以在同一对角线上交替放两种颜色。</p>
+<h4 id="e---less-than-3">E - Less than 3</h4>
+<p>思维题苦手。</p>
+<p>在一个串的每个 <span class="math inline">\(01\)</span> 子串中放一个红色的标记，每个 <span class="math inline">\(10\)</span> 子串中放一个蓝色标记。</p>
+<p>发现修改就是把某个标记移动一格，或者在头尾加入/删除一个标记，并且需要满足任意两个相邻标记之间的距离小于等于 <span class="math inline">\(2\)</span>。</p>
 <p>考虑枚举两个串标记的匹配关系，对于一组对应关系，下界显然是对应的线之间的距离之和，并且这个下界是可以构造达到的。</p>
-<h2 id="10-24"><a href="#10-24" class="headerlink" title="10.24"></a>10.24</h2><h3 id="ARC-106"><a href="#ARC-106" class="headerlink" title="ARC 106"></a>ARC 106</h3><hr>
-<h4 id="E-Medals"><a href="#E-Medals" class="headerlink" title="E - Medals"></a>E - Medals</h4><p>考虑二分答案。</p>
-<p>考虑这样一个二分图，左边部分第 $i$ 个点表示第 $i$ 天，右边部分 $n\times k$ 个点分别表示每个点的需求，左边第 $i$ 个点往右边能发奖牌的点连边，判断是否合法即判断该图是否存在一个完美匹配。</p>
-<p>考虑 Hall 定理，对于右边的每个人的集合 $S$，求左边有多少天至少和 $S$ 中的一个点匹配的，记为 $F_S$。</p>
-<p>令 $G_S$ 表示左边有多少天和 $S$ 中每一个点都能匹配，可以发现 $F_S=\sum_{T\in S} (-1)^{|T|+1}G_{T}$。</p>
-<p>又可以发现答案是 $O(nk)$，于是我们可以预处理出第 $i$ 天能和哪些人配，记为 $b_i$，令 $cnt_S=\sum_{i}[b_i=S]$，可以发现对 $cnt$ 做一遍高维后缀和就能得到 $G$，再对 $G$ 做高维前缀和就能得到 $F$ 了。</p>
-<p>时间复杂度 $O(2^nn\log nk+nk\log nk+n^2k)$。</p>
-<h4 id="F-Figures"><a href="#F-Figures" class="headerlink" title="F - Figures"></a>F - Figures</h4><p>考虑 prufer 序列。</p>
-<p>答案的式子为 $(n-2)!\sum_{\sum_{i}cnt_i=n-2} \prod_{i} \frac{d_i!}{cnt_i!(d_i-cnt_i-1)!}$。</p>
-<p>把后面的形式改改 $(n-2)!\sum_{\sum_{i}cnt_i=n-2} \prod_{i} d_i \binom{d_i-1}{cnt_i}$。</p>
-<p>把 $d_i$ 提出来，可以发现后面是个范德蒙德卷积，也可以考虑组合意义，不难发现就是 $\binom{\sum_{i} d_i-1}{n-2}$。</p>
-<h2 id="10-29"><a href="#10-29" class="headerlink" title="10.29"></a>10.29</h2><h3 id="AGC-029"><a href="#AGC-029" class="headerlink" title="AGC 029"></a>AGC 029</h3><hr>
+<h2 id="section-25">10.24</h2>
+<h3 id="arc-106">ARC 106</h3>
+<hr />
+<h4 id="e---medals">E - Medals</h4>
+<p>考虑二分答案。</p>
+<p>考虑这样一个二分图，左边部分第 <span class="math inline">\(i\)</span> 个点表示第 <span class="math inline">\(i\)</span> 天，右边部分 <span class="math inline">\(n\times k\)</span> 个点分别表示每个点的需求，左边第 <span class="math inline">\(i\)</span> 个点往右边能发奖牌的点连边，判断是否合法即判断该图是否存在一个完美匹配。</p>
+<p>考虑 Hall 定理，对于右边的每个人的集合 <span class="math inline">\(S\)</span>，求左边有多少天至少和 <span class="math inline">\(S\)</span> 中的一个点匹配的，记为 <span class="math inline">\(F_S\)</span>。</p>
+<p>令 <span class="math inline">\(G_S\)</span> 表示左边有多少天和 <span class="math inline">\(S\)</span> 中每一个点都能匹配，可以发现 <span class="math inline">\(F_S=\sum_{T\in S} (-1)^{|T|+1}G_{T}\)</span>。</p>
+<p>又可以发现答案是 <span class="math inline">\(O(nk)\)</span>，于是我们可以预处理出第 <span class="math inline">\(i\)</span> 天能和哪些人配，记为 <span class="math inline">\(b_i\)</span>，令 <span class="math inline">\(cnt_S=\sum_{i}[b_i=S]\)</span>，可以发现对 <span class="math inline">\(cnt\)</span> 做一遍高维后缀和就能得到 <span class="math inline">\(G\)</span>，再对 <span class="math inline">\(G\)</span> 做高维前缀和就能得到 <span class="math inline">\(F\)</span> 了。</p>
+<p>时间复杂度 <span class="math inline">\(O(2^nn\log nk+nk\log nk+n^2k)\)</span>。</p>
+<h4 id="f---figures">F - Figures</h4>
+<p>考虑 prufer 序列。</p>
+<p>答案的式子为 <span class="math inline">\((n-2)!\sum_{\sum_{i}cnt_i=n-2} \prod_{i} \frac{d_i!}{cnt_i!(d_i-cnt_i-1)!}\)</span>。</p>
+<p>把后面的形式改改 <span class="math inline">\((n-2)!\sum_{\sum_{i}cnt_i=n-2} \prod_{i} d_i \binom{d_i-1}{cnt_i}\)</span>。</p>
+<p>把 <span class="math inline">\(d_i\)</span> 提出来，可以发现后面是个范德蒙德卷积，也可以考虑组合意义，不难发现就是 <span class="math inline">\(\binom{\sum_{i} d_i-1}{n-2}\)</span>。</p>
+<h2 id="section-26">10.29</h2>
+<h3 id="agc-029">AGC 029</h3>
+<hr />
 <p>A,B,C,D,E 感觉都挺 easy 的，就不记了。</p>
-<h4 id="F-Construction-of-a-tree"><a href="#F-Construction-of-a-tree" class="headerlink" title="F - Construction of a tree"></a>F - Construction of a tree</h4><p><del>一开始就走偏了，如果想到怎么判无解应该就会往二分图方向想，应该就会了吧</del></p>
-<p>定义一个 ${1,2,..,N}$ 的非空子集的 $S$ 邻集 $N(S)$ 是所有在其中出现 $S$ 的点的集合。</p>
-<p>大力猜一波，如果对于任意 $S$ 都满足 $|N(S)|\ge |S|+1$ 就肯定存在解。</p>
+<h4 id="f---construction-of-a-tree">F - Construction of a tree</h4>
+<p><del>一开始就走偏了，如果想到怎么判无解应该就会往二分图方向想，应该就会了吧</del></p>
+<p>定义一个 <span class="math inline">\(\{1,2,..,N\}\)</span> 的非空子集的 <span class="math inline">\(S\)</span> 邻集 <span class="math inline">\(N(S)\)</span> 是所有在其中出现 <span class="math inline">\(S\)</span> 的点的集合。</p>
+<p>大力猜一波，如果对于任意 <span class="math inline">\(S\)</span> 都满足 <span class="math inline">\(|N(S)|\ge |S|+1\)</span> 就肯定存在解。</p>
 <p>这个条件的必要性显然，并且如果满足这个条件，根据 Hall 定理，这个二分图肯定存在一个完美匹配。匹配后会剩下一个点没有匹配，不妨设它为根，我们考虑搞出一个顺序，按顺序让每个集合匹配的点找到一个父亲，满足在这个顺序下父亲在它之前被考虑，这个直接从根开始 bfs 就行。</p>
 <p>然后我们可以发现如果满足了上面这个条件，这样构造就必然存在解。</p>
-<p>如果 bfs 在中途就结束了，那么走过的左边点个数比右边点个数多 $1$，左边点总个数比右边点总个数多 $1$，故现在未遍历的右边的点的集合 $T$ 满足 $|N(T)|\le |T|$，这与命题矛盾。</p>
-<p>如果用 Dinic 跑二分图匹配，复杂度是 $O(m\sqrt{n})$ 的，但是这个题直接跑匈牙利就能过。</p>
-<hr>
-<p>AGC 028 很早就补完了，独立做了 A,B,C,D,E 和 F 的大常数 $O(n^3)$ 但是觉得有些东西我不知道怎么用文字描述所以题解就先鸽着。</p>
+<p>如果 bfs 在中途就结束了，那么走过的左边点个数比右边点个数多 <span class="math inline">\(1\)</span>，左边点总个数比右边点总个数多 <span class="math inline">\(1\)</span>，故现在未遍历的右边的点的集合 <span class="math inline">\(T\)</span> 满足 <span class="math inline">\(|N(T)|\le |T|\)</span>，这与命题矛盾。</p>
+<p>如果用 Dinic 跑二分图匹配，复杂度是 <span class="math inline">\(O(m\sqrt{n})\)</span> 的，但是这个题直接跑匈牙利就能过。</p>
+<hr />
+<p>AGC 028 很早就补完了，独立做了 A,B,C,D,E 和 F 的大常数 <span class="math inline">\(O(n^3)\)</span> 但是觉得有些东西我不知道怎么用文字描述所以题解就先鸽着。</p>
 <p>另外因为联赛训练的缘故，AGC 的补题就先搁置了。</p>
 </div></article></div></main><footer><div class="paginator"><a class="prev" href="/2022/01/08/JOISC-%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/">prev</a><a class="next" href="/2022/01/08/ARC127-F%20%C2%B1AB/">next</a></div><div class="copyright"><p>&copy; 2022 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/zykykyk-39">Yikai Zhu</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
