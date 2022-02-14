@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>CF901E Cyclic Cipher • uyom</title><meta name="description" content="CF901E Cyclic Cipher - uyom"><link rel="icon" href="/xun.png"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="uyom"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="uyom" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="uyom"><img class="logo-image" src="/pictures/avatar.jpeg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">CF901E Cyclic Cipher</h1><div class="post-info"><a></a>2022-02-14</div><div class="post-content"><p>令 <span class="math inline">\(S(a)=\sum_{i} a_i^2\)</span>。</p>
+<p>展开 <span class="math inline">\(c_i\)</span> 式子里的平方，得到 <span class="math inline">\(c_i=S(a)+S(b)-2\sum_{k}a_kb_{(k+n-i)\bmod n}\)</span>。</p>
+<p>翻转 <span class="math inline">\(b\)</span>，令 <span class="math inline">\(c&#39;_i=c_i-S(a)-S(b)\)</span>，可以得到 <span class="math inline">\(\text{DFT}(a)\cdot \text{DFT}(b)=\text{DFT}(c&#39;)\)</span>，即 <span class="math inline">\(a=\text{IDFT}(\text{DFT}(c&#39;)/\text{DFT}(b))\)</span>。</p>
+<p>分析一下让 <span class="math inline">\(c\)</span> 全体减去一个 <span class="math inline">\(x\)</span> 会对最终得到的 <span class="math inline">\(a\)</span> 有啥影响。</p>
+<p>首先 <span class="math inline">\(\text{DFT}(c)_i=\sum_{j} c_j \omega_n^{ij}\)</span>，当 <span class="math inline">\(c\)</span> 整体加上一个 <span class="math inline">\(x\)</span> 时，对于 <span class="math inline">\(\text{DFT}(c)_i\)</span> 的影响是加上 <span class="math inline">\(x\times \sum_{j}\omega_n^{ij}\)</span>，注意到当 <span class="math inline">\(i&gt;0\)</span> 时，<span class="math inline">\(\sum_{j}\omega_n^{ij}=0\)</span>，即这时候只会对 <span class="math inline">\(\text{DFT}(c)_0\)</span> 加上 <span class="math inline">\(n\times x\)</span>。</p>
+<p>类似的分析，我们最终可以得到让 <span class="math inline">\(c\)</span> 全体减去一个 <span class="math inline">\(x\)</span> 会让最终得到的 <span class="math inline">\(a\)</span> 全体加上 <span class="math inline">\(\dfrac{x}{\text{DFT(b)[0]}}\)</span>。</p>
+<p>我们先假设 <span class="math inline">\(S(a)=0\)</span>，然后把按照上述做法做得到的结果设为 <span class="math inline">\(a&#39;\)</span>。</p>
+<p>于是我们可以得到方程：<span class="math inline">\(\sum_{i} (a&#39;_i-\frac{x}{DFT(b)[0]})^2=x\)</span></p>
+<p>然后就做完了。</p>
+<p>关于实现：</p>
+<ol type="1">
+<li>可以整个过程在一个存在 <span class="math inline">\(n\)</span> 次单位根的大模数域下做，对于判断最终结果是否为负数，只要考虑当前这个数距离 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(mod\)</span> 哪个更近。</li>
+<li>解方程可以直接求二次剩余，注意到如果存在解，那么一元二次方程的那个 <span class="math inline">\(\delta=b^2-4ac\)</span> 也肯定存在二次剩余。但是这样可能会解出来多一组在模域下合法的解，但是这个时候这组解的绝对值的最大值肯定会比较大，当大于某个阈值的时候舍去这组解即可。</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2022/01/08/JOI-2020-2021/">next</a></div><div class="copyright"><p>&copy; 2022 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/zykykyk-39">Yikai Zhu</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    Barba.Pjax.start()
+})
+</script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({
+"model": {
+//jsonpath控制显示模型
+jsonPath: "https://raw.githubusercontent.com/hunshuimogeyu/live2d-for-blog/main/%E5%B0%8F%E5%9F%8B/13.json",
+},
+"display": {
+"position": "right", //看板娘的表现位置
+"width": 150,  //宽度
+"height": 250, //高度
+"hOffset": -50,
+"vOffset": -20
+},
+"mobile": {
+"show": true,
+},
+"react": {
+"opacityDefault": 1,//不透明度，可调
+"opacityOnHover": 0.2
+}
+});</script></body></html>
