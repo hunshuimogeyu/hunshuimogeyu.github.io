@@ -3,9 +3,38 @@
 <h3 id="a---intercastellar">A - Intercastellar</h3>
 <hr />
 <p>不知道咋说，直接模拟记连续段长度就好。</p>
+<p>复杂度 <span class="math inline">\(O(n\log a_i+q)\)</span>。</p>
 <h3 id="b---self-study">B - Self Study</h3>
 <hr />
-<p>考虑二分答案</p>
+<p>先对每个 <span class="math inline">\(a_i\)</span> 和 <span class="math inline">\(b_i\)</span> 取 <span class="math inline">\(\max\)</span>。</p>
+<p>考虑二分答案，考虑对于一门课来说：它要么全部课上满还达不到 <span class="math inline">\(mid\)</span>，需要另外翘几次来补；要么若干次上课后达到要求了，那么就多了几次翘课。于是我们比较需要翘课的次数和多出来翘课的次数的大小就能 check 当前的 <span class="math inline">\(mid\)</span> 了。</p>
+<p>复杂度 <span class="math inline">\(O(n\log 10^{18})\)</span>。</p>
+<h3 id="c---lets-win-the-election">C - Let's Win the Election</h3>
+<hr />
+<p>考虑我们的决策肯定是先按 <span class="math inline">\(B_i\)</span> 大小在几个州赢得协作者，然后再在剩下的几个州里面赢满选票。</p>
+<p>为了下文描述方便，令 <span class="math inline">\(S\)</span> 表示赢得协作者的州的集合，<span class="math inline">\(T\)</span> 表示赢得选票的州的集合。</p>
+<p>那么考虑按 <span class="math inline">\(B_i\)</span> 从小到大排序，考虑对于一个前缀 <span class="math inline">\(i\)</span> 来说，如果 <span class="math inline">\(i\)</span> 是编号最大的赢得协作者的州，那么对于每个 <span class="math inline">\(j\ (j&lt;i)\)</span>，要么 <span class="math inline">\(j\in S\)</span>，要么 <span class="math inline">\(j\in T\)</span>。</p>
+<p>证明的话就考虑如果前面有一个州 <span class="math inline">\(k\)</span> 既没赢得协作者，也没赢得选票，那么可以在 <span class="math inline">\(S\)</span> 中删去 <span class="math inline">\(i\)</span>，再加入 <span class="math inline">\(k\)</span>，这样调整显然答案会变优。</p>
+<p>于是我们可以枚举 <span class="math inline">\(S\)</span> 的大小，然后对于每个后缀 <span class="math inline">\(i\)</span> 先求出要赢 <span class="math inline">\(j\)</span> 张选票的最小代价，对于每个前缀 <span class="math inline">\(i\)</span> 去 DP 一下选 <span class="math inline">\(|S|\)</span> 个赢得协作者的州和 <span class="math inline">\(i-|S|\)</span> 个赢得选票的州的代价，然后合并即可。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h3 id="d---railway-trip-2">D - Railway Trip 2</h3>
+<hr />
+<p>对于一个起点来说，走若干步能到的点显然是个区间，倍增加速整个过程即可。</p>
+<h3 id="e---sandcastle-2">E - Sandcastle 2</h3>
+<hr />
+<p>先假设 <span class="math inline">\(n\le m\)</span>（不满足就把整个矩形旋转下就行，答案显然不变）。</p>
+<p>考虑怎么 check 一个子矩形是否合法。</p>
+<p>考虑当前在 <span class="math inline">\((i,j)\)</span> 接下来肯定会走到周围格子里小于 <span class="math inline">\((i,j)\)</span> 并且最大的位置，否则肯定走不完整个自矩形。</p>
+<p>于是我们考虑，每个点 <span class="math inline">\((i,j)\)</span> 向它周围的比它小但是最大的格子连一条有向边。一个子矩形合法，当且仅当这个这样连边后的图是一条有向链，稍微转化一下合法的条件就是：</p>
+<ol type="1">
+<li>不存在入度大于 <span class="math inline">\(1\)</span> 的点。</li>
+<li>恰好存在一个入度等于 <span class="math inline">\(0\)</span> 的点。</li>
+</ol>
+<p>注意到一个点的入度大小仅和子矩形的四条边界与其的距离和 <span class="math inline">\(2\)</span> 取较小值有关。</p>
+<p>考虑枚举矩形的上下边界，再枚举下边界的过程中，维护一个 <span class="math inline">\(cnt[i][j][k][0/2]\)</span> 表示左边界和第 <span class="math inline">\(i\)</span> 列的距离和 <span class="math inline">\(2\)</span> 取 <span class="math inline">\(\min\)</span> 后是 <span class="math inline">\(j\)</span>，右边界和第 <span class="math inline">\(i\)</span> 列的距离和 <span class="math inline">\(2\)</span> 取 <span class="math inline">\(\min\)</span> 后是 <span class="math inline">\(k\)</span> 时，度数为 <span class="math inline">\(0/2\)</span> 的点的个数。</p>
+<p>每次下边界移动，只有当前行和前一行的出度会改变，重新计算下这两行对于另外点的入度的贡献，同时再更新下 <span class="math inline">\(cnt\)</span> 就行。</p>
+<p>统计答案考虑枚举右边界，根据 <span class="math inline">\(cnt\)</span> 维护两个 <code>bitset</code>，第 <span class="math inline">\(i\)</span> 位表示 <span class="math inline">\(i\)</span> 作为左边界是否满足条件 1/2，两个取并就行得到当前的贡献。</p>
+<p>时间复杂度 <span class="math inline">\(O(HW\min(HW)+\frac{(HW)^2}{\omega})\)</span>。</p>
 </div></article></div></main><footer><div class="paginator"><a class="next" href="/2022/02/14/CF901E-Cyclic-Cipher/">next</a></div><div class="copyright"><p>&copy; 2022 <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/zykykyk-39">Yikai Zhu</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
 _gaq.push(['_trackPageview']);
